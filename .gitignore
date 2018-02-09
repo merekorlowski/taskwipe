@@ -1,0 +1,19 @@
+# dependencies
+/src/node_modules
+/src/client/node_modules
+
+# testing
+/src/client/coverage
+
+# production
+/src/client/build
+
+# misc
+/src/client/.DS_Store
+/src/client/.env.local
+/src/client/.env.development.local
+/src/client/.env.test.local
+/src/client/.env.production.local
+
+npm-debug.log*
+/src/client/npm-debug.log*
