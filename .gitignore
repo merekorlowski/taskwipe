@@ -17,3 +17,6 @@
 
 npm-debug.log*
 /src/client/npm-debug.log*
+
+.idea
+.DS_Store
