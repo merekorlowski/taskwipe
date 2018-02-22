@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import './styles.css';
+import Home from '../Home/index';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Engineering Outreach</h1>
+        <Switch>
+          <Route path="/" component={Home} />
+        </Switch>
       </div>
     );
   }
