@@ -1,0 +1,83 @@
+#titleLink h1 {
+    font-size: 22px;
+}
+
+.App {
+    justify-content: space-between;
+}
+
+#navSection {
+    height: 100vh;
+    width: 200px;
+    box-shadow: 1px 1px 5px #222;
+    background-color: rgb(25, 47, 83);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    display: inline-block;
+}
+
+#navContent {
+    position: relative;
+    height: 100%;
+}
+
+#mainSection {
+    margin-left: 200px;
+    height: 100vh;
+    padding: 20px;
+    display: inline-block;
+    
+}
+
+#nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav li {
+    display: block;
+}
+
+#nav li a {
+    text-decoration: none;
+    color: #ffffffd5;
+    text-shadow: 0px 0px 5px #222;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 25px;
+    transition: 0.2s background-color linear;
+}
+
+#nav li a:hover {
+    background-color: rgb(38, 66, 110);
+    color: #ffffff;
+}
+
+#nav li a:hover i {
+    color: #ffffff;
+}
+
+#nav #titleLink a:hover {
+    background-color: transparent;
+}
+
+#nav li a {
+    width: 100%;
+}
+
+#nav li a i {
+    color: #ffffffd5;
+}
+
+#logoutBtn {
+    background-color: transparent;
+    border: none;
+    color: #ffffffd5;
+    padding: 10px 25px;
+    position: absolute;
+    bottom: 30px;
+}
