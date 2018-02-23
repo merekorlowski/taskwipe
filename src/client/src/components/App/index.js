@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './styles.css';
 import MaterialIcon from 'material-icons-react';
-import Home from '../Home/index';
+import Schedule from '../Schedule/index';
 
 class App extends Component {
   render() {
@@ -22,7 +22,7 @@ class App extends Component {
         </section>
         <section id="mainSection">
           <Switch>
-            <Route path="/" component={Home} />
+            <Route path="/" component={Schedule} />
           </Switch>
         </section>
       </div>

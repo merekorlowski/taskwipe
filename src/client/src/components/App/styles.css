@@ -63,6 +63,7 @@
 
 #nav #titleLink a:hover {
     background-color: transparent;
+    color: #ffffffd5;
 }
 
 #nav li a {
@@ -80,4 +81,15 @@
     padding: 10px 25px;
     position: absolute;
     bottom: 30px;
+}
+
+#logoutBtn:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.title-underline {
+    border-bottom: 5px solid rgba(38, 66, 110, 0.87);
+    width: 30px;
 }
