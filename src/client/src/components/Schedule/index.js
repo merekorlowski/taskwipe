@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './styles.css';
 
 class Schedule extends Component {
+  constructor(props) {
+    super(props);
+    this.value = 'fdfsd';
+  }
   render() {
     return (
       <div className="Schedule">

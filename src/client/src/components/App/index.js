@@ -17,10 +17,15 @@ class App extends Component {
                 <li><a href="/#/ideas"><span>Ideas</span><MaterialIcon icon="lightbulb_outline"/></a></li>
               </ul>
             </nav>
-            <button id="logoutBtn">Logout</button>
           </div>
         </section>
         <section id="mainSection">
+          <span id="settings">
+            <MaterialIcon icon="menu"/>
+            <ul>
+              <li>Logout</li>
+            </ul>
+          </span>
           <Switch>
             <Route path="/" component={Schedule} />
           </Switch>
