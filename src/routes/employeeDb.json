@@ -1,32 +1,32 @@
 [
   {
   "id": "001",
-  "first_name": "Mmayen",
-  "last_name": "Ewang",
+  "firstName": "Mmayen",
+  "lastName": "Ewang",
   "email": "mewan074@uottawa.ca"
   },
   {
   "id": "002",
-  "first_name": "Karim",
-  "last_name": "Ben Hassine",
+  "firstName": "Karim",
+  "lastName": "Ben Hassine",
   "email": "kbenh016@uottawa.ca"
   },
   {
     "id": "003",
-  "first_name": "Merek",
-  "last_name": "Orlowski",
+  "firstName": "Merek",
+  "lastName": "Orlowski",
   "email": "morlo088@uottawa.ca"
   },
   {
   "id": "004",
-  "first_name": "Opeoluwa",
-  "last_name": "Eweje",
+  "firstName": "Opeoluwa",
+  "lastName": "Eweje",
   "email": "oewej015@uottawa.ca"
   },
   {
   "id": "005",
-  "first_name": "Precious",
-  "last_name": "Oladotun-Amoo",
+  "firstName": "Precious",
+  "lastName": "Oladotun-Amoo",
   "email": "polad063@uottawa.ca"
   }
 ]
