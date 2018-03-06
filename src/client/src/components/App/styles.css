@@ -1,0 +1,140 @@
+#titleLink h1 {
+    font-size: 22px;
+}
+
+.App {
+    justify-content: space-between;
+}
+
+#settings {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+}
+
+#settings i {
+    color: #222;
+}
+
+#settings ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+
+#navSection {
+    height: 100vh;
+    box-shadow: 1px 1px 5px #222;
+    background-color: rgb(25, 47, 83);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    display: inline-block;
+}
+
+@media only screen and (min-width: 800px) {
+    #titleLink h1 {
+        display: block;
+    }
+
+    #navSection {
+        width: 200px;
+    }
+
+    #mainSection {
+        margin-left: 200px;
+    }
+
+    #nav li span {
+        display: inline-block;
+    }
+} 
+
+@media only screen and (max-width: 800px) {
+    #titleLink h1 {
+        display: none;
+    }
+
+    #navSection {
+        width: 75px;
+    }
+
+    #mainSection {
+        margin-left: 75px;
+    }
+
+    #nav li span {
+        display: none;
+    }
+}
+
+#navContent {
+    position: relative;
+    height: 100%;
+}
+
+#mainSection {
+    height: 100vh;
+    padding: 20px;
+    display: inline-block;
+    
+}
+
+#nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav li {
+    display: block;
+}
+
+#navContent a {
+    text-decoration: none;
+    color: #ffffffd5;
+    text-shadow: 0px 0px 5px #222;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 25px;
+    transition: 0.2s background-color linear;
+}
+
+#navContent a:hover {
+    background-color: rgb(38, 66, 110);
+    color: #ffffff;
+}
+
+#navContent a:hover i {
+    color: #ffffff;
+}
+
+#navContent #titleLink a:hover {
+    background-color: transparent;
+    color: #ffffffd5;
+}
+
+#navContent a {
+    width: 100%;
+}
+
+#navContent a i {
+    color: #ffffffd5;
+}
+
+#logoutBtn {
+    background-color: transparent;
+    border: none;
+    color: #ffffffd5;
+    padding: 10px 25px;
+    position: absolute;
+    bottom: 30px;
+}
+
+.title-underline {
+    border-bottom: 5px solid rgba(38, 66, 110, 0.87);
+    width: 30px;
+}

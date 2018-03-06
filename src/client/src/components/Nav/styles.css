@@ -1,0 +1,26 @@
+
+#nav li {
+    position: relative;
+}
+
+#navContent .active {
+    background-color: rgb(19, 35, 63);
+    color: #ffffff;
+}
+
+#navContent .active:after {
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 0;
+    height: 0;
+    border-left: solid 25px rgb(19, 35, 63);
+    border-top: solid 25px transparent;
+    border-bottom: solid 25px transparent;
+    z-index: 1;
+}
+
+#nav .active:hover {
+    background-color: rgb(19, 35, 63);
+}
