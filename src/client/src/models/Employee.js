@@ -6,7 +6,7 @@ export default class Employee {
         this.email=email;
     }
 
-    modifyEmployee(firstName, lastName, email) {
+    modify(firstName, lastName, email) {
         this.firstName=firstName;
         this.lastName=lastName;
         this.email=email;
