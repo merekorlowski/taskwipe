@@ -36,7 +36,7 @@ export default class Task {
         this.timeLogs.push(timeLog);
     }
 
-    modify(title, description) {
+    modifyTask(title, description) {
         this.title = title;
         this.description = description;
     }
