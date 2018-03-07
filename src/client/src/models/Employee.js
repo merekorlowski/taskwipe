@@ -1,4 +1,4 @@
-export default class Employee {
+export default class Employee{
 
         constructor(id, first_name, last_name, email) {
             this.id=id;
@@ -7,9 +7,7 @@ export default class Employee {
             this.lastName=last_name;
             this.email=email;
         }
-
-        edit(id, first_name, last_name, email) {
-            this.id=id;
+        edit(first_name, last_name, email) {
             this.firstName=first_name;
             this.lastName=last_name;
             this.email=email;
