@@ -1,5 +1,4 @@
 export default class Employee {
-    
     constructor(id, first_name, last_name, email) {
         this.id=id;
         this.firstName=first_name;
