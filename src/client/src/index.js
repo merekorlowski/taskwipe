@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import App from './components/App/index';
 import registerServiceWorker from './registerServiceWorker';
+import Login from './components/Content/Login/index.js';
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <Login />
     </BrowserRouter>, 
     document.getElementById('root')
 );
