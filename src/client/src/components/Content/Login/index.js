@@ -33,7 +33,7 @@ class Login extends Component {
 
 	render() {
 		return (
-	    <div className="Login">
+		    <div className="Login">
 				<h1>Login</h1>
 				<input
 					name="username"
@@ -41,9 +41,9 @@ class Login extends Component {
 					value={this.state.username}
 					placeholder="Enter your Username"
 					onChange = {(event,newValue) => this.setState({username:newValue})}
-		    />
-		    <br/>
-		    <br/>
+		    	/>
+			    <br/>
+			    <br/>
 				<input
 					name="password"
 					type="password"
@@ -51,15 +51,15 @@ class Login extends Component {
 					placeholder="Enter your Password"
 					onChange = {(event,newValue) => this.setState({password:newValue})}
 				/>
-		    <br/>
-		    <br/>
-		    <button
-		    	type="button"
-		    	label="Submit"
-		    	onClick={(event) => this.login.bind(this)}>
-		    	Sign in
-		    </button>
-		</div>
+			    <br/>
+			    <br/>
+			    <button
+			    	type="button"
+			    	label="Submit"
+			    	onClick={(event) => this.login.bind(this)}>
+			    	Sign in
+			    </button>
+			</div>
 		);
 	}
 }
