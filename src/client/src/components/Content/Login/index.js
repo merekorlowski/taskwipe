@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './styles.css';
-import { Route } from 'react-router-dom';
-import App from '../../App/index'
+import LoginService from '../../../services/login'
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
+		this.loginService = new LoginService();
 		this.state={
 			username:'',
 			password:'',
@@ -14,13 +14,10 @@ class Login extends Component {
 	}
 
 	login(self) {
-
-		//event.preventDefault();
-
-		//if (!(self.props.invalidPassword)) {
-			console.log('inside invalidPassword');
-			this.state.context.router.transitionTo('./Schedule/index.js');
-		//}
+		this.loginService.login(self.state).then(res => {
+			let login = res.login;
+			this.setState({login: login});
+		});
 	}
 
 	render() {
