@@ -6,8 +6,8 @@ export default class LoginService {
         this.endPoint = `${httpConfig.host}:${httpConfig.port}`;
     }
 
-    login(loginObject) {
-        return axios.post(`${this.endPoint}/login`, loginObject);
+    login() {
+        return axios.post(`${this.endPoint}/login`);
     }
 
 }

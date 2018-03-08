@@ -9,15 +9,26 @@ class Login extends Component {
 		this.state={
 			username:'',
 			password:'',
+			invalidUsername: false,
 			invalidPassword: false
 		}
 	}
 
 	login(self) {
-		this.loginService.login(self.state).then(res => {
-			let login = res.login;
-			this.setState({login: login});
-		});
+
+		if (self.state.username === '') {
+    		self.state.invalidStaffname = true
+    	}
+
+	    if (self.state.password === '') {
+	    	self.state.invalidPassword = true
+	    }
+
+	    if (!self.state.username && !self.state.password) {
+	    	this.loginService.login().then(res => {
+				let login = res.data;
+			});
+	    }
 	}
 
 	render() {
