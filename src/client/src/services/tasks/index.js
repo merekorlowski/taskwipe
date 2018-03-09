@@ -1,10 +1,10 @@
 
 import axios from 'axios';
-import httpConfig from './httpConfig.js';
+import httpConfig from '../httpConfig.js';
 
 export default class TaskService {
     constructor() {
-        this.endPoint = `${httpConfig.host}:${httpConfig.port}`;
+        this.endPoint = `${httpConfig.host}:${httpConfig.port}/${httpConfig.basePath}`;
     }
 
     getTasks(employeeId) {
