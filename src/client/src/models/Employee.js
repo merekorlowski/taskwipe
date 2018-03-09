@@ -1,4 +1,4 @@
-   export default class Employee {
+ export default class Employee {
         constructor(id, firstName, lastName, email) {
             this.id=id;
             this.firstName=firstName;
@@ -22,5 +22,6 @@
             if(index > -1){
             this.roles.splice(index,1);
             }
-        }
-   }
+        
+       }
+ }

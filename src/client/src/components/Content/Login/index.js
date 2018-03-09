@@ -44,29 +44,29 @@ class Login extends Component {
 
 	render() {
 		return (
-		    <div className="Login">
-				<h1>Login</h1>
-				<input
-					name="username"
-					type = "text"
-					value={this.state.username}
-					placeholder="Enter your Username"
-					onChange = {this.handleChange}
-		    	/>
-				<input
-					name="password"
-					type="password"
-					value={this.state.password}
-					placeholder="Enter your Password"
-					onChange = {this.handleChange}
+			<div className="Login">
+			<h1>Login</h1>
+			<input
+				name="username"
+				type = "text"
+				value={this.state.username}
+				placeholder="Enter your Username"
+				onChange = {this.handleChange}
 				/>
-				<button
-					type="button"
-					label="Submit"
-					onClick={this.login}>
-					Sign in
-				</button>
-			</div>
+			<input
+				name="password"
+				type="password"
+				value={this.state.password}
+				placeholder="Enter your Password"
+				onChange = {this.handleChange}
+			/>
+			<button
+				type="button"
+				label="Submit"
+				onClick={this.login}>
+				Sign in
+			</button>
+		</div>
 		);
 	}
 }
