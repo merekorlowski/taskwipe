@@ -10,7 +10,6 @@
 
 # misc
 /src/client/.DS_Store
-/src/.editorconfig
 /src/client/.env.local
 /src/client/.env.development.local
 /src/client/.env.test.local
