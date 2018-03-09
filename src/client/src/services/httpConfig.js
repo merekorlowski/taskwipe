@@ -1,5 +1,6 @@
 
 export default {
-    host: 'http://localhost',
-    port: 3001
+	host: 'http://localhost',
+	basePath: 'api',
+	port: 3001
 };
