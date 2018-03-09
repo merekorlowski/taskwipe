@@ -1,12 +1,14 @@
 export default class Employee {
-    
-    constructor(id, name) {
+    constructor(id, firstName, lastName, email) {
         this.id=id;
-        this.name=name;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.email=email;
     }
 
-    edit(id, name) {
-        this.id = id;
-        this.name = name;
+    modify(firstName, lastName, email) {
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.email=email;
     }
 }
