@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './styles.css';
 import LoginService from '../../../services/login'
 
 class Login extends Component {
+
 	constructor(props) {
 		super(props);
 		this.loginService = new LoginService();
@@ -12,23 +13,33 @@ class Login extends Component {
 			invalidUsername: false,
 			invalidPassword: false
 		}
+
+		//The binding is mandatory to make "this" work in the callback
+		this.handleChange = this.handleChange.bind(this);
+		this.login = this.login.bind(this);
 	}
 
-	login(self) {
+	handleChange(event) {
+		// The change is stored in the change data structure
+		var change = {};
+		change[event.target.name] = event.target.value;
+		this.setState(change);
+	}
 
-		if (self.state.username === '') {
-    		self.state.invalidStaffname = true
-    	}
+	login() {
+		if (this.state.username === '') {
+			this.setState({invalidUsername: true});
+		}
 
-	    if (self.state.password === '') {
-	    	self.state.invalidPassword = true
-	    }
+		if (this.state.password === '') {
+			this.setState({invalidPassword: true});
+		}
 
-	    if (!self.state.username && !self.state.password) {
-	    	this.loginService.login().then(res => {
+		if (!this.state.username && !this.state.password) {
+			this.loginService.login().then(res => {
 				let login = res.data;
 			});
-	    }
+		}
 	}
 
 	render() {
@@ -40,25 +51,21 @@ class Login extends Component {
 					type = "text"
 					value={this.state.username}
 					placeholder="Enter your Username"
-					onChange = {(event,newValue) => this.setState({username:newValue})}
+					onChange = {this.handleChange}
 		    	/>
-			    <br/>
-			    <br/>
 				<input
 					name="password"
 					type="password"
 					value={this.state.password}
 					placeholder="Enter your Password"
-					onChange = {(event,newValue) => this.setState({password:newValue})}
+					onChange = {this.handleChange}
 				/>
-			    <br/>
-			    <br/>
-			    <button
-			    	type="button"
-			    	label="Submit"
-			    	onClick={(event) => this.login.bind(this)}>
-			    	Sign in
-			    </button>
+				<button
+					type="button"
+					label="Submit"
+					onClick={this.login}>
+					Sign in
+				</button>
 			</div>
 		);
 	}
