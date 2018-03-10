@@ -1,0 +1,32 @@
+[
+  {
+  "id": "001",
+  "firstName": "Mmayen",
+  "lastName": "Ewang",
+  "email": "mewan074@uottawa.ca"
+  },
+  {
+  "id": "002",
+  "firstName": "Karim",
+  "lastName": "Ben Hassine",
+  "email": "kbenh016@uottawa.ca"
+  },
+  {
+  "id": "003",
+  "firstName": "Merek",
+  "lastName": "Orlowski",
+  "email": "morlo088@uottawa.ca"
+  },
+  {
+  "id": "004",
+  "firstName": "Opeoluwa",
+  "lastName": "Eweje",
+  "email": "oewej015@uottawa.ca"
+  },
+  {
+  "id": "005",
+  "firstName": "Precious",
+  "lastName": "Oladotun-Amoo",
+  "email": "polad063@uottawa.ca"
+  }
+]
