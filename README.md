@@ -1,6 +1,6 @@
 # Taskwipe
 ## Dependencies
-* [Node.js LTS version](#https://nodejs.org/en/)
+* [Node.js LTS version](https://nodejs.org/en/)
 
 ## Client
 ### Install Dependencies
