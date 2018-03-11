@@ -4,7 +4,6 @@ import './styles.css';
 import Moment from 'react-moment';
 import moment from 'moment';
 
-
 class TimeSlot extends Component {
 	constructor(props) {
 		super(props);
@@ -17,8 +16,8 @@ class TimeSlot extends Component {
 				<Moment format="HH:mm">
 					{this.time}
 				</Moment>
-			</div>  
-		)
+			</div>
+		);
 	}
 }
 

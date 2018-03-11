@@ -4,14 +4,14 @@ import Nav from '../Nav/index';
 import Content from '../Content/index';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Nav />
-        <Content />
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="App">
+				<Nav />
+				<Content />
+			</div>
+		);
+	}
 }
 
 export default App;

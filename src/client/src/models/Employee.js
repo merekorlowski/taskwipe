@@ -8,7 +8,7 @@ export default class Employee {
 	 * @param {string} lastName - The last name of this employee
 	 * @param {string} email - The email of this employee
 	 */
-  constructor(id, firstName, lastName, email) {
+	constructor(id, firstName, lastName, email) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
