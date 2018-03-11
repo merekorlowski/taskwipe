@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const task_data = require('./task_data.json');
+const taskData = require('./taskData.json');
 
 /**
  * Returns all of the tasks for a given user
@@ -11,7 +11,7 @@ router.get('/api/tasks', (req, res, next) => {
 
   // TODO: Get all tasks from the db for a specific user
 
-  res.json(task_data);
+  res.json(taskData);
 });
 
 /**
