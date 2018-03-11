@@ -6,6 +6,7 @@ import Tasks from '../Tasks/index';
 import Projects from '../Projects/index';
 import Activity from '../Activity/index';
 
+/**Content component which routes the different pages */
 class Content extends Component {
 	render() {
 		return (

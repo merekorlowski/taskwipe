@@ -1,7 +1,7 @@
 import axios from 'axios';
 import httpConfig from '../httpConfig.js';
 
-export default class LoginService {
+class LoginService {
 	/**
 	 * @constructor
 	 */
@@ -22,3 +22,5 @@ export default class LoginService {
 		});
 	}
 }
+
+export default LoginService;

@@ -1,5 +1,5 @@
 
-export default class Task {
+class Task {
 	/**
 	 * An Task
 	 * @constructor
@@ -10,7 +10,7 @@ export default class Task {
 	 * @param {array} employees - The employees assigned to this task
 	 * @param {string} deadline - The deadline of this task
 	 */
-	constructor(id, title, description, priority, employees, deadline) {
+	constructor(title, description, priority, employees, deadline) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -91,3 +91,5 @@ export default class Task {
 		this.deadline = deadline;
 	}
 }
+
+export default Task;

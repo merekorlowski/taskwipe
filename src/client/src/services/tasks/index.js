@@ -2,7 +2,8 @@
 import axios from 'axios';
 import httpConfig from '../httpConfig.js';
 
-export default class TaskService {
+/** Service for handling http requests for the tasks api */
+class TaskService {
 	/**
 	 * Represents a TaskService.
 	 * @constructor
@@ -47,3 +48,5 @@ export default class TaskService {
 		return axios.delete(`${this.endPoint}/task`, {taskId: taskId});
 	}
 }
+
+export default TaskService;
