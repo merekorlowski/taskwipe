@@ -15,7 +15,6 @@ export default class Task {
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
-		this.colour = colour;
 		this.employees = employees;
 		this.deadline = deadline;
 		this.assigned = false;
@@ -40,7 +39,7 @@ export default class Task {
 	 */
 	removeEmployee(index) {
 		this.employees.splice(index, 1);
-        
+
 		if (this.employees.length === 0) {
 			this.assigned = false;
 		}

@@ -3,20 +3,20 @@ import React, { Component } from 'react';
 import './styles.css';
 import Moment from 'react-moment';
 import moment from 'moment';
-import Day from './Day/index';
+import Day from './Day';
 
 class Calendar extends Component {
 	constructor(props) {
 		super(props);
 		this.currentDate = moment();
 		this.days = [];
-		
+
 		for (let i = 0; i < 7; i++) {
 			this.days[i] = this.getDay(i);
 		}
 
 		this.hours = [];
-		
+
 		for (let i = 8; i < 20; i++) {
 			this.hours.push(moment().hour(i).minute(0));
 		}
