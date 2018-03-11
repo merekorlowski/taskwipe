@@ -1,5 +1,5 @@
 import axios from 'axios';
-import httpConfig from './httpConfig.js';
+import httpConfig from '../httpConfig.js';
 
 export default class LoginService {
 	/**

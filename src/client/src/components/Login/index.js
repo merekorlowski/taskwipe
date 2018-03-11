@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
 import './styles.css';
-import LoginService from '../../../services/login'
+import LoginService from '../../services/login';
 
 class Login extends Component {
-
 	constructor(props) {
 		super(props);
 		this.loginService = new LoginService();
-		this.state={
-			username:'',
-			password:'',
+		this.state = {
+			username: '',
+			password: '',
 			invalidUsername: false,
 			invalidPassword: false
-		}
+		};
 
-		//The binding is mandatory to make "this" work in the callback
+		// The binding is mandatory to make "this" work in the callback
 		this.handleChange = this.handleChange.bind(this);
 		this.login = this.login.bind(this);
 	}
@@ -45,28 +44,28 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="Login">
-			<h1>Login</h1>
-			<input
-				name="username"
-				type = "text"
-				value={this.state.username}
-				placeholder="Enter your Username"
-				onChange = {this.handleChange}
+				<h1>Login</h1>
+				<input
+					name="username"
+					type = "text"
+					value={this.state.username}
+					placeholder="Enter your Username"
+					onChange = {this.handleChange}
 				/>
-			<input
-				name="password"
-				type="password"
-				value={this.state.password}
-				placeholder="Enter your Password"
-				onChange = {this.handleChange}
-			/>
-			<button
-				type="button"
-				label="Submit"
-				onClick={this.login}>
+				<input
+					name="password"
+					type="password"
+					value={this.state.password}
+					placeholder="Enter your Password"
+					onChange = {this.handleChange}
+				/>
+				<button
+					type="button"
+					label="Submit"
+					onClick={this.login}>
 				Sign in
-			</button>
-		</div>
+				</button>
+			</div>
 		);
 	}
 }
