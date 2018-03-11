@@ -3,6 +3,9 @@ const router = express.Router();
 
 const task_data = require('./task_data.json');
 
+/**
+ * Returns all of the tasks for a given user
+ */
 router.get('/api/tasks', (req, res, next) => {
   let employeeId = req.query.employeeId;
 
@@ -11,6 +14,9 @@ router.get('/api/tasks', (req, res, next) => {
   res.json(task_data);
 });
 
+/**
+ * Adds a new task to the user's task list
+ */
 router.post('/api/task', (req, res, next) => {
   let task = req.body;
 
@@ -19,6 +25,10 @@ router.post('/api/task', (req, res, next) => {
   res.json(task);
 });
 
+
+/**
+ * Updates a task in the user's task list
+ */
 router.put('/api/task', (req, res, next) => {
   let task = req.body;
 
@@ -27,6 +37,9 @@ router.put('/api/task', (req, res, next) => {
   res.json(task);
 });
 
+/**
+ * Deletes a task from the user's task list
+ */
 router.delete('/api/task', (req, res, next) => {
   let taskId = req.body.taskId;
 

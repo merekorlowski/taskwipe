@@ -3,6 +3,9 @@ const router = express.Router();
 
 const employeeData = require('./employee_data.json');
 
+/**
+ * Verifies the login credentials provided by the user and sends a response to the user
+ */
 router.post('/login', (req, res, next) => {
 	for (let i = 0; i < employeeData.length; i++) {
 		if (employeeData.email == req.query.email && 
