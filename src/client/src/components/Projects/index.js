@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 
+/** Projects page component */
 class Projects extends Component {
 	render() {
 		return (

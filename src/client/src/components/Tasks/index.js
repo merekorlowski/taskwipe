@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import './styles.css';
 import TaskService from '../../services/tasks';
 
+/** Tasks page component */
 class Tasks extends Component {
+	/**
+	 * A Tasks component instance
+	 * @constructor
+	 * @param {*} props - The properties passed into this component
+	 */
 	constructor(props) {
 		super(props);
 		this.taskService = new TaskService();
@@ -12,6 +18,7 @@ class Tasks extends Component {
 		this.getTasks();
 	}
 
+	/** Gets all the tasks for the current user and updates the state */
 	getTasks() {
 		this.taskService.getTasks('e1').then(res => {
 			let tasks = res.data;
@@ -19,6 +26,10 @@ class Tasks extends Component {
 		});
 	}
 
+	/**
+	 * Adds a task to the user's list of tasks
+	 * @param {*} task 
+	 */
 	addTask(task) {
 		this.taskService.addTask(task).then(res => {
 			// if ther response is ready, update the task in the list
@@ -30,6 +41,11 @@ class Tasks extends Component {
 		});
 	}
 
+	/**
+	 * Updates a task from the user's list of tasks
+	 * @param {*} task 
+	 * @param {number} index 
+	 */
 	updateTask(task, index) {
 		this.taskService.updateTask(task).then(res => {
 			// if ther response is ready, update the task in the list
@@ -41,6 +57,11 @@ class Tasks extends Component {
 		});
 	}
 
+	/**
+	 * Deletes a task from the user's list of tasks
+	 * @param {string} taskId 
+	 * @param {number} index 
+	 */
 	deleteTask(taskId, index) {
 		this.taskService.deleteTask(taskId).then(res => {
 			// if ther response is ready, update the task in the list
@@ -52,6 +73,7 @@ class Tasks extends Component {
 		});
 	}
 
+	/** Renders the tasks page */
 	render() {
 		return (
 			<div className="Tasks">

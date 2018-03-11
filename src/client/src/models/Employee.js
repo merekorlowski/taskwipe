@@ -1,5 +1,5 @@
 
-export default class Employee {
+class Employee {
 	/**
 	 * An Employee
 	 * @constructor
@@ -44,3 +44,5 @@ export default class Employee {
 		this.roles.splice(index, 1);
 	}
 }
+
+export default Employee;

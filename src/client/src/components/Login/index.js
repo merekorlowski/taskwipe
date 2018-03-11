@@ -2,14 +2,19 @@ import React, {Component} from 'react';
 import './styles.css';
 import LoginService from '../../services/login';
 
+/**Login page component */
 class Login extends Component {
+	/**
+	 * A log in component
+	 * @constructor
+	 * */
 	constructor(props) {
 		super(props);
 		this.loginService = new LoginService();
 		this.state = {
-			username: '',
+			email: '',
 			password: '',
-			invalidUsername: false,
+			invalidEmail: false,
 			invalidPassword: false
 		};
 
@@ -18,53 +23,44 @@ class Login extends Component {
 		this.login = this.login.bind(this);
 	}
 
+	/**
+	 * Updates the state when a value is changed
+	 * @param {*} event 
+	 */
 	handleChange(event) {
 		// The change is stored in the change data structure
-		var change = {};
-		change[event.target.name] = event.target.value;
-		this.setState(change);
+		this.setState({
+			[event.target.name]: event.target.value
+		});
 	}
 
+	/** Attempts to log in with the given credentials*/
 	login() {
-		if (this.state.username === '') {
-			this.setState({invalidUsername: true});
+		if (this.state.email === '') {
+			this.setState({invalidEmail: true});
 		}
 
 		if (this.state.password === '') {
 			this.setState({invalidPassword: true});
 		}
 
-		if (!this.state.username && !this.state.password) {
+		if (!this.state.email && !this.state.password) {
 			this.loginService.login().then(res => {
 				let login = res.data;
 			});
 		}
 	}
 
+	/** Renders the login page */
 	render() {
 		return (
 			<div className="Login">
 				<h1>Login</h1>
-				<input
-					name="username"
-					type = "text"
-					value={this.state.username}
-					placeholder="Enter your Username"
-					onChange = {this.handleChange}
-				/>
-				<input
-					name="password"
-					type="password"
-					value={this.state.password}
-					placeholder="Enter your Password"
-					onChange = {this.handleChange}
-				/>
-				<button
-					type="button"
-					label="Submit"
-					onClick={this.login}>
-				Sign in
-				</button>
+				<input name="email" type="text" placeholder="Enter your email"
+					value={this.state.email} onChange={this.handleChange} />
+				<input name="password" type="password" placeholder="Enter your password"
+					value={this.state.password} onChange={this.handleChange} />
+				<button type="submit" onClick={this.login}>Sign in</button>
 			</div>
 		);
 	}

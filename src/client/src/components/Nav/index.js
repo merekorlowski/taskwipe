@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './styles.css';
 
+/** Main navigation component */
 class Nav extends Component {
 	render() {
 		return (

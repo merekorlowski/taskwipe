@@ -9,7 +9,7 @@ class Activity extends Component {
 			<div className="Activity">
 				<h1>Activity</h1>
 				<div className="title-underline"></div>
-				<Calendar/>
+				{/*<Calendar/>*/}
 			</div>
 		);
 	}
