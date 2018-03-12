@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import './styles.css';
 import LoginService from '../../services/login';
 
@@ -35,7 +36,8 @@ class Login extends Component {
 	}
 
 	/** Attempts to log in with the given credentials*/
-	login() {
+	login(event) {
+    event.preventDefault();
 		if (this.state.email === '') {
 			this.setState({invalidEmail: true});
 		}
@@ -44,25 +46,50 @@ class Login extends Component {
 			this.setState({invalidPassword: true});
 		}
 
-		if (!this.state.email && !this.state.password) {
-			this.loginService.login().then(res => {
-				let login = res.data;
+		if (!this.state.invalidEmail && !this.state.invalidPassword) {
+			this.loginService.login(this.state.email, this.state.password).then(res => {
+				if (!('unauthenticated' in res.data)) {
+					localStorage.setItem('loggedIn', 'true');
+					this.props.history.push('/tasks');
+				}
 			});
 		}
 	}
 
 	/** Renders the login page */
 	render() {
-		return (
-			<div className="Login">
-				<h1>Login</h1>
-				<input name="email" type="text" placeholder="Enter your email"
-					value={this.state.email} onChange={this.handleChange} />
-				<input name="password" type="password" placeholder="Enter your password"
-					value={this.state.password} onChange={this.handleChange} />
-				<button type="submit" onClick={this.login}>Sign in</button>
-			</div>
-		);
+		if (localStorage.getItem('loggedIn') === 'false') {
+			return (
+				<div className="Login">
+					<div id="banner">
+						<div className="content" id="bannerContent">
+							<span id="task">task</span>wipe
+						</div>
+					</div>
+					<section className="content">
+						<h1>Login</h1>
+						<div className="title-underline"></div>
+						<form id="loginForm" onSubmit={this.login}>
+							<p>
+								<input name="email" type="email" autoFocus="on" placeholder="Enter your email"
+									value={this.state.email} onChange={this.handleChange} />
+							</p>
+							<p>
+								<input name="password" type="password" placeholder="Enter your password"
+									value={this.state.password} onChange={this.handleChange} />
+							</p>
+							<p>
+								<button type="submit">Sign in</button>
+							</p>
+						</form>
+					</section>
+				</div>
+			);
+		} else {
+			return (
+				<Redirect to="/"/>
+			);
+		}
 	}
 }
 

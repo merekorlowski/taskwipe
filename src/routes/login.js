@@ -6,20 +6,26 @@ const employeeData = require('./employeeData.json');
 /**
  * Verifies the login credentials provided by the user and sends a response to the user
  */
-router.post('/login', (req, res, next) => {
+router.post('/api/login', (req, res, next) => {
+	
+	let employee = null;
+
 	for (let i = 0; i < employeeData.length; i++) {
-		if (employeeData.email == req.query.email && 
-			employeeData.password == req.query.password) {
-				
-			res.json({
-				"success": "Successfully logged in"
-			});
+		if (employeeData[i].email === req.body.email && 
+			employeeData[i].password === req.body.password) {
+			
+			employee = employeeData[i];
+			break;
 		}
 	}
 
-	res.json({
-		"failure": "Invalid email or password"
-	});
+	if (employee) {
+		res.json(employee);
+	} else {
+		res.json({
+			'unauthenticated': true
+		});
+	}
 });
 
 module.exports = router;
