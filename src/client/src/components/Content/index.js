@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import './styles.css';
 import MaterialIcon from 'material-icons-react';
 import Tasks from '../Tasks/index';
@@ -28,6 +28,7 @@ class Content extends Component {
 				<Route path="/tasks" component={Tasks} />
 				<Route path="/projects" component={Projects} />
 				<Route path="/activity" component={Activity} />
+				<Redirect to="/tasks"/>
 			</div>
 		);
 	}

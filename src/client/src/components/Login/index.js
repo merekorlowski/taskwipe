@@ -58,7 +58,10 @@ class Login extends Component {
 
 	/** Renders the login page */
 	render() {
-		if (localStorage.getItem('loggedIn') === 'false') {
+		if (localStorage.getItem('loggedIn') &&
+		localStorage.getItem('loggedIn') === 'true') {
+			<Redirect to="/"/>
+		} else {
 			return (
 				<div className="Login">
 					<div id="banner">
@@ -84,10 +87,6 @@ class Login extends Component {
 						</form>
 					</section>
 				</div>
-			);
-		} else {
-			return (
-				<Redirect to="/"/>
 			);
 		}
 	}

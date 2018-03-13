@@ -15,7 +15,8 @@ class Main extends Component {
 	}
 
 	render() {		
-		if (localStorage.getItem('loggedIn') === 'true') {
+		if (localStorage.getItem('loggedIn') &&
+		localStorage.getItem('loggedIn') === 'true') {
 			return (
 				<div>
 					<Nav />
