@@ -2,3 +2,41 @@
 .App {
   justify-content: space-between;
 }
+
+.content {
+	position: relative;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+@media only screen and (min-width: 1000px) {
+	.content {
+		width: 950px;
+	}
+} 
+
+@media only screen and (max-width: 999px) {
+	.content {
+		width: 100%;
+	}
+}
+
+input {
+	border: 1px solid #adadad;
+	padding: 10px;
+	font-size: 14px;
+	border-radius: 5px;
+}
+
+button {
+	display: block;
+	padding: 10px;
+	border: 1px solid #adadad;
+	color: #ffffff;
+	background-color: #19334d;
+	border-radius: 5px;
+}
+
+button:hover {
+	background-color: #0c1927;
+}

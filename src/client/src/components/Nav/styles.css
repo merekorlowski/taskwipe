@@ -1,111 +1,96 @@
 
+#titleLink {
+	padding: 0;
+	vertical-align: middle;
+	font-weight: bold;
+	margin: 0;
+	float: left;
+	font-size: 26px;
+}
+
 #navSection {
-    height: 100vh;
-    box-shadow: 1px 1px 5px #222;
-    background-color: rgb(25, 47, 83);
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    display: inline-block;
+	width: 100%;
+	box-shadow: 1px 1px 5px #222;
+	background-color:#19334d;
+	display: block;
+	padding: 0;
+	font-size: 16px;
+	height: 75px;
 }
 
 #nav li {
-    position: relative;
+  position: relative;
 }
 
-#navContent .active {
-    background-color: rgb(19, 35, 63);
-    color: #ffffff;
-}
-
-#navContent .active:after {
-    content:'';
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 0;
-    height: 0;
-    border-left: solid 25px rgb(19, 35, 63);
-    border-top: solid 25px transparent;
-    border-bottom: solid 25px transparent;
-    z-index: 1;
-}
-
-#nav .active:hover {
-    background-color: rgb(19, 35, 63);
-}
-
-@media only screen and (min-width: 800px) {
-    #navSection {
-        width: 200px;
-    }
-
-    #nav li span {
-        display: inline-block;
-    }
-} 
-
-@media only screen and (max-width: 800px) {
-
-    #navSection {
-        width: 75px;
-    }
-
-    #nav li span {
-        display: none;
-    }
+#navContent .active, #navContent .active:hover {
+	background-color: #0c1927;
+	color: #ffffff;
 }
 
 #navContent {
-    position: relative;
-    height: 100%;
+	position: relative;
+	height: 100%;
+	margin: 0 auto;
+	padding: 0;
+	display: flex;
+	justify-content: space-between;
 }
 
 
 #nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+	float: right;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
 }
 
 #nav li {
-    display: block;
+	padding: 0;
+	display: inline-block;
+}
+
+#nav li a {
+	height: 75px;
+	line-height: 37.25px;
 }
 
 #navContent a {
-    text-decoration: none;
-    color: #ffffffd5;
-    text-shadow: 0px 0px 5px #222;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 25px;
-    transition: 0.2s background-color linear;
+	text-decoration: none;
+	color: #ffffffd5;
+	text-shadow: 0px 0px 5px #222;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	transition: 0.2s background-color linear;
 }
 
 #navContent a:hover {
-    background-color: rgb(38, 66, 110);
-    color: #ffffff;
+	background-color: #12263b;
+	color: #ffffff;
 }
 
 #navContent a:hover i {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 #navContent #titleLink a:hover {
-    background-color: transparent;
-    color: #ffffffd5;
+	background-color: #19334d;
+  color: #ffffffd5;
 }
 
 #navContent a {
-    width: 100%;
+	display: block;
 }
 
 #navContent a i {
-    color: #ffffffd5;
+  color: #ffffffd5;
 }
 
 #task {
-    color: #c3c3c3;
+  color: #c3c3c3;
+}
+
+#nav {
+	width: 100%;
 }

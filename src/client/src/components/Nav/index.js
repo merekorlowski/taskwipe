@@ -8,12 +8,12 @@ class Nav extends Component {
 		return (
 			<div className="Nav">
 				<section id="navSection">
-					<div id="navContent">
+					<div className="content" id="navContent">
 						<nav id="nav">
+							<span id="titleLink"><NavLink to="/tasks" activeClassName="none">
+								<span id="task">task</span><span id="wipe">wipe</span></NavLink>
+							</span>
 							<ul>
-								<li id="titleLink"><NavLink to="/" activeClassName="none">
-									<h1><span id="task">task</span><span id="wipe">wipe</span></h1></NavLink>
-								</li>
 								<li><NavLink to="/tasks" activeClassName="active">Tasks</NavLink></li>
 								<li><NavLink to="/projects" activeClassName="active">Projects</NavLink></li>
 								<li><NavLink to="/activity" activeClassName="active">Activity</NavLink></li>
