@@ -42,14 +42,14 @@ class Calendar extends Component {
 				</div>
 				<ul className="hours">
 					{this.hours.map(hour => (
-						<li><Moment format="HH:mm">
+						<li key={hour}><Moment format="HH:mm">
 							{hour}
 						</Moment></li>
 					))}
 				</ul>
 				<ul>
 					{this.days.map(day => (
-						<li><Day value={day}/></li>
+						<li key={day}><Day value={day}/></li>
 					))}
 				</ul>
 			</div>

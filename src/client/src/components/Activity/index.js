@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './styles.css';
 
-import Calendar from './Calendar';
+/* import Calendar from './Calendar'; */
 
 class Activity extends Component {
 	render() {
 		return (
-			<div className="Activity">
+			<div className="content">
 				<h1>Activity</h1>
 				<div className="title-underline"></div>
-				{/*<Calendar/>*/}
+				{/* <Calendar/> */}
 			</div>
 		);
 	}

@@ -3,7 +3,6 @@ class Task {
 	/**
 	 * An Task
 	 * @constructor
-	 * @param {string} id - The id of this task
 	 * @param {string} title - The title of this task
 	 * @param {string} description - The description of this task
 	 * @param {string} priority - The priority of this task
@@ -11,7 +10,6 @@ class Task {
 	 * @param {string} deadline - The deadline of this task
 	 */
 	constructor(title, description, priority, employees, deadline) {
-		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.priority = priority;

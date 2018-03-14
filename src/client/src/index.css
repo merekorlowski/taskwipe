@@ -14,3 +14,30 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+.background-theme {
+	background-color: #19334d;
+	color: #ffffffd5;
+}
+
+button.background-theme-btn i.material-icons {
+	color: #ffffffd5;
+}
+
+button.background-theme-btn:hover i.material-icons {
+	color: #ffffff;
+}
+
+.background-theme-link a {
+	color: #ffffffd5;
+}
+
+.background-theme-btn:hover, .background-theme-link:hover a {
+	background-color: #12263b;
+	color: #ffffff;
+}
+
+.background-theme-link a.active, .background-theme-btn:active {
+	background-color: #0c1927;
+	color: #ffffff;
+}

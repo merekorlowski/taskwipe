@@ -1,24 +1,4 @@
 
-#banner {
-	width: 100%;
-	box-shadow: 1px 1px 5px #222;
-	background-color:#19334d;
-	display: block;
-	padding: 0;
-	height: 75px;
-}
-
-#bannerContent {
-	position: relative;
-	height: 100%;
-	margin: 0 auto;
-	padding: 0;
-	color: #ffffff;
-	font-size: 26px;
-	font-weight: bold;
-	padding: 20px;
-}
-
 #loginForm {
 	margin-top: 25px;
 	width: 300px;

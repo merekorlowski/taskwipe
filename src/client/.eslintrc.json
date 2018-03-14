@@ -11,7 +11,8 @@
   "env": {
     "es6": true,
 		"node": true,
-		"jasmine": true
+		"jasmine": true,
+    "browser": true
 	},
 	
 	"extends": [

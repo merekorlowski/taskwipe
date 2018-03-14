@@ -5,9 +5,9 @@ import './styles.css';
 class Projects extends Component {
 	render() {
 		return (
-			<div className="Projects">
+			<div className="content">
 				<h1>Projects</h1>
-				<div className="title-underline"></div>
+				<div className="title-underline background-theme"></div>
 			</div>
 		);
 	}

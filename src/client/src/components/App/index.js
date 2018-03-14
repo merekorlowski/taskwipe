@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './styles.css';
-import Main from '../Main';
-import Login from '../Login'
+import Nav from '../Nav';
+import Login from '../Login';
+import Tasks from '../Tasks/index';
+import Projects from '../Projects/index';
+import Activity from '../Activity/index';
+import PrivateRoute from '../PrivateRoute';
 
-/**Base component of the application, contains nav and content */
+/** Base component of the application, contains nav and content */
 class App extends Component {
 	render() {
 		return (
 			<BrowserRouter>
 				<div>
-					<Route path="/" component={Main} />
-					<Route path="/login" component={Login} />
+					<Nav />
+					<Switch>
+						<Route path="/login" component={Login} />
+						<PrivateRoute path="/tasks" component={Tasks} />
+						<PrivateRoute path="/projects" component={Projects} />
+						<PrivateRoute path="/activity" component={Activity} />
+					</Switch>
 				</div>
 			</BrowserRouter>
 		);
