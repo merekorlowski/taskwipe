@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import './styles.css';
 import moment from 'moment';
-import TimeSlot from './TimeSlot';
 
 class Day extends Component {
 	constructor(props) {
@@ -20,7 +19,7 @@ class Day extends Component {
 			<div className="day">
 				<ul>
 					{this.hours.map(hour => (
-						<li><TimeSlot hour={hour}/></li>
+						<li key={hour}>hour</li>
 					))}
 				</ul>
 			</div>

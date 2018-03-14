@@ -1,30 +1,29 @@
 
-#titleLink {
+#logo {
 	padding: 0;
 	vertical-align: middle;
 	font-weight: bold;
 	margin: 0;
-	float: left;
 	font-size: 26px;
+	display: inline-block;
+	height: 75px;
+	line-height: 37.25px;
+	padding: 20px;
+	color: #ffffffd5;
+}
+
+#logo a {
+	color: #ffffffd5;
+	text-decoration: none;
 }
 
 #navSection {
 	width: 100%;
 	box-shadow: 1px 1px 5px #222;
-	background-color:#19334d;
 	display: block;
 	padding: 0;
 	font-size: 16px;
 	height: 75px;
-}
-
-#nav li {
-  position: relative;
-}
-
-#navContent .active, #navContent .active:hover {
-	background-color: #0c1927;
-	color: #ffffff;
 }
 
 #navContent {
@@ -36,28 +35,24 @@
 	justify-content: space-between;
 }
 
-
-#nav ul {
-	float: right;
+#navContent ul {
+	display: inline-block;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	vertical-align: middle;
 }
 
-#nav li {
+#navContent li {
 	padding: 0;
 	display: inline-block;
+  position: relative;
 }
 
-#nav li a {
+#navContent li a {
 	height: 75px;
 	line-height: 37.25px;
-}
-
-#navContent a {
 	text-decoration: none;
-	color: #ffffffd5;
 	text-shadow: 0px 0px 5px #222;
 	display: flex;
 	justify-content: space-between;
@@ -65,32 +60,14 @@
 	transition: 0.2s background-color linear;
 }
 
-#navContent a:hover {
-	background-color: #12263b;
-	color: #ffffff;
-}
-
-#navContent a:hover i {
-  color: #ffffff;
-}
-
-#navContent #titleLink a:hover {
-	background-color: #19334d;
-  color: #ffffffd5;
-}
-
-#navContent a {
-	display: block;
-}
-
-#navContent a i {
-  color: #ffffffd5;
-}
-
 #task {
   color: #c3c3c3;
 }
 
-#nav {
-	width: 100%;
+#settingsBtn {
+	border: none;
+}
+
+#settingsBtn i {
+	vertical-align: middle;
 }

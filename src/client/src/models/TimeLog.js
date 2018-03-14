@@ -2,8 +2,8 @@
 class TimeLog {
 	/**
 	 * A time log for a task
-	 * @param {Date} startTime 
-	 * @param {Date} endTime 
+	 * @param {Date} startTime
+	 * @param {Date} endTime
 	 */
 	constructor(startTime, endTime) {
 		this.startTime = startTime;

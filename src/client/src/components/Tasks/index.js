@@ -23,12 +23,14 @@ class Tasks extends Component {
 		this.taskService.getTasks('e1').then(res => {
 			let tasks = res.data;
 			this.setState({tasks: tasks});
+		}).catch(err => {
+			console.error(err);
 		});
 	}
 
 	/**
 	 * Adds a task to the user's list of tasks
-	 * @param {*} task 
+	 * @param {*} task
 	 */
 	addTask(task) {
 		this.taskService.addTask(task).then(res => {
@@ -37,14 +39,14 @@ class Tasks extends Component {
 			tasks.push(res.data);
 			this.setState({tasks: tasks});
 		}).catch(err => {
-			// display error
+			console.error(err);
 		});
 	}
 
 	/**
 	 * Updates a task from the user's list of tasks
-	 * @param {*} task 
-	 * @param {number} index 
+	 * @param {*} task
+	 * @param {number} index
 	 */
 	updateTask(task, index) {
 		this.taskService.updateTask(task).then(res => {
@@ -53,14 +55,14 @@ class Tasks extends Component {
 			tasks[index] = res.data;
 			this.setState({tasks: tasks});
 		}).catch(err => {
-			// display error
+			console.error(err);
 		});
 	}
 
 	/**
 	 * Deletes a task from the user's list of tasks
-	 * @param {string} taskId 
-	 * @param {number} index 
+	 * @param {string} taskId
+	 * @param {number} index
 	 */
 	deleteTask(taskId, index) {
 		this.taskService.deleteTask(taskId).then(res => {
@@ -69,16 +71,16 @@ class Tasks extends Component {
 			tasks.splice(index, 1);
 			this.setState({tasks: tasks});
 		}).catch(err => {
-			// display error
+			console.error(err);
 		});
 	}
 
 	/** Renders the tasks page */
 	render() {
 		return (
-			<div className="Tasks">
+			<div className="content">
 				<h1>Tasks</h1>
-				<div className="title-underline"></div>
+				<div className="title-underline background-theme"></div>
 				<ul>
 					{this.state.tasks.map(task => (
 						<li key={task.taskId}>{task.title}</li>
