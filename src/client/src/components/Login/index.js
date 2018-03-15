@@ -28,7 +28,7 @@ class Login extends Component {
 	static get propTypes() {
 		return {
 			history: PropTypes.shape({
-				push: PropTypes.object.isRequired
+				push: PropTypes.func.isRequired
 			})
 		};
 	}

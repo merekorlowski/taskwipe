@@ -6,7 +6,7 @@ class PrivateRoute extends Component {
 	static get propTypes() {
 		return {
 			path: PropTypes.string.isRequired,
-			component: PropTypes.object.isRequired
+			component: PropTypes.func.isRequired
 		};
 	};
 	render() {
