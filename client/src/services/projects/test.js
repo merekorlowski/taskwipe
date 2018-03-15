@@ -15,8 +15,8 @@ describe('Test for creating new projects ', () => {
     for (var i=0; i<projectService.getProjectNames().length; i++) {
       for (var j=0; j<projectService.getTeamMembers().length; j++) {
         projectLists = {
-          projectNames[i] : {
-            'teamMember(s)' : teamMembers[j];
+          [projectNames[i]]: {
+            'teamMember(s)': teamMembers[j]
           }
         }
       }
