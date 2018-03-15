@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './styles.css';
 import Nav from '../Nav';
 import Login from '../Login';
@@ -20,6 +20,7 @@ class App extends Component {
 						<PrivateRoute path="/tasks" component={Tasks} />
 						<PrivateRoute path="/projects" component={Projects} />
 						<PrivateRoute path="/activity" component={Activity} />
+						<Redirect from="*" to="/tasks"/>
 					</Switch>
 				</div>
 			</BrowserRouter>
