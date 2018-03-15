@@ -1,12 +1,12 @@
-import TaskService from './index';
+import LoginService from './index';
 
 describe('Test Login API', () => {
   it('Returns the task page when the login button is clicked.', () => {
-    let taskService = new TaskService();
-    let username = taskService.getUsername();
-    let password = taskService.getPassword();
+    let loginService = new loginService();
+    let username = loginService.getUsername();
+    let password = loginService.getPassword();
 
-    taskService.loginButton(username,password);
-    expect(taskService.getCurrentPage() == 'taskPage');
+    loginService.loginButton(username,password);
+    expect(loginService.getCurrentPage() == 'taskPage');
   });
 });
