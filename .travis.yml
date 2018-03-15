@@ -1,8 +1,14 @@
 language: node_js
 node_js:
  - "8"
+before_install:
+ - cd client
 install:
  - npm install
 script:
  - npm run eslint 
  - npm run jsdoc
+ - npm run build
+ - cd ..
+after_script:
+ - cd ..
