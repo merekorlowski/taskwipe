@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-		"start": "node ./bin/www",
-		"jsdoc": "./node_modules/.bin/jsdoc -r -c .jsdocrc.json .",
-		"build:tw": "cd tw && npm run build &&",
-		"build":  "npm run build:tw"
+    "start": "node ./bin/www",
+    "jsdoc": "./node_modules/.bin/jsdoc -r -c .jsdocrc.json .",
+    "build:tw": "cd tw && npm run build &&",
+    "build": "npm run build:tw"
   },
   "dependencies": {
+    "all": "0.0.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
