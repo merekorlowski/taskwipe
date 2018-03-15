@@ -1,6 +1,6 @@
 import TaskService from './index';
 
-describe('Test for creating a new project ', () => {
+describe('Test for creating new projects ', () => {
   it('Creates new project after create button is clicked.', () => {
     let taskService = new TaskService();
 
