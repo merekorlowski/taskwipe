@@ -6,23 +6,23 @@
 
 ## Client
 ### Install Dependencies
-In the src/client directory, run the following command: 
+In theclient directory, run the following command: 
 * `npm install`
 
 This will install all of the dependencies listed in the package.json file.
 
 ### Build
-In the src/client directory, run the following command:
+In theclient directory, run the following command:
 * `npm run build`
 
 ### Run dev server
-In the src/client directory, run the following command:
+In theclient directory, run the following command:
 * `npm start`  
 
 This will run the client dev server at http://localhost:3000.  
 
 ### Run unit tests
-In the src/client directory, run the following command:
+In theclient directory, run the following command:
 * `npm run test`  
 
 ## Web Server
