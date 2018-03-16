@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import './styles.css';
+import 'react-bootstrap';
 import Nav from '../Nav';
 import Login from '../Login';
 import Tasks from '../Tasks/index';
 import Projects from '../Projects/index';
 import Activity from '../Activity/index';
 import PrivateRoute from '../PrivateRoute';
+import './styles.css';
 
 /** Base component of the application, contains nav and content */
 class App extends Component {

@@ -1,8 +1,4 @@
-
-.App {
-  justify-content: space-between;
-}
-
+/* 
 .content {
 	position: relative;
 	margin: 0 auto;
@@ -67,9 +63,13 @@ button {
 	padding: 10px 25px;
 	position: absolute;
 	bottom: 30px;
-}
+} */
 
 .title-underline {
 	width: 30px;
 	height: 5px;
+}
+
+.sidebar {
+	
 }

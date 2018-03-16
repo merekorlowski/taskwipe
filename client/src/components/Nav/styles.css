@@ -1,15 +1,10 @@
 
-#logo {
-	padding: 0;
-	vertical-align: middle;
-	font-weight: bold;
-	margin: 0;
+.navbar {
+	background-color: #19334d;
+}
+
+/* #logo {
 	font-size: 26px;
-	display: inline-block;
-	height: 75px;
-	line-height: 37.25px;
-	padding: 20px;
-	color: #ffffffd5;
 }
 
 #logo a {
@@ -70,4 +65,4 @@
 
 #settingsBtn i {
 	vertical-align: middle;
-}
+} */

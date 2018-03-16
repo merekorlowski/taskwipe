@@ -78,7 +78,7 @@ class Tasks extends Component {
 	/** Renders the tasks page */
 	render() {
 		return (
-			<div className="content">
+			<div className="container">
 				<h1>Tasks</h1>
 				<div className="title-underline background-theme"></div>
 				<ul>

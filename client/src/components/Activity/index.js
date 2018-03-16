@@ -6,7 +6,7 @@ import './styles.css';
 class Activity extends Component {
 	render() {
 		return (
-			<div className="content">
+			<div className="container">
 				<h1>Activity</h1>
 				<div className="title-underline"></div>
 				{/* <Calendar/> */}

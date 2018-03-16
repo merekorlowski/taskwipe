@@ -5,7 +5,7 @@ import './styles.css';
 class Projects extends Component {
 	render() {
 		return (
-			<div className="content">
+			<div className="container">
 				<h1>Projects</h1>
 				<div className="title-underline background-theme"></div>
 			</div>
