@@ -1,76 +1,60 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import MaterialIcon from 'material-icons-react';
-import Settings from '../Settings';
 import './styles.css';
 
 /** Main navigation component */
 class Nav extends Component {
-	constructor(props) {
-		super(props);
-		this.logout = this.logout.bind(this);
-		this.toggleSettings = this.toggleSettings.bind(this);
-		this.state = {
-			isDisplayingSettings: false
-		}
+
+	isActive(pathname) {
+		return (window.location.pathname === pathname);
 	}
 
-	toggleSettings() {
-		this.setState({isDisplayingSettings: !this.state.isDisplayingSettings});
-	}
-
-	logout(event) {
-		localStorage.setItem('loggedIn', 'false');
-		window.location = '/login';
-	}
-
-	renderNavIfLoggedIn() {
-		if (localStorage.getItem('loggedIn') === 'true') {
-			return (
-				<nav className="navbar navbar-inverse">
-					<div className="container">
-						<span id="logo" className="navbar-header">
-							<NavLink to="/tasks" activeClassName="none">
-								<span id="task" className="navbar-brand">taskwipe</span>
-							</NavLink>
-						</span>
-						<ul className="nav navbar-nav">
-							<li className="active">
-								<NavLink to="/tasks" activeClassName="active">Tasks</NavLink>
-							</li>
-							<li>
-								<NavLink to="/projects" activeClassName="active">Projects</NavLink>
-							</li>
-							<li>
-								<NavLink to="/activity" activeClassName="active">Activity</NavLink>
-							</li>
-						</ul>
-						<button type="button" className="navbar-right navbar-btn btn" onClick={this.toggleSettings}>
-							<i className="glyphicon glyphicon-menu-hamburger"></i>
-						</button>
-					</div>
-				</nav>
-			);
-		} else {
-			return (
-				<nav className="navbar navbar-default">
-					<div className="container">
-						<span className="navbar-header">
-							<span id="task" className="navbar-brand">taskwipe</span>
-						</span>
-					</div>
-				</nav>
-			);
-		}
+	isLoggedIn() {
+		return (localStorage.getItem('loggedIn') === 'true');
 	}
 
 	render() {
 		return (
 			<div>
 				<header>
-					{this.renderNavIfLoggedIn()}
+					<nav className="bg-theme">
+						<div className="container">
+							<span className="col-xs-11">
+								<span id="logo">
+									{this.isLoggedIn() ? (
+										<NavLink to="/tasks" activeClassName="none" className="">
+											taskwipe
+										</NavLink>
+									) : <span>taskwipe</span>}
+								</span>
+								{this.isLoggedIn() ? (
+									<ul>
+										<li className={this.isActive('/tasks') ? 'active' : ''}>
+											<NavLink to="/tasks" className="bg-theme-link">Tasks</NavLink>
+										</li>
+										<li className={this.isActive('/projects') ? 'active' : ''}>
+											<NavLink to="/projects" className="bg-theme-link">Projects</NavLink>
+										</li>
+										<li className={this.isActive('/time') ? 'active' : ''}>
+											<NavLink to="/time" className="bg-theme-link">Time</NavLink>
+										</li>
+									</ul>
+								) : ''}
+							</span>
+							{this.isLoggedIn() ? (
+								<span>
+									<ul className="col-xs-1">
+										<li className={this.isActive('/settings') ? 'active' : ''}>
+											<NavLink to="/settings" activeClassName="active" className="bg-theme-link">
+												<i className="fa fa-cog" />
+											</NavLink>
+										</li>
+									</ul>
+								</span>
+							) : ''}
+						</div>
+					</nav>
 				</header>
-				{this.state.isDisplayingSettings ? (<Settings />) : ''}
 			</div>
 		);
 	}

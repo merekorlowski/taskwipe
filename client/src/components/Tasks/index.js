@@ -13,9 +13,98 @@ class Tasks extends Component {
 		super(props);
 		this.taskService = new TaskService();
 		this.state = {
-			tasks: []
+			tasks: [],
+			newTask: {}
 		};
 		this.getTasks();
+	}
+
+	/** Renders the tasks page */
+	render() {
+		return (
+			<div className="container">
+				<h2>Tasks</h2>
+				<div className="title-underline bg-theme"></div>
+				<div>
+					<div>
+						<h5>Monday, March 13</h5>
+						<ul className="list">
+							<li>
+								<form className="container" onSubmit={this.addTask.bind(this)}>
+									<span className="col-xs-6 col-lg-8">
+										<input name="title" type="text" className="form-elem" placeholder="Enter new task" required="true"
+										 value={this.state.newTask.title} onChange={this.handleNewTaskChange.bind(this)}/>
+									</span>
+									<span className="col-xs-3">
+										<select name="project" className="form-elem"
+										 value={this.state.newTask.project}  onChange={this.handleNewTaskChange.bind(this)}>
+											<option>Capstone</option>
+											<option>P1</option>
+										</select>
+									</span>
+									<span className="col-xs-1">
+										<button className="bg-theme-btn">
+											Create
+										</button>
+									</span>
+								</form>
+							</li>
+							{this.state.tasks.map((task, index) => (
+								<li key={task.taskId}>
+									<div className="container">
+										<span className="col-xs-2 col-lg-3">{task.title}</span>
+										<span>
+											<span className="col-xs-1">
+												<i className="fa fa-angle-down"></i>
+											</span>
+											<span className="col-xs-1" >
+												<i className="fa fa-comment"></i>
+											</span>
+											<span className="col-xs-1">
+												<i className="fa fa-edit"></i>
+											</span>
+											<span className="col-xs-1" onClick={this.deleteTask.bind(this, task.taskId, index)}>
+												<i className="fa fa-times"></i>
+											</span>
+										</span>
+										<span className="col-xs-2">
+											<select className="form-elem" value={task.project}>
+												<option>Capstone</option>
+												<option>P1</option>
+											</select>
+										</span>
+										<span className="col-xs-2">
+											<select className="form-elem" value={task.type}>
+												<option>Priority</option>
+												<option>Push</option>
+												<option>Archive</option>
+												<option>Optional</option>
+											</select>
+										</span>
+										<span className="col-xs-1">
+											<button className="bg-theme-btn">Start</button>
+										</span>
+									</div>
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	/**
+	 * Updates the state when a value is changed
+	 * @param {*} event
+	 */
+	handleNewTaskChange(event) {
+		let newTask = {...this.state.newTask};
+		newTask[event.target.name] = event.target.value;
+		// The change is stored in the change data structure
+		this.setState({
+			newTask: newTask
+		});
 	}
 
 	/** Gets all the tasks for the current user and updates the state */
@@ -32,17 +121,21 @@ class Tasks extends Component {
 	 * Adds a task to the user's list of tasks
 	 * @param {*} task
 	 */
-	addTask(task) {
-		this.taskService.addTask(task).then(res => {
+	addTask(event) {
+		event.preventDefault();
+		this.taskService.addTask(this.state.newTask).then(res => {
 			// if ther response is ready, update the task in the list
 			let tasks = this.state.tasks;
 			tasks.push(res.data);
-			this.setState({tasks: tasks});
+			this.setState({
+				tasks: tasks,
+				newTask: {}
+			});
 		}).catch(err => {
 			console.error(err);
 		});
 	}
-
+	
 	/**
 	 * Updates a task from the user's list of tasks
 	 * @param {*} task
@@ -73,21 +166,6 @@ class Tasks extends Component {
 		}).catch(err => {
 			console.error(err);
 		});
-	}
-
-	/** Renders the tasks page */
-	render() {
-		return (
-			<div className="container">
-				<h1>Tasks</h1>
-				<div className="title-underline background-theme"></div>
-				<ul>
-					{this.state.tasks.map(task => (
-						<li key={task.taskId}>{task.title}</li>
-					))}
-				</ul>
-			</div>
-		);
 	}
 }
 

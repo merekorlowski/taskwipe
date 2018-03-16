@@ -68,8 +68,6 @@ button {
 .title-underline {
 	width: 30px;
 	height: 5px;
-}
-
-.sidebar {
-	
+	margin-left: 5px;
+	margin-bottom: 10px;
 }

@@ -6,8 +6,8 @@ class Projects extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h1>Projects</h1>
-				<div className="title-underline background-theme"></div>
+				<h2>Projects</h2>
+				<div className="title-underline bg-theme"></div>
 			</div>
 		);
 	}

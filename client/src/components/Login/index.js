@@ -71,27 +71,25 @@ class Login extends Component {
 		} else {
 			return (
 				<div className="container">
-					<h1>Login</h1>
-					<div className="title-underline"></div>
-					<form onSubmit={this.login}>
-						<div className="form-group form-group-lg">
-							<div className="input-group">
-								<span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
-								<input id="email" type="text" autoFocus="on" className="form-control" name="email" placeholder="Email"
-									value={this.state.email} onChange={this.handleChange} />
+					<h2>Login</h2>
+					<div className="title-underline bg-theme"></div>
+					<div>
+						<form onSubmit={this.login}>
+							<div class="col-md-6 col-lg-6 col-sm-10">
+								<div className="form-row">
+									<input id="email" type="text" autoFocus="on" className="form-elem" name="email" placeholder="Email"
+										value={this.state.email} onChange={this.handleChange} />
+								</div>
+								<div className="form-row">
+									<input id="password" type="password" className="form-elem" name="password" placeholder="Password"
+										value={this.state.password} onChange={this.handleChange} />
+								</div>
+								<div>
+									<button type="submit" className="bg-theme-btn right">Sign in</button>
+								</div>
 							</div>
-						</div>
-						<div className="form-group form-group-lg">
-							<div className="input-group">
-								<span className="input-group-addon"><i className="glyphicon glyphicon-lock"></i></span>
-								<input id="password" type="password" className="form-control" name="password" placeholder="Password"
-									value={this.state.password} onChange={this.handleChange} />
-							</div>
-						</div>
-						<div className="form-group">
-							<button type="submit" className="btn btn-primary btn-lg navbar-right">Sign in</button>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			);
 		}
