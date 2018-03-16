@@ -33,11 +33,11 @@ class Tasks extends Component {
 								<form className="container" onSubmit={this.addTask.bind(this)}>
 									<span className="col-xs-6 col-lg-8">
 										<input name="title" type="text" className="form-elem" placeholder="Enter new task" required="true"
-										 value={this.state.newTask.title} onChange={this.handleNewTaskChange.bind(this)}/>
+											value={this.state.newTask.title} onChange={this.handleNewTaskChange.bind(this)}/>
 									</span>
 									<span className="col-xs-3">
 										<select name="project" className="form-elem"
-										 value={this.state.newTask.project}  onChange={this.handleNewTaskChange.bind(this)}>
+											value={this.state.newTask.project} onChange={this.handleNewTaskChange.bind(this)}>
 											<option>Capstone</option>
 											<option>P1</option>
 										</select>
@@ -68,13 +68,13 @@ class Tasks extends Component {
 											</span>
 										</span>
 										<span className="col-xs-2">
-											<select className="form-elem" value={task.project}>
+											<select className="form-elem" value={task.project} onChange={this.handleTaskChange.bind(this, index)}>
 												<option>Capstone</option>
 												<option>P1</option>
 											</select>
 										</span>
 										<span className="col-xs-2">
-											<select className="form-elem" value={task.type}>
+											<select className="form-elem" value={task.type} onChange={this.handleTaskChange.bind(this, index)}>
 												<option>Priority</option>
 												<option>Push</option>
 												<option>Archive</option>
@@ -107,6 +107,19 @@ class Tasks extends Component {
 		});
 	}
 
+	/**
+	 * Updates the state when a value is changed
+	 * @param {*} event
+	 */
+	handleTaskChange(event, index) {
+		let tasks = {...this.state.tasks};
+		tasks[index][event.target.name] = event.target.value;
+		// The change is stored in the change data structure
+		this.setState({
+			tasks: tasks
+		});
+	}
+
 	/** Gets all the tasks for the current user and updates the state */
 	getTasks() {
 		this.taskService.getTasks('e1').then(res => {
@@ -135,7 +148,7 @@ class Tasks extends Component {
 			console.error(err);
 		});
 	}
-	
+		
 	/**
 	 * Updates a task from the user's list of tasks
 	 * @param {*} task
