@@ -4,15 +4,6 @@ import './styles.css';
 
 /** Main navigation component */
 class Nav extends Component {
-
-	isActive(pathname) {
-		return (window.location.pathname === pathname);
-	}
-
-	isLoggedIn() {
-		return (localStorage.getItem('loggedIn') === 'true');
-	}
-
 	render() {
 		return (
 			<div>
@@ -57,6 +48,14 @@ class Nav extends Component {
 				</header>
 			</div>
 		);
+	}
+	
+	isActive(pathname) {
+		return (window.location.pathname === pathname);
+	}
+
+	isLoggedIn() {
+		return (localStorage.getItem('loggedIn') === 'true');
 	}
 }
 

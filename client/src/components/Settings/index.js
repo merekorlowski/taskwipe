@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import './styles.css';
 
 class Settings extends Component {
-
-	logout() {
-		localStorage.setItem('loggedIn', 'false');
-		window.location = '/login';
-	}
-
 	render() {
 		return (
 			<div className="container">
@@ -18,6 +12,11 @@ class Settings extends Component {
 				</p>
 			</div>
 		);
+	}
+	
+	logout() {
+		localStorage.setItem('loggedIn', 'false');
+		window.location = '/login';
 	}
 }
 

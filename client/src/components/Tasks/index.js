@@ -33,11 +33,11 @@ class Tasks extends Component {
 								<form className="container" onSubmit={this.addTask.bind(this)}>
 									<span className="col-xs-6 col-lg-8">
 										<input name="title" type="text" className="form-elem" placeholder="Enter new task" required="true"
-										 value={this.state.newTask.title} onChange={this.handleNewTaskChange.bind(this)}/>
+											value={this.state.newTask.title} onChange={this.handleNewTaskChange.bind(this)}/>
 									</span>
 									<span className="col-xs-3">
 										<select name="project" className="form-elem"
-										 value={this.state.newTask.project}  onChange={this.handleNewTaskChange.bind(this)}>
+											value={this.state.newTask.project} onChange={this.handleNewTaskChange.bind(this)}>
 											<option>Capstone</option>
 											<option>P1</option>
 										</select>
@@ -135,7 +135,7 @@ class Tasks extends Component {
 			console.error(err);
 		});
 	}
-	
+		
 	/**
 	 * Updates a task from the user's list of tasks
 	 * @param {*} task

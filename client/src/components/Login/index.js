@@ -75,7 +75,7 @@ class Login extends Component {
 					<div className="title-underline bg-theme"></div>
 					<div>
 						<form onSubmit={this.login}>
-							<div class="col-md-6 col-lg-6 col-sm-10">
+							<div className="col-md-6 col-lg-6 col-sm-10">
 								<div className="form-row">
 									<input id="email" type="text" autoFocus="on" className="form-elem" name="email" placeholder="Email"
 										value={this.state.email} onChange={this.handleChange} />

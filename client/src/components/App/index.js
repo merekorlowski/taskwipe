@@ -22,7 +22,7 @@ class App extends Component {
 						<PrivateRoute path="/tasks" component={Tasks} />
 						<PrivateRoute path="/projects" component={Projects} />
 						<PrivateRoute path="/time" component={Time} />
-						<PrivateRoute path="/settings" component={Settings} />						
+						<PrivateRoute path="/settings" component={Settings} />
 						<Redirect from="*" to="/tasks"/>
 					</Switch>
 				</div>
