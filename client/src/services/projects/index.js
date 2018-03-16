@@ -37,11 +37,11 @@ class ProjectService {
 	}
 
 	/**
-	 * Delete a project 
+	 * Delete a project
 	 * @return Returns a promise
 	 */
 	deleteProject(projectId) {
-		return axios.delete(`${this.endPoint}/project`, {projectId:projectId});
+		return axios.delete(`${this.endPoint}/project`, {projectId: projectId});
 	}
 }
 
