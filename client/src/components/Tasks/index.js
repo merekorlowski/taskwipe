@@ -68,13 +68,13 @@ class Tasks extends Component {
 											</span>
 										</span>
 										<span className="col-xs-2">
-											<select className="form-elem" value={task.project}>
+											<select className="form-elem" value={task.project} onChange={this.handleTaskChange.bind(this, index)}>
 												<option>Capstone</option>
 												<option>P1</option>
 											</select>
 										</span>
 										<span className="col-xs-2">
-											<select className="form-elem" value={task.type}>
+											<select className="form-elem" value={task.type} onChange={this.handleTaskChange.bind(this, index)}>
 												<option>Priority</option>
 												<option>Push</option>
 												<option>Archive</option>
@@ -104,6 +104,19 @@ class Tasks extends Component {
 		// The change is stored in the change data structure
 		this.setState({
 			newTask: newTask
+		});
+	}
+
+	/**
+	 * Updates the state when a value is changed
+	 * @param {*} event
+	 */
+	handleTaskChange(event, index) {
+		let tasks = {...this.state.tasks};
+		tasks[index][event.target.name] = event.target.value;
+		// The change is stored in the change data structure
+		this.setState({
+			tasks: tasks
 		});
 	}
 
