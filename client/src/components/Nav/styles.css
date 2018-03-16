@@ -19,7 +19,7 @@
 
 #navSection {
 	width: 100%;
-	box-shadow: 1px 1px 5px #222;
+	box-shadow: 1px 1px 5px gray;
 	display: block;
 	padding: 0;
 	font-size: 16px;
