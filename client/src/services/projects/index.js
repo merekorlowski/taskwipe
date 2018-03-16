@@ -24,16 +24,16 @@ class ProjectService {
 	 * Add a project
 	 * @return Returns a promise
 	 */
-	addProject(task) {
-		return axios.post(`${this.endPoint}/project`, task);
+	addProject(project) {
+		return axios.post(`${this.endPoint}/project`, project);
 	}
 
 	/**
 	 * Update a project
 	 * @return Returns a promise
 	 */
-	updateProject(task) {
-		return axios.put(`${this.endPoint}/project`, task);
+	updateProject(project) {
+		return axios.put(`${this.endPoint}/project`, project);
 	}
 
 	/**
