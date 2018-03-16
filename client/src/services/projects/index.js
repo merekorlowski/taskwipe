@@ -41,7 +41,7 @@ class ProjectService {
 	 * @return Returns a promise
 	 */
 	deleteProject(projectId) {
-		return axios.delete(`${this.endPoint}/project`);
+		return axios.delete(`${this.endPoint}/project`, {projectId:projectId});
 	}
 }
 
