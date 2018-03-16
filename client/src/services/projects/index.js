@@ -37,12 +37,11 @@ class ProjectService {
 	}
 
 	/**
-	 * Delete a project from an employee
-	 * @param {string} taskId - The id of the project 
+	 * Delete a project 
 	 * @return Returns a promise
 	 */
 	deleteProject(projectId) {
-		return axios.delete(`${this.endPoint}/project`, {projectId: projectId});
+		return axios.delete(`${this.endPoint}/project`);
 	}
 }
 
