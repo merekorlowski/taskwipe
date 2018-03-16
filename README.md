@@ -1,5 +1,6 @@
 # Taskwipe 
 [![BCH compliance](https://bettercodehub.com/edge/badge/merekorlowski/taskwipe?branch=dev)](https://bettercodehub.com/)
+[![Build Status](https://travis-ci.org/merekorlowski/taskwipe.svg?branch=dev)](https://travis-ci.org/merekorlowski/taskwipe)
 
 ## Dependencies
 * [Node.js LTS version](https://nodejs.org/en/)
