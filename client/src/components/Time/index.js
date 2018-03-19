@@ -3,16 +3,16 @@ import './styles.css';
 
 /* import Calendar from './Calendar'; */
 
-class Activity extends Component {
+class Time extends Component {
 	render() {
 		return (
-			<div className="content">
-				<h1>Activity</h1>
-				<div className="title-underline"></div>
+			<div className="container">
+				<h2>Time</h2>
+				<div className="title-underline bg-theme"></div>
 				{/* <Calendar/> */}
 			</div>
 		);
 	}
 }
 
-export default Activity;
+export default Time;

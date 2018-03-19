@@ -1,8 +1,7 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Open Sans';
-  color: #222;
+	font-family: 'Open Sans';
+	padding: 0;
+	margin: 0;
 }
 
 * {
@@ -10,34 +9,79 @@ body {
 }
 
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
 }
 
-.background-theme {
+.bg-theme {
 	background-color: #19334d;
 	color: #ffffffd5;
 }
 
-button.background-theme-btn i.material-icons {
-	color: #ffffffd5;
-}
-
-button.background-theme-btn:hover i.material-icons {
+.bg-theme-link:hover i {
 	color: #ffffff;
 }
 
-.background-theme-link a {
+.bg-theme-link {
 	color: #ffffffd5;
+	text-decoration: none;
 }
 
-.background-theme-btn:hover, .background-theme-link:hover a {
+.bg-theme-btn {
+	border: none;
+	padding: 10px;
+	background-color: #19334d;
+	color: #ffffffd5;
+	border-radius: 5px;
+}
+
+.bg-theme-btn:hover, .bg-theme-link:hover {
 	background-color: #12263b;
 	color: #ffffff;
+	text-decoration: none;
+
 }
 
-.background-theme-link a.active, .background-theme-btn:active {
+.bg-theme-link.active, .bg-theme-btn:active {
 	background-color: #0c1927;
 	color: #ffffff;
+	text-decoration: none;
+}
+
+.centered {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.form-elem {
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #c2c2c2;
+	background-color: #ffffff;
+	width: 100%;
+}
+
+.list {
+	border: 1px solid #c2c2c2;
+	border-radius: 5px;
+	box-shadow: 1px 1px 5px gray;
+}
+
+.list li {
+	border-bottom: 1px solid #c2c2c2;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.list li:last-child {
+	border-bottom: none;
+}
+
+.right {
+	float: right;
+}
+
+.form-row {
+	margin-bottom: 5px;
 }

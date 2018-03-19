@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './styles.css';
 import LoginService from '../../services/login';
 import { PropTypes } from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -71,24 +70,26 @@ class Login extends Component {
 			return (<Redirect to="/tasks" />);
 		} else {
 			return (
-				<div className="Login">
-					<section className="content">
-						<h1>Login</h1>
-						<div className="title-underline background-theme"></div>
-						<form id="loginForm" onSubmit={this.login}>
-							<p>
-								<input name="email" type="email" autoFocus="on" placeholder="Enter your email"
-									value={this.state.email} onChange={this.handleChange} />
-							</p>
-							<p>
-								<input name="password" type="password" placeholder="Enter your password"
-									value={this.state.password} onChange={this.handleChange} />
-							</p>
-							<p>
-								<button type="submit" className="">Sign in</button>
-							</p>
+				<div className="container">
+					<h2>Login</h2>
+					<div className="title-underline bg-theme"></div>
+					<div>
+						<form onSubmit={this.login}>
+							<div className="col-md-6 col-lg-6 col-sm-10">
+								<div className="form-row">
+									<input id="email" type="text" autoFocus="on" className="form-elem" name="email" placeholder="Email"
+										value={this.state.email} onChange={this.handleChange} />
+								</div>
+								<div className="form-row">
+									<input id="password" type="password" className="form-elem" name="password" placeholder="Password"
+										value={this.state.password} onChange={this.handleChange} />
+								</div>
+								<div>
+									<button type="submit" className="bg-theme-btn right">Sign in</button>
+								</div>
+							</div>
 						</form>
-					</section>
+					</div>
 				</div>
 			);
 		}

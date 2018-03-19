@@ -2,19 +2,19 @@
 	{
 		"taskId": "t1",
 		"title": "Task 1",
-		"priority": "High",
-		"projectId": "p1"
+		"type": "Priority",
+		"project": "Capstone"
 	},
 	{
 		"taskId": "t2",
 		"title": "Task 2",
-		"priority": "High",
-		"projectId": "p1"
+		"type": "Optional",
+		"project": "p1"
 	},
 	{
 		"taskId": "t3",
 		"title": "Task 3",
-		"priority": "High",
-		"projectId": "p1"
+		"type": "Priority",
+		"project": "p1"
 	}
 ]
