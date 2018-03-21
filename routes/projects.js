@@ -30,7 +30,7 @@ router.post('/api/project', (req, res) => {
 /**
  * Updates a project in the user's project list
  */
-router.put('/api/project', (req, res) => {
+router.put('/api/project/:projectId', (req, res) => {
   let project = req.body;
 
   // TODO: Update project in the db
@@ -41,8 +41,8 @@ router.put('/api/project', (req, res) => {
 /**
  * Deletes a project from the user's project list
  */
-router.delete('/api/project', (req, res) => {
-  let projectId = req.body.projectId;
+router.delete('/api/project/:projectId', (req, res) => {
+  let projectId = req.params.projectId;
 
   // TODO: Delete a project in the db
 
