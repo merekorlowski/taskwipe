@@ -13,11 +13,12 @@ class ProjectService {
 	}
 
 	/**
-	 * Return all projects
+	 * Return all the tasks for a given employee
+	 * @param {string} employeeId - The id of an employee
 	 * @return Returns a promise
 	 */
-	getProjects() {
-		return axios.get(`${this.endPoint}/projects`);
+	getProjects(employeeId) {
+		return axios.get(`${this.endPoint}/projects?employeeId=${employeeId}`);
 	}
 
 	/**
