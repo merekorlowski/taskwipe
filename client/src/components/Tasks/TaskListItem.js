@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import TaskService from '../../services/tasks';
 import moment from 'moment';
 
@@ -32,6 +33,13 @@ class TaskListItem extends Component {
 		this.taskService = new TaskService();
 		this.getOnGoingTimeLog();
 	}
+
+	static get propTypes() {
+		return {
+			data: PropTypes.Object.isOptional,
+			handleDelete: PropTypes.func.isRequired
+		};
+	};
 
 	render() {
 		return (
@@ -71,7 +79,7 @@ class TaskListItem extends Component {
 						: (<button className="bg-theme-btn" onClick={this.stopTimer.bind(this)}>{this.state.onGoingTime}</button>)}
 				</span>
 			</div>
-		)
+		);
 	}
 
 	/**
@@ -124,7 +132,7 @@ class TaskListItem extends Component {
 	}
 
 	/**
-	 * Starts a new timer 
+	 * Starts a new timer
 	 */
 	startTimer() {
 		this.taskService.startTimer(this.state.taskId).then(res => {
@@ -132,19 +140,18 @@ class TaskListItem extends Component {
 				let startTime = moment(res.data.startTime, 'YYYY-MM-DD HH:mm:ss');
 				let currentTime = moment();
 				let duration = moment.duration(currentTime.diff(startTime));
-				console.log(Math.floor(duration.asMinutes()))
 				this.setState({
 					onGoingTime: Math.floor(duration.asMinutes())
 				});
 			}, 60000);
 			this.state.timeLogs.push(res.data);
 		}).catch(err => {
-			console.error(err);	
+			console.error(err);
 		});
 	}
 
 	/**
-	 * Stops the current running timer 
+	 * Stops the current running timer
 	 */
 	stopTimer() {
 		this.taskService.stopTimer(this.state.taskId).then(res => {
@@ -187,9 +194,8 @@ class TaskListItem extends Component {
 			title: this.state.title,
 			type: this.state.type,
 			projectId: this.state.projectId
-		}
+		};
 	}
-	
 }
 
 export default TaskListItem;

@@ -1,7 +1,6 @@
 
 import axios from 'axios';
 import httpConfig from '../httpConfig.js';
-import Task from '../../models/Task';
 
 /** Service for handling http requests for the tasks api */
 class TaskService {
@@ -108,7 +107,6 @@ class TaskService {
 	deleteComment(taskId, commentId) {
 		return axios.delete(`${this.endPoint}/task/${taskId}/comment/${commentId}`);
 	}
-
 }
 
 export default TaskService;
