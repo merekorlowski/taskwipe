@@ -4,7 +4,7 @@ import ProjectService from '../../services/projects';
 
 /** Projects page component */
 class Projects extends Component {
-    /**
+/**
 	 * A Projects component instance
 	 * @constructor
 	 * @param {*} props - The properties passed into this component
@@ -33,7 +33,9 @@ class Projects extends Component {
 		);
 	}
     
-    /** Gets all the projects for the current user and updates the state */
+	/**
+	Gets all the projects for the current user and updates the state
+	*/
 	getProjects() {
 		this.projectService.getProjects('e1').then(res => {
 			let projects = res.data;
