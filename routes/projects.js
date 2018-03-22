@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express.Router();
+const router = express.Router();
 
 const projectData = require('./projectData.json');
 
