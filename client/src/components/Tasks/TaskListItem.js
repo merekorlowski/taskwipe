@@ -36,7 +36,7 @@ class TaskListItem extends Component {
 
 	static get propTypes() {
 		return {
-			data: PropTypes.Object.isOptional,
+			data: PropTypes.object.isOptional,
 			handleDelete: PropTypes.func.isRequired
 		};
 	};
