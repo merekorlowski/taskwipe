@@ -1,16 +1,16 @@
 [
 	{
-        "id": "p001",
+        "projectId": "p001",
         "title": "Capstone Project",
         "description": "Design a new version of the taskwipe system"
 	},
 	{
-        "id": "p002",
+        "projectId": "p002",
         "title": "Summer Fitness Project",
         "description": "Implement a plan to get staff fit"
 	},
 	{
-        "id": "p003",
+        "projectId": "p003",
         "title": "Building Railway",
         "description": "Design a new railway system"
 	}
