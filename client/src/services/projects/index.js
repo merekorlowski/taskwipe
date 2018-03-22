@@ -13,11 +13,12 @@ class ProjectService {
 	}
 
 	/**
-	 * Return all projects
+	 * Return all the tasks for a given employee
+	 * @param {string} employeeId - The id of an employee
 	 * @return Returns a promise
 	 */
-	getProjects() {
-		return axios.get(`${this.endPoint}/projects`);
+	getProjects(employeeId) {
+		return axios.get(`${this.endPoint}/projects?employeeId=${employeeId}`);
 	}
 
 	/**
@@ -37,11 +38,11 @@ class ProjectService {
 	}
 
 	/**
-	 * Delete a project 
+	 * Delete a project
 	 * @return Returns a promise
 	 */
 	deleteProject(projectId) {
-		return axios.delete(`${this.endPoint}/project`, {projectId:projectId});
+		return axios.delete(`${this.endPoint}/project`, {projectId: projectId});
 	}
 }
 
