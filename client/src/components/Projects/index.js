@@ -24,11 +24,6 @@ class Projects extends Component {
 			<div className="container">
 				<h2>Projects</h2>
 				<div className="title-underline bg-theme"></div>
-				<div>
-					<div>
-						<h5>Monday, March 13</h5>
-					</div>
-				</div>
 			</div>
 		);
 	}
