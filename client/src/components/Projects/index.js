@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './styles.css';
-import ProjectService from '../../services/tasks';
+import ProjectService from '../../services/projects';
 
 /** Projects page component */
 class Projects extends Component {
