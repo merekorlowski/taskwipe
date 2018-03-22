@@ -1,62 +1,95 @@
+import TaskService from '../services/tasks';
+import moment from 'moment';
+
+const DEFAULT_TYPE = 'Priority';
 
 class Task {
 	/**
-	 * An Task
+	 * A Task
 	 * @constructor
-	 * @param {string} title - The title of this task
-	 * @param {string} description - The description of this task
-	 * @param {string} priority - The priority of this task
-	 * @param {array} employees - The employees assigned to this task
-	 * @param {string} deadline - The deadline of this task
+	 * @param {JSON} task
 	 */
-	constructor(title, description, priority, employees, deadline) {
-		this.title = title;
-		this.description = description;
-		this.priority = priority;
-		this.employees = employees;
-		this.deadline = deadline;
-		this.assigned = false;
-		this.inProgress = false;
-		this.finished = false;
+	constructor(task) {
+		// casts the JSON retrieved from the server into a Task object
+		if (task) {
+			this.taskId = task.taskId;
+			this.title = task.title;
+			this.type = task.type;
+			this.projectId = task.projectId;
+		} else {
+			this.title = '';
+			this.type = DEFAULT_TYPE;
+			this.projectId = '';
+		}
 		this.timeLogs = [];
 		this.comments = [];
+		this.onGoingTime = '';
+
+		this.taskService = new TaskService();
+		this.getOnGoingTimeLog();
 	}
 
 	/**
-	 * Assign an employee to this task
-	 * @param {Employee} employee - The employee to assign to this task
+	 * Retrieves the last started time and starts an interval to display current time in minutes
 	 */
-	addEmployee(employee) {
-		this.employees.push(employee);
-		this.assigned = true;
+	getOnGoingTimeLog() {
+		// this.taskService.getOnGoingTimeLog(this.taskId).then(res => {
+		// 	// update every minute
+		// 	setInterval(() => {
+		// 		let duration = moment.duration(moment().diff(res.data.startTime));
+		// 		this.onGoingTime = duration.asMinutes();
+		// 	}, 60000);
+		// });
 	}
 
 	/**
-	 * Unassign an employee from this task
-	 * @param {number} index - The index of the employee to unassing from this task
+	 * Retrieves all of the time logs for this task
 	 */
-	removeEmployee(index) {
-		this.employees.splice(index, 1);
-
-		if (this.employees.length === 0) {
-			this.assigned = false;
-		}
+	getTimeLogs() {
+		this.taskService.getTimeLogs(this.taskId).then(res => {
+			this.timeLogs = res.data;
+		}).catch(err => {
+			console.error(err);
+		});
 	}
 
 	/**
-	 * Add a time log to this task
-	 * @param {TimeLog} timelog - The time log to add to this task
+	 * Retrieves all of the comments for this task
 	 */
-	addTimeLog(timeLog) {
-		this.timeLogs.push(timeLog);
+	getComments() {
+		this.taskService.getComments(this.taskId).then(res => {
+			this.comments = res.data;
+		}).catch(err => {
+			console.error(err);
+		});
 	}
 
 	/**
-	 * Remove a time log from this task
-	 * @param {number} index - The index of the time log to remove from this task
+	 * Starts a new timer 
 	 */
-	removeTimelog(index) {
-		this.timeLogs.splice(index, 1);
+	startTimer(parent) {
+		this.taskService.startTimer(this.taskId).then(res => {
+			setInterval(() => {
+				let startTime = moment(res.data.startTime, 'YYYY-MM-DD HH:mm:ss');
+				let currentTime = moment();
+				let duration = moment.duration(currentTime.diff(startTime));
+				let tasks = [...parent.state.tasks];
+				this.onGoingTime = duration.asMinutes();
+				parent.setState({tasks: tasks});
+			}, 1000);
+			//this.timeLogs.push(res.data);
+		}).catch(err => {
+			console.error(err);	
+		});
+	}
+
+	/**
+	 * Stops the current running timer 
+	 */
+	stopTimer() {
+		this.taskService.stopTimer(this.taskId).catch(err => {
+			console.error(err);
+		});
 	}
 
 	/**
@@ -64,30 +97,35 @@ class Task {
 	 * @param {string} comment - The comment to add to this task
 	 */
 	addComment(comment) {
-		this.comments.push(comment);
+		this.taskService.addComment(this.taskId, comment).then(res => {
+			this.comments.push(res.data);
+		}).catch(err => {
+			console.error(err);
+		});
 	}
 
 	/**
 	 * Remove a comment from this task
+	 * @param {string} commentId - The id of the comment to remove from this task
 	 * @param {number} index - The index of the comment to remove from this task
 	 */
-	removeComment(index) {
-		this.comments.splice(index, 1);
+	deleteComment(commentId, index) {
+		this.taskService.deleteComment(this.taskId, this.commentId).then(res => {
+			this.comments.splice(index, 1);
+		}).catch(err => {
+			console.error(err);
+		});
 	}
 
-	/**
-	 * Modify the attributes of this task
-	 * @param {number} title - The new title of this task
-	 * @param {number} description - The new description of this task
-	 * @param {number} priority - The new priority of this task
-	 * @param {number} deadline - The new deadline of this task
-	 */
-	modify(title, description, priority, deadline) {
-		this.title = title;
-		this.description = description;
-		this.priority = priority;
-		this.deadline = deadline;
+	toJSON() {
+		return {
+			taskId: this.taskId,
+			title: this.title,
+			type: this.type,
+			projectId: this.projectId
+		}
 	}
+	
 }
 
 export default Task;

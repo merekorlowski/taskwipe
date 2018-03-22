@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 import TaskService from '../../services/tasks';
+import TaskListItem from './TaskListItem';
 
 /** Tasks page component */
 class Tasks extends Component {
@@ -12,9 +13,17 @@ class Tasks extends Component {
 	constructor(props) {
 		super(props);
 		this.taskService = new TaskService();
+		this.newTask = {
+			title: '',
+			type: '',
+			project: {
+				projectId: '',
+				title: ''
+			}
+		};
 		this.state = {
 			tasks: [],
-			newTask: {}
+			newTask: {...this.newTask}
 		};
 		this.getTasks();
 	}
@@ -36,10 +45,10 @@ class Tasks extends Component {
 											value={this.state.newTask.title} onChange={this.handleNewTaskChange.bind(this)}/>
 									</span>
 									<span className="col-xs-3">
-										<select name="project" className="form-elem"
+										<select name="projectId" className="form-elem"
 											value={this.state.newTask.project} onChange={this.handleNewTaskChange.bind(this)}>
-											<option>Capstone</option>
-											<option>P1</option>
+											<option value="p1">Project 1</option>
+											<option value="p2">Project 2</option>
 										</select>
 									</span>
 									<span className="col-xs-1">
@@ -50,42 +59,7 @@ class Tasks extends Component {
 								</form>
 							</li>
 							{this.state.tasks.map((task, index) => (
-								<li key={task.taskId}>
-									<div className="container">
-										<span className="col-xs-2 col-lg-3">{task.title}</span>
-										<span>
-											<span className="col-xs-1">
-												<i className="fa fa-angle-down"></i>
-											</span>
-											<span className="col-xs-1" >
-												<i className="fa fa-comment"></i>
-											</span>
-											<span className="col-xs-1">
-												<i className="fa fa-edit"></i>
-											</span>
-											<span className="col-xs-1" onClick={this.deleteTask.bind(this, task.taskId, index)}>
-												<i className="fa fa-times"></i>
-											</span>
-										</span>
-										<span className="col-xs-2">
-											<select className="form-elem" value={task.project} onChange={this.handleTaskChange.bind(this, index)}>
-												<option>Capstone</option>
-												<option>P1</option>
-											</select>
-										</span>
-										<span className="col-xs-2">
-											<select className="form-elem" value={task.type} onChange={this.handleTaskChange.bind(this, index)}>
-												<option>Priority</option>
-												<option>Push</option>
-												<option>Archive</option>
-												<option>Optional</option>
-											</select>
-										</span>
-										<span className="col-xs-1">
-											<button className="bg-theme-btn">Start</button>
-										</span>
-									</div>
-								</li>
+								<li key={task.taskId}><TaskListItem data={task} handleDelete={this.deleteTask.bind(this, task.taskId, index)} /></li>
 							))}
 						</ul>
 					</div>
@@ -107,24 +81,10 @@ class Tasks extends Component {
 		});
 	}
 
-	/**
-	 * Updates the state when a value is changed
-	 * @param {*} event
-	 */
-	handleTaskChange(event, index) {
-		let tasks = {...this.state.tasks};
-		tasks[index][event.target.name] = event.target.value;
-		// The change is stored in the change data structure
-		this.setState({
-			tasks: tasks
-		});
-	}
-
 	/** Gets all the tasks for the current user and updates the state */
 	getTasks() {
 		this.taskService.getTasks('e1').then(res => {
-			let tasks = res.data;
-			this.setState({tasks: tasks});
+			this.setState({tasks: res.data});
 		}).catch(err => {
 			console.error(err);
 		});
@@ -142,7 +102,7 @@ class Tasks extends Component {
 			tasks.push(res.data);
 			this.setState({
 				tasks: tasks,
-				newTask: {}
+				newTask: {...this.newTask}
 			});
 		}).catch(err => {
 			console.error(err);
@@ -174,7 +134,9 @@ class Tasks extends Component {
 		this.taskService.deleteTask(taskId).then(res => {
 			// if ther response is ready, update the task in the list
 			let tasks = this.state.tasks;
+			console.log(JSON.stringify(tasks));
 			tasks.splice(index, 1);
+			console.log(JSON.stringify(tasks));
 			this.setState({tasks: tasks});
 		}).catch(err => {
 			console.error(err);
