@@ -16,7 +16,7 @@ class EmployeeService{
 	 * Return all the employees(users)
 	 * @return Returns a promise
 	 */
-	getEmployees() {
+	getAllEmployees() {
 		return axios.get(`${this.endPoint}/employees`);
 	}
 	/**
@@ -24,7 +24,7 @@ class EmployeeService{
 	 * @param {string} projectId - The id of a project
 	 * @return Returns a promise
 	 */
-	getEmployees(projectId) {
+	getEmployeesbyProject(projectId) {
 		return axios.get(`${this.endPoint}/employees?projectId=${projectId}`);
 	}
 	/**
@@ -32,7 +32,7 @@ class EmployeeService{
 	 * @param {string} teamId - The id of a team
 	 * @return Returns a promise
 	 */
-	getEmployees(teamId) {
+	getEmployeesbyTeam(teamId) {
 		return axios.get(`${this.endPoint}/employees?teamId=${teamId}`);
 	}
 }
