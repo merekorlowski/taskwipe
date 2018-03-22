@@ -1,34 +1,34 @@
 [
   {
-		"id": "001",
+		"employeeId": "001",
 		"firstName": "Mmayen",
 		"lastName": "Ewang",
 		"email": "mewan074@uottawa.ca",
 		"password": "password"
   },
   {
-		"id": "002",
+		"employeeId": "002",
 		"firstName": "Karim",
 		"lastName": "Ben Hassine",
 		"email": "kbenh016@uottawa.ca",
 		"password": "password"
   },
   {
-		"id": "003",
+		"employeeId": "003",
 		"firstName": "Merek",
 		"lastName": "Orlowski",
 		"email": "morlo088@uottawa.ca",
 		"password": "password"
   },
   {
-		"id": "004",
+		"employeeid": "004",
 		"firstName": "Opeoluwa",
 		"lastName": "Eweje",
 		"email": "oewej015@uottawa.ca",
 		"password": "password"
   },
   {
-		"id": "005",
+		"employeeId": "005",
 		"firstName": "Precious",
 		"lastName": "Oladotun-Amoo",
 		"email": "polad063@uottawa.ca",
