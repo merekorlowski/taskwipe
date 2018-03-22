@@ -3,7 +3,7 @@ import httpConfig from '../httpConfig.js';
 
 /** Service for handling http requests for the employee api */
 
-class EmployeeService{
+class EmployeeService {
 	/**
 	 * Represents an EmployeeService.
 	 * @constructor
@@ -37,4 +37,4 @@ class EmployeeService{
 	}
 }
 
-export default EmployeeService
+export default EmployeeService;
