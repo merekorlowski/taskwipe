@@ -71,8 +71,6 @@ class Login extends Component {
 		} else {
 			return (
 				<div className="container">
-					<h2>Login</h2>
-					<div className="title-underline bg-theme"></div>
 					<div>
 						<form onSubmit={this.login}>
 							<div className="col-md-6 col-lg-6 col-sm-10">
