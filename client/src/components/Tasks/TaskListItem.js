@@ -21,14 +21,18 @@ class TaskListItem extends Component {
 			this.state.title = task.title;
 			this.state.type = task.type;
 			this.state.projectId = task.projectId;
+			this.state.comments = task.comments;
 		} else {
 			this.state.title = '';
 			this.state.type = DEFAULT_TYPE;
 			this.state.projectId = '';
+			this.state.comments = 'Write comments here...';
 		}
 		this.state.timeLogs = [];
-		this.state.comments = [];
 		this.state.onGoingTime = null;
+		this.state.isExpanded = false;
+		this.onGoingInterval = null;
+		this.state.mouseover = false;
 
 		this.taskService = new TaskService();
 		this.getOnGoingTimeLog();
@@ -36,48 +40,54 @@ class TaskListItem extends Component {
 
 	static get propTypes() {
 		return {
-			data: PropTypes.object.isOptional,
-			handleDelete: PropTypes.func.isRequired
+			data: PropTypes.any.event.isRequired,
+			handleDelete: PropTypes.func.isRequired,
+			checkIfCanStart: PropTypes.func.isRequired,
+			setOnGoingTask: PropTypes.func.isRequired,
+			removeOnGoingTask: PropTypes.func.isRequired
 		};
 	};
 
 	render() {
 		return (
 			<div className="container">
-				<span className="col-xs-2 col-lg-3">{this.state.title}</span>
-				<span>
-					<span className="col-xs-1">
-						<i className="fa fa-angle-down"></i>
-					</span>
-					<span className="col-xs-1" >
-						<i className="fa fa-comment"></i>
-					</span>
-					<span className="col-xs-1">
-						<i className="fa fa-edit"></i>
-					</span>
-					<span className="col-xs-1" onClick={this.handleDelete.bind(this)}>
-						<i className="fa fa-times"></i>
-					</span>
+				<span className="col-md-5 col-lg-5 col-sm-12" onClick={this.toggleExpand.bind(this)}>
+					<i className={`fa ${this.state.isExpanded ? 'fa-angle-up' : 'fa-angle-down'} task-expand-icon`}></i>
+					{this.state.title}
 				</span>
-				<span className="col-xs-2">
+				<span className="col-md-3 col-lg-3 col-sm-5">
 					<select name="projectId" className="form-elem" value={this.state.projectId} onChange={this.handleChange.bind(this)}>
 						<option value="Capstone">Capstone</option>
 						<option value="P1">P1</option>
 					</select>
 				</span>
-				<span className="col-xs-2">
+				<span className="col-md-2 col-lg-2 col-sm-3">
 					<select name="type" className="form-elem" value={this.state.type} onChange={this.handleChange.bind(this)}>
 						<option value="Priority">Priority</option>
 						<option value="Push">Push</option>
 						<option value="Archive">Archive</option>
 						<option value="Optional">Optional</option>
+						<option value="Delete">Delete</option>
 					</select>
 				</span>
-				<span className="col-xs-1">
+				<span className="col-md-1 col-lg-1 col-sm-2">
 					{this.state.onGoingTime === null
-						? (<button className="bg-theme-btn" onClick={this.startTimer.bind(this)}>Start</button>)
-						: (<button className="bg-theme-btn" onClick={this.stopTimer.bind(this)}>{this.state.onGoingTime}</button>)}
+						? (<button className={`bg-theme-btn ${!this.checkIfCanStart ? 'disabled-btn' : ''}`}
+							onClick={this.startTimer.bind(this)} disabled={!this.checkIfCanStart}>Start</button>)
+						: (<button className="bg-theme-btn on-going-time"
+							onClick={this.stopTimer.bind(this)}
+							onMouseEnter={this.onMouseEnter.bind(this)}
+							onMouseLeave={this.onMouseLeave.bind(this)}>
+							{this.state.mouseover ? 'Stop' : this.state.onGoingTime}
+						</button>)}
 				</span>
+				{this.state.isExpanded
+					? (
+						<div className="col-xs-11 list-elem-details">
+							<textarea name="comments" rows="50" autoFocus="on" value={this.state.comments} onChange={this.handleChange.bind(this)}></textarea>
+						</div>
+					) : ''
+				}
 			</div>
 		);
 	}
@@ -87,26 +97,53 @@ class TaskListItem extends Component {
 	 * @param {*} event
 	 */
 	handleChange(event) {
-		this.setState({
-			[event.target.name]: event.target.value
-		});
+		if (event.target.name === 'type' && event.target.value === 'Delete') {
+			this.handleDelete();
+		} else {
+			this.setState({
+				[event.target.name]: event.target.value
+			});
+		}
 	}
 
 	handleDelete() {
 		this.props.handleDelete();
 	}
 
+	get checkIfCanStart() {
+		return this.props.checkIfCanStart();
+	}
+	
+	toggleExpand() {
+		let isExpanded = this.state.isExpanded;
+		this.setState({isExpanded: !isExpanded});
+	}
+
+	onMouseEnter() {
+		this.setState({mouseover: true});
+	}
+
+	onMouseLeave() {
+		this.setState({mouseover: false});
+	}
+
 	/**
 	 * Retrieves the last started time and starts an interval to display current time in minutes
 	 */
 	getOnGoingTimeLog() {
-		// this.taskService.getOnGoingTimeLog(this.taskId).then(res => {
-		// 	// update every minute
-		// 	setInterval(() => {
-		// 		let duration = moment.duration(moment().diff(res.data.startTime));
-		// 		this.onGoingTime = duration.asMinutes();
-		// 	}, 60000);
-		// });
+		this.taskService.getOnGoingTimeLog(this.state.taskId).then(res => {
+			if (res.data.startTime) {
+				this.props.setOnGoingTask(this.state.taskId);
+				this.setState({
+					onGoingTime: this.getDuration(res.data.startTime)
+				});
+				this.onGoingInterval = setInterval(() => {
+					this.setState({
+						onGoingTime: this.getDuration(res.data.startTime)
+					});
+				}, 1000);
+			}
+		});
 	}
 
 	/**
@@ -121,29 +158,19 @@ class TaskListItem extends Component {
 	}
 
 	/**
-	 * Retrieves all of the comments for this task
-	 */
-	getComments() {
-		this.taskService.getComments(this.state.taskId).then(res => {
-			this.setState({comments: res.data});
-		}).catch(err => {
-			console.error(err);
-		});
-	}
-
-	/**
 	 * Starts a new timer
 	 */
 	startTimer() {
 		this.taskService.startTimer(this.state.taskId).then(res => {
-			setInterval(() => {
-				let startTime = moment(res.data.startTime, 'YYYY-MM-DD HH:mm:ss');
-				let currentTime = moment();
-				let duration = moment.duration(currentTime.diff(startTime));
+			this.props.setOnGoingTask(this.state.taskId);
+			this.setState({
+				onGoingTime: this.getDuration(res.data.startTime)
+			});
+			this.onGoingInterval = setInterval(() => {
 				this.setState({
-					onGoingTime: Math.floor(duration.asMinutes())
+					onGoingTime: this.getDuration(res.data.startTime)
 				});
-			}, 60000);
+			}, 1000);
 			this.state.timeLogs.push(res.data);
 		}).catch(err => {
 			console.error(err);
@@ -155,37 +182,22 @@ class TaskListItem extends Component {
 	 */
 	stopTimer() {
 		this.taskService.stopTimer(this.state.taskId).then(res => {
+			this.props.removeOnGoingTask();
 			this.setState({
 				onGoingTime: null
 			});
+			clearInterval(this.onGoingInterval);
 		}).catch(err => {
 			console.error(err);
 		});
 	}
 
-	/**
-	 * Add a comment to this task
-	 * @param {string} comment - The comment to add to this task
-	 */
-	addComment(comment) {
-		this.taskService.addComment(this.state.taskId, comment).then(res => {
-			this.state.comments.push(res.data);
-		}).catch(err => {
-			console.error(err);
-		});
-	}
+	getDuration(startTime) {
+		let ms = moment().diff(moment(startTime, 'YYYY-MM-DD HH:mm:ss'));
+		let d = moment.duration(ms);
+		let s = Math.floor(d.asHours()) + moment.utc(ms).format(':mm:ss');
 
-	/**
-	 * Remove a comment from this task
-	 * @param {string} commentId - The id of the comment to remove from this task
-	 * @param {number} index - The index of the comment to remove from this task
-	 */
-	deleteComment(commentId, index) {
-		this.taskService.deleteComment(this.state.taskId, commentId).then(res => {
-			this.state.comments.splice(index, 1);
-		}).catch(err => {
-			console.error(err);
-		});
+		return s;
 	}
 
 	toJSON() {
@@ -193,7 +205,8 @@ class TaskListItem extends Component {
 			taskId: this.state.taskId,
 			title: this.state.title,
 			type: this.state.type,
-			projectId: this.state.projectId
+			projectId: this.state.projectId,
+			comments: this.state.comments
 		};
 	}
 }

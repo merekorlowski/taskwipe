@@ -3,23 +3,39 @@ const router = express.Router();
 const moment = require('moment');
 
 const taskData = require('./taskData.json');
+let taskIdIncrement = 1;
+let onGoingTaskId = null;
+let startTime = null;
 
 /**
  * Returns all of the tasks for a given user
  */
 router.get('/api/tasks', (req, res, next) => {
-  let employeeId = req.query.employeeId;
+	let employeeId = req.query.employeeId;
+	let date = req.query.date;
+
+	let tasks = [];
+
+	for (let i = 0; i < taskData.length; i++) {
+		if (date == taskData[i].date) {
+			tasks.push(taskData[i]);
+		}
+	}
 
   // TODO: Get all tasks from the db for a specific user
 
-  res.json(taskData);
+  res.json(tasks);
 });
 
 /**
  * Adds a new task to the user's task list
  */
 router.post('/api/task', (req, res, next) => {
-  let task = req.body;
+	let task = req.body;
+	task.taskId = taskIdIncrement;
+	taskIdIncrement++;
+
+	taskData.push(task);
 
   // TODO: Add a new task to the db
 
@@ -42,7 +58,14 @@ router.put('/api/task/:taskId', (req, res, next) => {
  * Deletes a task from the user's task list
  */
 router.delete('/api/task/:taskId', (req, res, next) => {
-  let taskId = req.params.taskId;
+	let taskId = req.params.taskId;
+	
+	for (let i = 0; i < taskData.length; i++) {
+		if (taskData[i].taskId == taskId) {
+			taskData.splice(i, 1);
+			break;
+		}
+	}
 
   // TODO: Delete a task in the db
 
@@ -53,13 +76,16 @@ router.delete('/api/task/:taskId', (req, res, next) => {
  * Gets the current time log
  */
 router.get('/api/task/:taskId/ongoing-timelog', (req, res, next) => {
-	let taskId = req.params.taskId;
-	let startTime = new Date('2018-03-19T23:30');
-
-  res.json({
-		taskId: taskId,
-		startTime: startTime
-	});
+	console.log(onGoingTaskId);
+	console.log(startTime);
+	if (req.params.taskId === onGoingTaskId) {
+		res.json({
+			taskId: onGoingTaskId,
+			startTime: startTime.format('YYYY-MM-DD HH:mm:ss')
+		});
+	} else {
+		res.json();
+	}
 });
 
 /**
@@ -67,7 +93,9 @@ router.get('/api/task/:taskId/ongoing-timelog', (req, res, next) => {
  */
 router.post('/api/task/:taskId/start', (req, res, next) => {
 	let taskId = req.params.taskId;
-	let startTime = moment();
+	startTime = moment();
+
+	onGoingTaskId = taskId;
 
   res.json({
 		taskId: taskId,
@@ -81,6 +109,7 @@ router.post('/api/task/:taskId/start', (req, res, next) => {
 router.post('/api/task/:taskId/stop', (req, res, next) => {
 	let taskId = req.params.taskId;
 
+	onGoingTaskId = null;
 
   res.json({
 		taskId: taskId
