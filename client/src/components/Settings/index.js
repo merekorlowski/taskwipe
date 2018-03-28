@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
+import SettingsService from '../../services/settings';
 import './styles.css';
 
 class Settings extends Component {
+	constructor(props){
+    super(props);
+    this.state = {
+      numOfWeeksAhead: 1,
+      showDeadlineForTask: false,
+      teamColor: '#19334d'
+    };
+
+    this.settingsService = new SettingsService();
+
+	}
+
 	render() {
 		return (
 			<div className="container">
@@ -12,7 +25,15 @@ class Settings extends Component {
 				</p>
 			</div>
 		);
-	}
+  }
+  
+  getUserSettings(employeeId) {
+    this.settingsService.getUserSettings('e1').then(res => {
+			this.setState({...res.data});
+		}).catch(err => {
+			console.error(err);
+		});
+  }
 	
 	logout() {
 		localStorage.setItem('loggedIn', 'false');
