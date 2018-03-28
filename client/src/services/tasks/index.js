@@ -15,10 +15,11 @@ class TaskService {
 	/**
 	 * Return all the tasks for a given employee
 	 * @param {string} employeeId - The id of an employee
+	 * @param {string} date - The date of the tasks to get
 	 * @return Returns a promise
 	 */
-	getTasks(employeeId) {
-		return axios.get(`${this.endPoint}/tasks?employeeId=${employeeId}`);
+	getTasks(employeeId, date) {
+		return axios.get(`${this.endPoint}/tasks?employeeId=${employeeId}&date=${date}`);
 	}
 
 	getOnGoingTimeLog(taskId) {
