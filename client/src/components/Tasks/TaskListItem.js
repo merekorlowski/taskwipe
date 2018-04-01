@@ -3,8 +3,6 @@ import { PropTypes } from 'prop-types';
 import TaskService from '../../services/tasks';
 import moment from 'moment';
 
-const DEFAULT_TYPE = 'Priority';
-
 class TaskListItem extends Component {
 	/**
 	 * A Task
@@ -14,33 +12,27 @@ class TaskListItem extends Component {
 	constructor(props) {
 		super(props);
 		let task = this.props.data;
-		this.state = {};
-		// casts the JSON retrieved from the server into a Task object
-		if (task) {
-			this.state.taskId = task.taskId;
-			this.state.title = task.title;
-			this.state.type = task.type;
-			this.state.projectId = task.projectId;
-			this.state.comments = task.comments;
-		} else {
-			this.state.title = '';
-			this.state.type = DEFAULT_TYPE;
-			this.state.projectId = '';
-			this.state.comments = 'Write comments here...';
-		}
-		this.state.timeLogs = [];
-		this.state.onGoingTime = null;
-		this.state.isExpanded = false;
-		this.onGoingInterval = null;
-		this.state.mouseover = false;
+		this.state = {
+			taskId: task.taskId,
+			title: task.title,
+			type: task.type,
+			projectId: task.projectId,
+			comments: task.comments,
+			onGoingTime: null,
+			isExpanded: false,
+			mouseover: false
+		};
 
 		this.taskService = new TaskService();
 		this.getOnGoingTimeLog();
 	}
 
+	/**
+	 * Static getter for validating the properties passed into this component
+	 */
 	static get propTypes() {
 		return {
-			data: PropTypes.any.event.isRequired,
+			data: PropTypes.any.isRequired,
 			handleDelete: PropTypes.func.isRequired,
 			checkIfCanStart: PropTypes.func.isRequired,
 			setOnGoingTask: PropTypes.func.isRequired,
@@ -48,6 +40,9 @@ class TaskListItem extends Component {
 		};
 	};
 
+	/**
+	 * Renders the task list item
+	 */
 	render() {
 		return (
 			<div className="container">
@@ -106,23 +101,38 @@ class TaskListItem extends Component {
 		}
 	}
 
+	/**
+	 * Calls the parent's function to handle deleting this task
+	 */
 	handleDelete() {
 		this.props.handleDelete();
 	}
 
+	/**
+	 * Getter that calls the parent's function to verify if the user can start this task
+	 */
 	get checkIfCanStart() {
 		return this.props.checkIfCanStart();
 	}
 	
+	/**
+	 * Toggles the expand feature of the task
+	 */
 	toggleExpand() {
 		let isExpanded = this.state.isExpanded;
 		this.setState({isExpanded: !isExpanded});
 	}
 
+	/**
+	 * Update the mouseover flag when the user moves the mouse over of the timer button
+	 */
 	onMouseEnter() {
 		this.setState({mouseover: true});
 	}
 
+	/**
+	 * Update the mouseover flag when the user moves the mouse off of the timer button
+	 */
 	onMouseLeave() {
 		this.setState({mouseover: false});
 	}
@@ -134,13 +144,9 @@ class TaskListItem extends Component {
 		this.taskService.getOnGoingTimeLog(this.state.taskId).then(res => {
 			if (res.data.startTime) {
 				this.props.setOnGoingTask(this.state.taskId);
-				this.setState({
-					onGoingTime: this.getDuration(res.data.startTime)
-				});
+				this.setDuration(res.data.startTime);
 				this.onGoingInterval = setInterval(() => {
-					this.setState({
-						onGoingTime: this.getDuration(res.data.startTime)
-					});
+					this.setDuration(res.data.startTime);
 				}, 1000);
 			}
 		});
@@ -163,15 +169,11 @@ class TaskListItem extends Component {
 	startTimer() {
 		this.taskService.startTimer(this.state.taskId).then(res => {
 			this.props.setOnGoingTask(this.state.taskId);
-			this.setState({
-				onGoingTime: this.getDuration(res.data.startTime)
-			});
+			this.setDuration(res.data.startTime);
 			this.onGoingInterval = setInterval(() => {
-				this.setState({
-					onGoingTime: this.getDuration(res.data.startTime)
-				});
+				this.setDuration(res.data.startTime);
 			}, 1000);
-			this.state.timeLogs.push(res.data);
+			this.setState({mouseover: true});
 		}).catch(err => {
 			console.error(err);
 		});
@@ -192,14 +194,23 @@ class TaskListItem extends Component {
 		});
 	}
 
-	getDuration(startTime) {
+	/**
+	 * Helper method for setting the duration of the current time since the given start time
+	 * @param {string} startTime
+	 */
+	setDuration(startTime) {
 		let ms = moment().diff(moment(startTime, 'YYYY-MM-DD HH:mm:ss'));
 		let d = moment.duration(ms);
 		let s = Math.floor(d.asHours()) + moment.utc(ms).format(':mm:ss');
 
-		return s;
+		this.setState({
+			onGoingTime: s
+		});
 	}
 
+	/**
+	 * Used for sending the JSON of this task to the server
+	 */
 	toJSON() {
 		return {
 			taskId: this.state.taskId,

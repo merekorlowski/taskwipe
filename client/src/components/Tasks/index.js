@@ -4,7 +4,6 @@ import TaskService from '../../services/tasks';
 import DailyTasks from './DailyTasks';
 import moment from 'moment';
 
-/** Tasks page component */
 class Tasks extends Component {
 	/**
 	 * A Tasks component instance
@@ -20,14 +19,15 @@ class Tasks extends Component {
 		this.getWeeks();
 	}
 
-	/** Renders the tasks page */
+	/**
+	 * Renders the tasks page
+	 * */
 	render() {
+		let { weeks } = this.state;
 		return (
 			<div className="container main-section">
-				{/* <h2>Tasks</h2>
-				<div className="title-underline bg-theme"></div> */}
 				<ul>
-					{this.state.weeks.map((week, index) => (
+					{weeks.map((week, index) => (
 						<li key={`week-${index}`} className="task-week">
 							<h3 className="week-number">Week {index + 1}</h3>
 							<ul>
@@ -44,31 +44,37 @@ class Tasks extends Component {
 		);
 	}
 
+	/**
+	 * Gets the ammount of weeks to be viewed by the user
+	 */
 	getWeeks() {
 		// temporary while waiting for settings implementation
-		let numOfWeeksBefore = 0;
-		let numOfWeeksAfter = 2;
-
-		let startOfCurrentWeek = moment();
-		let startDateToDisplay = startOfCurrentWeek.subtract(7 * numOfWeeksBefore, 'd');
-		let day = startDateToDisplay;
+		let numOfWeeks = 2;
+		let day = moment();
 
 		let weeks = [];
-		for (let i = 0; i < (numOfWeeksBefore + numOfWeeksAfter); i++) {
+		for (let i = 0; i < numOfWeeks; i++) {
 			weeks[i] = [];
-			for (let j = 0; j < 7; j++) {
-				this.getTasks(weeks, weeks[i], day);
+			
+			let start = i === 0 ? moment() : moment().add(i * 7, 'd').startOf('week');
+			let endOfWeek = moment().add(i * 7, 'd').endOf('week');
+			let numOfDays = endOfWeek.diff(start, 'd') + 1;
+
+			day = start;
+
+			for (let j = 0; j < numOfDays; j++) {
+				this.getTasks(weeks, i, j, day);
 				day = day.clone().add(1, 'd');
 			}
 		}
 	}
 
-	getTasks(weeks, week, day) {
+	getTasks(weeks, i, j, day) {
 		this.taskService.getTasks('e1', day.format('YYYY-MM-DD')).then(res => {
-			week.push({
+			weeks[i][j] = {
 				date: day.format('YYYY-MM-DD'),
 				tasks: res.data
-			});
+			};
 			this.setState({weeks: weeks});
 		}).catch(err => {
 			console.error(err);
