@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import createClass from 'create-react-class';
 import EmployeeService from '../../services/employees';
 import { PropTypes } from 'prop-types';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import './select.less'
-//import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import './select.less';
+// import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-//Alternative to the current dropdown
+// Alternative to the current dropdown
 /*
 class EmployeeDropdown extends Component{
 	constructor(props){
@@ -71,7 +71,7 @@ let EmployeeDropdown = createClass({
 		});
 	},
 	render() {
-		let options = employeeService.getAllEmployees();// get the data from json, need to edit
+		//let options = employeeService.getAllEmployees();// get the data from json, need to edit
 		return (
 			<div className="section">
 				<label for="employee-select"><em>{this.props.label}</em></label>
