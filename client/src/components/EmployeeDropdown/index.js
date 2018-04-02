@@ -1,6 +1,6 @@
 import React from 'react';
 import createClass from 'create-react-class';
-import EmployeeService from '../../services/employees';
+// import EmployeeService from '../../services/employees';
 import { PropTypes } from 'prop-types';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -37,44 +37,44 @@ class EmployeeDropdown extends Component{
 }
 */
 
-const employeeService= new EmployeeService();
+// const employeeService = new EmployeeService();
 
 let EmployeeDropdown = createClass({
 	displayName: 'EmployeeDropdown',
 	propTypes: {
 		label: PropTypes.string,
 		searchable: PropTypes.bool,
-		clearable: PropTypes.bool,
+		clearable: PropTypes.bool
 	},
 	getDefaultProps() {
 		return {
 			label: 'Employees',
 			searchable: true,
-			clearable: true,
+			clearable: true
 
 		};
 	},
 	switchView(value, event) {
-//switch the state task page view to the selected employee view
+		// switch the state task page view to the selected employee view
 	},
 	getInitialState() {
 		return {
 			searchable: this.props.searchable,
 			clearable: true,
 			disabled: false,
-			selectValue: 'current user',//to be changed
+			selectValue: 'current user'// to be changed
 		};
 	},
 	updateValue(newValue) {
 		this.setState({
-			selectValue: newValue,
+			selectValue: newValue
 		});
 	},
 	render() {
-		//let options = employeeService.getAllEmployees();// get the data from json, need to edit
+		// let options = employeeService.getAllEmployees();// get the data from json, need to edit
 		return (
 			<div className="section">
-				<label for="employee-select"><em>{this.props.label}</em></label>
+				<label htmlFor="employee-select"><em>{this.props.label}</em></label>
 				<Select
 					id="employee-select"
 					ref={(ref) => { this.select = ref; }}
@@ -83,7 +83,7 @@ let EmployeeDropdown = createClass({
 					autoFocus
 					options={[
 						{ value: 'one', label: 'One' },
-						{ value: 'two', label: 'Two' },//dummy for now, this is where you add the options for the dropdown
+						{ value: 'two', label: 'Two' }// dummy for now, this is where you add the options for the dropdown
 					]}
 					simpleValue
 					clearable={this.state.clearable}
@@ -91,10 +91,10 @@ let EmployeeDropdown = createClass({
 					disabled={this.state.disabled}
 					value={this.state.selectValue}
 					onChange={this.updateValue}
-					style={{width: '200px'}}//adjust the styling here
+					style={{width: '200px'}}// adjust the styling here
 					searchable={this.state.searchable} />
 			</div>
-		)
+		);
 	}
 });
 export default EmployeeDropdown;

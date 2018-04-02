@@ -29,20 +29,20 @@ class Tasks extends Component {
 				<div className="title-underline bg-theme"></div> */}
 				<div><EmployeeDropdown/></div>
 				<div>
-				<ul>
-					{this.state.weeks.map((week, index) => (
-						<li key={`week-${index}`} className="task-week">
-							<h3 className="week-number">Week {index + 1}</h3>
-							<ul>
-								{week.map((day, index) => (
-									<li key={day.date}>
-										<DailyTasks date={day.date} tasks={day.tasks} />
-									</li>
-								))}
-							</ul>
-						</li>
-					))}
-				</ul>
+					<ul>
+						{this.state.weeks.map((week, index) => (
+							<li key={`week-${index}`} className="task-week">
+								<h3 className="week-number">Week {index + 1}</h3>
+								<ul>
+									{week.map((day, index) => (
+										<li key={day.date}>
+											<DailyTasks date={day.date} tasks={day.tasks} />
+										</li>
+									))}
+								</ul>
+							</li>
+						))}
+					</ul>
 				</div>
 			</div>
 		);
