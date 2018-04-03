@@ -5,10 +5,16 @@ before_install:
  - cd client
 install:
  - npm install
+ - cd client
+ - npm install
+ - cd ..
 script:
+ - npm start &
+ - cd client
+ - npm start
  - npm run eslint 
  - npm run jsdoc
- - npm run build
  - npm test
+ - npm run build
 after_script:
  - cd ..
