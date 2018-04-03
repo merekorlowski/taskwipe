@@ -164,3 +164,13 @@ input:focus, select:focus, textarea:focus {
 	border: 1px solid #c2c2c2;
 	outline: none;
 }
+
+.expand-icon {
+	margin-right: 10px;
+}
+
+.title-underline {
+	width: 25px;
+	height: 5px;
+	margin-bottom: 15px;
+}

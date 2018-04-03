@@ -1,34 +1,17 @@
-import ProjectService from './index';
+import ProjectService from './';
 
-describe('Test for creating new projects ', () => {
-	it('Creates new project after create button is clicked.', () => {
-		let projectService = new ProjectService();
+describe('Projects API', () => {
+	let projectService = new ProjectService();
 
-		let projectNames = [];
-		projectNames.push(projectService.getProjectNames());
+	it('Returns the projects for the given employee.', (done) => {
+		const employeeId = '001';
+		const projectIds = ['p001', 'p002'];
 
-		let teamMembers = [];
-		teamMembers.push(projectService.getTeamMembers());
-
-		// Get all projectlist data in JSON format
-		let projectLists;
-		for (let i = 0; i < projectService.getProjectNames().length; i++) {
-			for (let j = 0; j < projectService.getTeamMembers().length; j++) {
-				projectLists = {
-					[projectNames[i]]: {
-						'teamMember(s)': teamMembers[j]
-					}
-				};
+		projectService.getProjects(employeeId).then(res => {
+			for (let i = 0; i < res.data.length; i++) {
+				expect(res.data[i].projectId).toBe(projectIds[i]);
 			}
-		}
-
-		// Create button gets clicked here, takes in user's input of project name and team member(s)
-		projectService.createProject(projectNames, teamMembers);
-
-		// Test all project names and team members assigned in each project
-		for (let k = 0; k < projectService.getProjects().length; k++) {
-			expect(projectService.getProjects[k].projectNames === projectLists.projectNames[k]);
-			expect(projectService.getProjects[k].projectNames.teamMembers === projectLists.projectNames[k].teamMembers);
-		}
+			done();
+		});
 	});
 });

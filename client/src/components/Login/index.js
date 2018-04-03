@@ -58,6 +58,7 @@ class Login extends Component {
 			this.loginService.login(this.state.email, this.state.password).then(res => {
 				if (!('unauthenticated' in res.data)) {
 					localStorage.setItem('loggedIn', true);
+					localStorage.setItem('employeeId', res.data.employeeId);
 					this.props.history.push('/tasks');
 				}
 			});

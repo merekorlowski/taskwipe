@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 
-const taskData = require('./taskData.json');
+const taskData = require('./dummyData/task.json');
+const employeeTaskData = require('./dummyData/employeeTask.json');
 let taskIdIncrement = 1;
 let onGoingTaskId = null;
 let startTime = null;
@@ -16,28 +17,34 @@ router.get('/api/tasks', (req, res, next) => {
 
 	let tasks = [];
 
-	for (let i = 0; i < taskData.length; i++) {
-		if (date == taskData[i].date) {
-			tasks.push(taskData[i]);
+	for (let i = 0; i < employeeTaskData.length; i++) {
+		if (employeeTaskData[i].employeeId == employeeId) {
+			for (let j = 0; j < taskData.length; j++) {
+				if (date == taskData[j].date && employeeTaskData[i].taskId == taskData[j].taskId) {
+					tasks.push(taskData[j]);
+					break;
+				}
+			}
 		}
 	}
 
-  // TODO: Get all tasks from the db for a specific user
-
-  res.json(tasks);
+	res.json(tasks);
 });
 
 /**
  * Adds a new task to the user's task list
  */
 router.post('/api/task', (req, res, next) => {
-	let task = req.body;
+	let task = req.body.task;
+	let employeeId = req.body.employeeId;
 	task.taskId = taskIdIncrement;
 	taskIdIncrement++;
 
 	taskData.push(task);
-
-  // TODO: Add a new task to the db
+	employeeTaskData.push({
+		taskId: task.taskId,
+		employeeId: employeeId
+	});
 
   res.json(task);
 });
@@ -76,15 +83,13 @@ router.delete('/api/task/:taskId', (req, res, next) => {
  * Gets the current time log
  */
 router.get('/api/task/:taskId/ongoing-timelog', (req, res, next) => {
-	console.log(onGoingTaskId);
-	console.log(startTime);
 	if (req.params.taskId === onGoingTaskId) {
 		res.json({
 			taskId: onGoingTaskId,
 			startTime: startTime.format('YYYY-MM-DD HH:mm:ss')
 		});
 	} else {
-		res.json();
+		res.json({});
 	}
 });
 

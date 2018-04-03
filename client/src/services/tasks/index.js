@@ -31,8 +31,11 @@ class TaskService {
 	 * @param {string} task - The task to add to an employee
 	 * @return Returns a promise
 	 */
-	addTask(task) {
-		return axios.post(`${this.endPoint}/task`, task);
+	addTask(task, employeeId) {
+		return axios.post(`${this.endPoint}/task`, {
+			task: task,
+			employeeId: employeeId
+		});
 	}
 
 	/**
