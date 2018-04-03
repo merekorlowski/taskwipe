@@ -39,7 +39,7 @@ class Projects extends Component {
 					<li>
 						<form className="container" onSubmit={this.addProject.bind(this)}>
 							<span className="col-sm-11 col-md-5 col-lg-5">
-								<input name="title" type="text" className="form-elem"
+								<input name="title" type="text" className="form-elem" autoFocus="on"
 									placeholder="Enter new project" required="true" value={this.state.newProject.title}
 									onChange={this.handleNewProjectChange.bind(this)}/>
 							</span>
@@ -72,7 +72,7 @@ class Projects extends Component {
 			let projects = res.data;
 			this.setState({projects: projects});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -101,7 +101,7 @@ class Projects extends Component {
 				newProject: {...this.newProject}
 			});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -116,7 +116,7 @@ class Projects extends Component {
 			project[index] = res.data;
 			this.setState({projects: projects});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -131,7 +131,7 @@ class Projects extends Component {
 			projects.splice(index, 1);
 			this.setState({projects: projects});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 }

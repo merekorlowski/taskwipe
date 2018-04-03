@@ -13,11 +13,9 @@ class DailyTasks extends Component {
 		this.newTask = {
 			title: '',
 			type: DEFAULT_TYPE,
-			project: {
-				projectId: '',
-				title: '',
-				comments: ''
-			},
+			employeeId: localStorage.getItem('employeeId'),
+			projectId: '',
+			comments: '',
 			date: this.props.date
 		};
 		this.state = {
@@ -66,15 +64,24 @@ class DailyTasks extends Component {
 							</span>
 						</form>
 					</li>
-					{this.state.tasks.map((task, index) => (
-						<li key={task.taskId}>
-							<TaskListItem data={task}
-								handleDelete={this.deleteTask.bind(this, task.taskId, index)}
-								checkIfCanStart={this.canStartTask.bind(this, task.taskId)}
-								setOnGoingTask={this.setOnGoingTask.bind(this, task.taskId)}
-								removeOnGoingTask={this.removeOnGoingTask.bind(this)} />
-						</li>
-					))}
+					{this.state.tasks.length > 0
+						? this.state.tasks.map((task, index) => (
+							<li id={task.taskId} key={task.taskId}>
+								<TaskListItem data={task}
+									handleDelete={this.deleteTask.bind(this, task.taskId, index)}
+									handleArchive={this.archiveTask.bind(this, task.taskId, index)}
+									handlePush={this.pushTask.bind(this, task.taskId, index)}
+									checkIfCanStart={this.canStartTask.bind(this, task.taskId)}
+									setOnGoingTask={this.setOnGoingTask.bind(this, task.taskId)}
+									removeOnGoingTask={this.removeOnGoingTask.bind(this)} />
+							</li>
+						))
+						: (
+							<li className="empty-list">
+								There are no tasks specified for this day.
+							</li>
+						)
+					}
 				</ul>
 			</div>
 		);
@@ -105,9 +112,14 @@ class DailyTasks extends Component {
 
 	getProjects() {
 		this.projectService.getProjects(localStorage.getItem('employeeId')).then(res => {
-			this.setState({projects: res.data});
+			let newTask = {...this.state.newTask};
+			newTask.projectId = res.data[0].projectId;
+			this.setState({
+				projects: res.data,
+				newTask: newTask
+			});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -117,7 +129,7 @@ class DailyTasks extends Component {
 	 */
 	addTask(event) {
 		event.preventDefault();
-		this.taskService.addTask(this.state.newTask, localStorage.getItem('employeeId')).then(res => {
+		this.taskService.addTask(this.state.newTask).then(res => {
 			// if ther response is ready, update the task in the list
 			let tasks = this.state.tasks;
 			tasks.push(res.data);
@@ -126,7 +138,7 @@ class DailyTasks extends Component {
 				newTask: {...this.newTask}
 			});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -142,7 +154,7 @@ class DailyTasks extends Component {
 			tasks[index] = res.data;
 			this.setState({tasks: tasks});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -158,7 +170,37 @@ class DailyTasks extends Component {
 			tasks.splice(index, 1);
 			this.setState({tasks: tasks});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
+		});
+	}
+
+	/**
+	 * Archives a task from the user's list of tasks
+	 * @param {string} taskId
+	 * @param {number} index
+	 */
+	archiveTask(taskId, index) {
+		this.taskService.archiveTask(taskId).then(res => {
+			let tasks = this.state.tasks;
+			tasks.splice(index, 1);
+			this.setState({tasks: tasks});
+		}).catch(err => {
+			console.error(err.message);
+		});
+	}
+
+	/**
+	 * Pushes a task to the next day
+	 * @param {string} taskId
+	 * @param {number} index
+	 */
+	pushTask(taskId, index) {
+		this.taskService.pushTask(taskId).then(res => {
+			let tasks = this.state.tasks;
+			tasks.splice(index, 1);
+			this.setState({tasks: tasks});
+		}).catch(err => {
+			console.error(err.message);
 		});
 	}
 

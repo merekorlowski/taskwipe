@@ -42,7 +42,7 @@ class ProjectListItem extends Component {
 			<div className="container">
 				<span className="col-md-5 col-lg-5 col-sm-12" onClick={this.toggleExpand.bind(this)}>
 					<i className={`fa ${this.state.isExpanded ? 'fa-angle-up' : 'fa-angle-down'} expand-icon`}></i>
-					{this.state.title}
+					<strong>{this.state.title}</strong>
 				</span>
 				<span className="col-md-3 col-lg-3 col-sm-3">
 					<select name="teammembers" className="form-elem" value={this.state.teamMembers} onChange={this.handleChange.bind(this)}>
@@ -60,7 +60,8 @@ class ProjectListItem extends Component {
 				{this.state.isExpanded
 					? (
 						<div className="col-xs-11 list-elem-details">
-							<textarea name="comments" rows="50" autoFocus="on" value={this.state.comments} onChange={this.handleChange.bind(this)}></textarea>
+							<textarea name="comments" rows="50" autoFocus="on" placeholder="Notes"
+								value={this.state.comments} onChange={this.handleChange.bind(this)}></textarea>
 						</div>
 					) : ''
 				}

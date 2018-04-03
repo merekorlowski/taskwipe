@@ -33,6 +33,8 @@ class TaskListItem extends Component {
 		return {
 			data: PropTypes.any.isRequired,
 			handleDelete: PropTypes.func.isRequired,
+			handleArchive: PropTypes.func.isRequired,
+			handlePush: PropTypes.func.isRequired,
 			checkIfCanStart: PropTypes.func.isRequired,
 			setOnGoingTask: PropTypes.func.isRequired,
 			removeOnGoingTask: PropTypes.func.isRequired
@@ -54,7 +56,7 @@ class TaskListItem extends Component {
 			<div className="container">
 				<span className="col-md-5 col-lg-5 col-sm-12" onClick={this.toggleExpand.bind(this)}>
 					<i className={`fa ${this.state.isExpanded ? 'fa-angle-up' : 'fa-angle-down'} expand-icon`}></i>
-					{this.state.title}
+					<strong>{this.state.title}</strong>
 				</span>
 				<span className="col-md-3 col-lg-3 col-sm-5">
 					<select name="projectId" className="form-elem" value={this.state.projectId} onChange={this.handleChange.bind(this)}>
@@ -86,7 +88,8 @@ class TaskListItem extends Component {
 				{this.state.isExpanded
 					? (
 						<div className="col-xs-11 list-elem-details">
-							<textarea name="comments" rows="50" autoFocus="on" value={this.state.comments} onChange={this.handleChange.bind(this)}></textarea>
+							<textarea name="comments" rows="50" autoFocus="on" placeholder="Notes"
+								value={this.state.comments} onChange={this.handleChange.bind(this)}></textarea>
 						</div>
 					) : ''
 				}
@@ -101,9 +104,15 @@ class TaskListItem extends Component {
 	handleChange(event) {
 		if (event.target.name === 'type' && event.target.value === 'Delete') {
 			this.handleDelete();
+		} else if (event.target.name === 'type' && event.target.value === 'Archive') {
+			this.handleArchive();
 		} else {
-			this.setState({
-				[event.target.name]: event.target.value
+			this.taskService.updateTask(this.state.taskId, event.target.name, event.target.value).then(res => {
+				this.setState({
+					[res.data.attribute]: res.data.value
+				});
+			}).catch(err => {
+				console.error(err.message);
 			});
 		}
 	}
@@ -113,6 +122,14 @@ class TaskListItem extends Component {
 	 */
 	handleDelete() {
 		this.props.handleDelete();
+	}
+
+	handleArchive() {
+		this.props.handleArchive();
+	}
+
+	handlePush() {
+		this.props.handlePush();
 	}
 
 	/**
@@ -157,7 +174,7 @@ class TaskListItem extends Component {
 				}, 1000);
 			}
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -165,7 +182,7 @@ class TaskListItem extends Component {
 		this.projectService.getProjects(localStorage.getItem('employeeId')).then(res => {
 			this.setState({projects: res.data});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -176,7 +193,7 @@ class TaskListItem extends Component {
 		this.taskService.getTimeLogs(this.state.taskId).then(res => {
 			this.setState({timeLogs: res.data});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -192,7 +209,7 @@ class TaskListItem extends Component {
 			}, 1000);
 			this.setState({mouseover: true});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
@@ -207,7 +224,7 @@ class TaskListItem extends Component {
 			});
 			clearInterval(this.onGoingInterval);
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 
