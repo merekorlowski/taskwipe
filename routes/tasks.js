@@ -3,7 +3,7 @@ const router = express.Router();
 const moment = require('moment');
 
 const taskData = require('./dummyData/task.json');
-const employeeTaskData = require('./dummyData/employeeTask.json');
+const projectData = require('./dummyData/project.json');
 let taskIdIncrement = 1;
 let onGoingTaskId = null;
 let startTime = null;
@@ -17,14 +17,9 @@ router.get('/api/tasks', (req, res, next) => {
 
 	let tasks = [];
 
-	for (let i = 0; i < employeeTaskData.length; i++) {
-		if (employeeTaskData[i].employeeId == employeeId) {
-			for (let j = 0; j < taskData.length; j++) {
-				if (date == taskData[j].date && employeeTaskData[i].taskId == taskData[j].taskId) {
-					tasks.push(taskData[j]);
-					break;
-				}
-			}
+	for (let i = 0; i < taskData.length; i++) {
+		if (date == taskData[i].date && employeeId == taskData[i].employeeId) {
+			tasks.push(taskData[i]);
 		}
 	}
 
@@ -35,16 +30,11 @@ router.get('/api/tasks', (req, res, next) => {
  * Adds a new task to the user's task list
  */
 router.post('/api/task', (req, res, next) => {
-	let task = req.body.task;
-	let employeeId = req.body.employeeId;
+	let task = req.body;
 	task.taskId = taskIdIncrement;
 	taskIdIncrement++;
 
 	taskData.push(task);
-	employeeTaskData.push({
-		taskId: task.taskId,
-		employeeId: employeeId
-	});
 
   res.json(task);
 });
@@ -54,11 +44,21 @@ router.post('/api/task', (req, res, next) => {
  * Updates a task in the user's task list
  */
 router.put('/api/task/:taskId', (req, res, next) => {
-  let task = req.body;
+	let taskId = req.params.taskId;
+	let attribute = req.body.attribute;
+	let value = req.body.value;
 
-  // TODO: Update task in the db
+	for (let i = 0; i < taskData.length; i++) {
+		if (taskData[i].taskId == taskId) {
+			taskData[i][attribute] = value;
+			break;
+		}
+	}
 
-  res.json(task);
+  res.json({
+		attribute: attribute,
+		value: value
+	});
 });
 
 /**
@@ -73,8 +73,6 @@ router.delete('/api/task/:taskId', (req, res, next) => {
 			break;
 		}
 	}
-
-  // TODO: Delete a task in the db
 
   res.json({taskId: taskId});
 });
@@ -119,6 +117,42 @@ router.post('/api/task/:taskId/stop', (req, res, next) => {
   res.json({
 		taskId: taskId
 	});
+});
+
+/**
+ * Archives a task into a project comment
+ */
+router.put('/api/task/:taskId/archive', (req, res) => {
+	let taskId = req.params.taskId;
+
+	for (let i = 0; i < taskData.length; i++) {
+		if (taskData[i].taskId == taskId) {
+			for (let j = 0; j < projectData.length; j++) {
+				if (taskData[i].projectId == projectData[j].projectId) {
+					projectData[j].comments +=  ((projectData[j].comments ? '\n- ' : '- ') +  taskData[i].title);
+					taskData.splice(i, 1);
+					break;
+				}
+			}
+		}
+	}
+
+	res.json(taskId);
+});
+
+/**
+ * Pushes a task to the next day
+ */
+router.put('/api/task/:taskId/push', (req, res) => {
+	let taskId = req.params.taskId;
+
+	for (let i = 0; i < taskData.length; i++) {
+		if (taskData[i].taskId == taskId) {
+			taskData[i].date = moment(taskData[i].date, 'YYYY-MM-DD').add(1, 'd').format('YYYY-MM-DD');
+		}
+	}
+
+	res.json(taskId);
 });
 
 module.exports = router;
