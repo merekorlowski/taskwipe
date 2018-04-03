@@ -25,8 +25,8 @@ class Tasks extends Component {
 	render() {
 		return (
 			<div className="container main-section">
-				{/* <h2>Tasks</h2>
-				<div className="title-underline bg-theme"></div> */}
+				/* <h2>Tasks</h2>
+				<div className="title-underline bg-theme"></div> */
 				<EmployeeDropdown/>
 				<ul>
 					{this.state.weeks.map((week, index) => (
