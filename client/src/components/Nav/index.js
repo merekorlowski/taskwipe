@@ -34,6 +34,7 @@ class Nav extends Component {
 							</span>
 							{this.isLoggedIn() ? (
 								<span>
+									<span className="employeeName">{'Hello ' + localStorage.getItem('employeeName')}</span>
 									<ul className="col-xs-1">
 										<li className={this.isActive('/settings') ? 'active' : ''}>
 											<NavLink to="/settings" activeClassName="active" className="bg-theme-link">

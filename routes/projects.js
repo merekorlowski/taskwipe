@@ -1,27 +1,46 @@
 const express = require('express');
 const router = express.Router();
 
-const projectData = require('./projectData.json');
+const projectData = require('./dummyData/project.json');
+const employeeProjectData = require('./dummyData/employeeProject.json');
 
+let projectIdIncrement = 1;
 
 /**
  * Returns all of the projects for a given user
  */
 router.get('/api/projects', (req, res) => {
-  let employeeId = req.query.employeeId;
+	let employeeId = req.query.employeeId;
+	let projects = [];
 
-  // TODO: Get all projects from the db for a specific user
-
-  res.json(projectData);
+	for (let i = 0; i < employeeProjectData.length; i++) {
+		if (employeeProjectData[i].employeeId == employeeId) {
+			for (let j = 0; j < projectData.length; j++) {
+				if (projectData[j].projectId == employeeProjectData[i].projectId) {
+					projects.push(projectData[j]);
+				}
+			}
+		}
+	}
+	
+  res.json(projects);
 });
 
 /**
  * Adds a new project to the user's project list
  */
-router.post('/api/project', (req, res) => {
-  let project = req.body;
+router.post('/api/project', (req, res, next) => {
+	let project = req.body.project;
+	let employeeId = req.body.employeeId;
+	project.projectId = projectIdIncrement;
+	projectIdIncrement++;
 
-  // TODO: Add a new project to the db
+	projectData.push(project);
+	employeeProjectData.push({
+		employeeId: employeeId,
+		projectId: project.projectId,
+		projectAdmin: true
+	});
 
   res.json(project);
 });
@@ -43,6 +62,13 @@ router.put('/api/project/:projectId', (req, res) => {
  */
 router.delete('/api/project/:projectId', (req, res) => {
   let projectId = req.params.projectId;
+	
+	for (let i = 0; i < projectData.length; i++) {
+		if (projectData[i].projectId == projectId) {
+			projectData.splice(i, 1);
+			break;
+		}
+	}
 
   // TODO: Delete a project in the db
 

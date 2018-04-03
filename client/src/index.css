@@ -1,8 +1,7 @@
 body {
-	font-family: 'Open Sans';
+	font-family: 'Work Sans';
 	padding: 0;
 	margin: 0;
-	background-color: #e9ebee;
 	font-size: 14px;
 }
 
@@ -86,10 +85,10 @@ ul {
 }
 
 .list {
-	border: 1px solid #c2c2c2;
+	border: 1px solid #cecece;
 	border-radius: 5px;
-	background-color: #ffffff;
 	box-shadow: 1px 1px 5px #cecece;
+	transition: 1s height linear;
 }
 
 .task-week {
@@ -121,6 +120,24 @@ ul {
 	border-bottom: 1px solid #c2c2c2;
 	min-height: 50px;
 	line-height: 50px;
+	padding: 5px 10px;
+	transition: .2s box-shadow ease-in-out;
+}
+
+.list li input, .list li select {
+	background-color: transparent;
+}
+
+.list li:first-child {
+	background-color: transparent;
+}
+.list li:first-child:hover {
+	box-shadow: none;
+	background-color: transparent;
+}
+.list li:hover {
+	background-color: #ffffff;
+	box-shadow: 0px 0px 10px #19334d7e;
 }
 
 .list-elem-details {
@@ -136,6 +153,7 @@ ul {
 	background-color: #f2f2f2;
 	border-radius: 5px;
 	padding: 10px;
+	margin-top: 5px;
 }
 
 .list li:last-child {
@@ -163,4 +181,23 @@ input:focus, select:focus, textarea:focus {
 	box-shadow: 0 0 5px #19334d7e;
 	border: 1px solid #c2c2c2;
 	outline: none;
+}
+
+.expand-icon {
+	margin-right: 10px;
+}
+
+.title-underline {
+	width: 25px;
+	height: 5px;
+	margin-bottom: 15px;
+}
+
+button {
+	font-weight: bold;
+}
+
+.list li.empty-list, .list li.empty-list:hover {
+	background-color: transparent;
+	box-shadow: none;
 }

@@ -58,8 +58,12 @@ class Login extends Component {
 			this.loginService.login(this.state.email, this.state.password).then(res => {
 				if (!('unauthenticated' in res.data)) {
 					localStorage.setItem('loggedIn', true);
-					this.props.history.push('/tasks');
+					localStorage.setItem('employeeId', res.data.employeeId);
+          localStorage.setItem('employeeName', res.data.firstName);
+					window.location = '/tasks';
 				}
+			}).catch(err => {
+				console.error(err.message);
 			});
 		}
 	}
@@ -71,23 +75,23 @@ class Login extends Component {
 		} else {
 			return (
 				<div className="container">
-					<div>
-						<form onSubmit={this.login}>
-							<div className="col-md-6 col-lg-6 col-sm-10">
-								<div className="form-row">
-									<input id="email" type="text" autoFocus="on" className="form-elem" name="email" placeholder="Email"
-										value={this.state.email} onChange={this.handleChange} />
-								</div>
-								<div className="form-row">
-									<input id="password" type="password" className="form-elem" name="password" placeholder="Password"
-										value={this.state.password} onChange={this.handleChange} />
-								</div>
-								<div>
-									<button type="submit" className="bg-theme-btn right">Sign in</button>
-								</div>
+					<h2>Login</h2>
+					<div className="title-underline bg-theme"></div>
+					<form onSubmit={this.login}>
+						<div className="col-md-6 col-lg-6 col-sm-10">
+							<div className="form-row">
+								<input id="email" type="text" autoFocus="on" className="form-elem" name="email" placeholder="Email"
+									value={this.state.email} onChange={this.handleChange} />
 							</div>
-						</form>
-					</div>
+							<div className="form-row">
+								<input id="password" type="password" className="form-elem" name="password" placeholder="Password"
+									value={this.state.password} onChange={this.handleChange} />
+							</div>
+							<div>
+								<button type="submit" className="bg-theme-btn right">Sign in</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			);
 		}
