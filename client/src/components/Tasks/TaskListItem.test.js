@@ -11,6 +11,8 @@ describe('Renders TaskListItem Component', () => {
 		const wrapper = mount(
 			<TaskListItem data={{}}
 				handleDelete={() => {}}
+				handleArchive={() => {}}
+				handlePush={() => {}}
 				checkIfCanStart={() => {}}
 				setOnGoingTask={() => {}}
 				removeOnGoingTask={() => {}} />

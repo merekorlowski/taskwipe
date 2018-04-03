@@ -83,7 +83,7 @@ class Tasks extends Component {
 			};
 			this.setState({weeks: weeks});
 		}).catch(err => {
-			console.error(err);
+			console.error(err.message);
 		});
 	}
 }

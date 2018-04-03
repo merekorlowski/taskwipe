@@ -37,7 +37,10 @@ describe('DailyTasks Component Tests', () => {
 			/>
 		);
 		expect(wrapper.find(DailyTasks)).toHaveLength(1);
-		expect(wrapper.find(TaskListItem)).toHaveLength(2);
+		expect(wrapper.find(TaskListItem)).toHaveLength(tasks.length);
+		for (let i = 0; i < tasks.length; i++) {
+			expect(wrapper.find(`#${tasks[i].taskId}`)).toHaveLength(1);
+		}
 		done();
 	});
 });
