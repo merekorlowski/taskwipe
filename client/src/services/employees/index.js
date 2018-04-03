@@ -25,7 +25,7 @@ class EmployeeService {
 	 * @return Returns a promise
 	 */
 	getEmployeesbyProject(projectId) {
-		return axios.get(`${this.endPoint}/employees?projectId=${projectId}`);
+		return axios.get(`${this.endPoint}/employees/project/${projectId}`);
 	}
 	/**
 	 * Return all employees for a given team
@@ -33,7 +33,7 @@ class EmployeeService {
 	 * @return Returns a promise
 	 */
 	getEmployeesbyTeam(teamId) {
-		return axios.get(`${this.endPoint}/employees?teamId=${teamId}`);
+		return axios.get(`${this.endPoint}/employees/team/${teamId}`);
 	}
 }
 
