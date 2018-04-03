@@ -59,6 +59,7 @@ class Login extends Component {
 				if (!('unauthenticated' in res.data)) {
 					localStorage.setItem('loggedIn', true);
 					localStorage.setItem('employeeId', res.data.employeeId);
+					localStorage.setItem('employeeName', res.data.firstName);
 					this.props.history.push('/tasks');
 				}
 			});
