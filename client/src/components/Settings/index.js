@@ -11,7 +11,8 @@ class Settings extends Component {
       employeeId: '',
       numOfWeeksAhead: '',
       showDeadlineForTask: '',
-      teamColor: ''
+      teamColor: '',
+      teamName:''
     };
 
     this.getUserSettings();
@@ -28,25 +29,31 @@ class Settings extends Component {
 				<div className="title-underline bg-theme"></div>
         <ul className="list">
 					<li>
-            <h3>Display Settings</h3>
+            <h3 className="settings-title">Display Settings</h3>
             <div className="settingsItem">
               <span>Number of Weeks to Show in Tasks Page:</span>
-              <span>
+              <span className="settingsValue">
                 <input type="number" name="numOfWeeksAhead" value={this.state.numOfWeeksAhead} onChange={this.handleChange.bind(this)}/>
               </span>
             </div>
             <div className="settingsItem">
               <span>Show Deadlines in Tasks Page?</span>
-              <span>
+              <span className="settingsValue">
                 <input type="checkbox" checked={this.state.showDeadlineForTask} onChange={this.handleChange.bind(this)}/>
               </span>
             </div>
           </li>
           <li>
-            <h3>Team Settings</h3>
+            <h3 className="settings-title">Team Settings</h3>
+            <div className="settingsItem">
+              <span>Team Name:</span>
+              <span className="settingsValue">
+                <input type="text" name="teamName" value={this.state.teamName} onChange={this.handleChange.bind(this)}/>
+              </span>
+            </div>
             <div className="settingsItem">
               <span>Team Color:</span>
-              <span>
+              <span className="settingsValue">
                 <input type="color" name="teamColor" value={this.state.teamColor} onChange={this.handleChange.bind(this)}/>
               </span>
             </div>

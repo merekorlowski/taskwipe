@@ -1,3 +1,11 @@
-.settingsItem span, .settingsItem span {
-	display:inline;
+.settings-title {
+	margin-left:20px
+}
+
+.settingsItem {
+	margin-left:40px
+}
+
+.settingsValue {
+	margin-right:10px
 }
