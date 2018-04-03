@@ -77,9 +77,9 @@ class Settings extends Component {
   
   getUserSettings() {
     this.settingsService.getUserSettings('e1').then(res => {
-      this.setState({
-        ...res.data
-      });
+      this.setState(
+        {...res.data}
+      );
 		}).catch(err => {
 			console.error(err);
     });
