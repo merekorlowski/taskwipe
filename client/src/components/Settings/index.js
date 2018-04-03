@@ -7,14 +7,11 @@ class Settings extends Component {
     super(props);
     this.settingsService = new SettingsService();
 
-    this.settingsData = {
+    this.state = {
       employeeId: '',
       numOfWeeksAhead: '',
-      showDeadlineForTask: false,
+      showDeadlineForTask: '',
       teamColor: ''
-    }
-    this.state = {
-      settingsData: this.settingsData
     };
 
     this.getUserSettings();
@@ -35,13 +32,13 @@ class Settings extends Component {
             <div className="settingsItem">
               <span>Number of Weeks to Show in Tasks Page:</span>
               <span>
-                <input type="number" name="numOfWeeksAhead" defaultValue={this.state.settingsData.numOfWeeksAhead} onChange={this.handleChange.bind(this)}/>
+                <input type="number" name="numOfWeeksAhead" value={this.state.numOfWeeksAhead} onChange={this.handleChange.bind(this)}/>
               </span>
             </div>
             <div className="settingsItem">
               <span>Show Deadlines in Tasks Page?</span>
               <span>
-                <input type="checkbox" defaultChecked={this.state.settingsData.showDeadlineForTask} onChange={this.handleChange.bind(this)}/>
+                <input type="checkbox" checked={this.state.showDeadlineForTask} onChange={this.handleChange.bind(this)}/>
               </span>
             </div>
           </li>
@@ -50,7 +47,7 @@ class Settings extends Component {
             <div className="settingsItem">
               <span>Team Color:</span>
               <span>
-                <input type="color" name="teamColor" defaultValue={this.state.settingsData.teamColor} onChange={this.handleChange.bind(this)}/>
+                <input type="color" name="teamColor" value={this.state.teamColor} onChange={this.handleChange.bind(this)}/>
               </span>
             </div>
           </li>
@@ -72,10 +69,8 @@ class Settings extends Component {
   
   getUserSettings() {
     this.settingsService.getUserSettings('e1').then(res => {
-      let settingsData = this.state.settingsData;
-      settingsData = {...res.data[0]};
       this.setState({
-        settingsData: settingsData
+        ...res.data
       });
 		}).catch(err => {
 			console.error(err);

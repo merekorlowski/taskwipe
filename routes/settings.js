@@ -10,11 +10,11 @@ router.get('/api/settings/:employeeId', (req, res, next) => {
 
   let employeeId = req.params.employeeId;
 
-  let settings = [];
+  let settings = {};
 
   for (let i = 0; i < settingsData.length; i++) {
 		if (employeeId == settingsData[i].employeeId) {
-			settings.push(settingsData[i]);
+			settings = settingsData[i];
 		}
   }
 
