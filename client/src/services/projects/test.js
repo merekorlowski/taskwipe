@@ -1,12 +1,9 @@
 import ProjectService from './';
-import axios from 'axios';
 
 describe('Projects API', () => {
-
 	let projectService = new ProjectService();
 
 	it('Returns the projects for the given employee.', (done) => {
-
 		const employeeId = '001';
 		const projectIds = ['p001', 'p002'];
 
@@ -17,5 +14,4 @@ describe('Projects API', () => {
 			done();
 		});
 	});
-
 });

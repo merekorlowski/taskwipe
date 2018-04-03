@@ -1,17 +1,15 @@
 import LoginService from './';
-import axios from 'axios';
 
 describe('Test Login API', () => {
-
 	let loginService = new LoginService();
 
 	it('Returns the successfully logged in uses\'s information.', (done) => {
 		const response = {
-			"employeeId": "001",
-			"firstName": "Mmayen",
-			"lastName": "Ewang",
-			"email": "mewan074@uottawa.ca",
-			"password": "password"
+			'employeeId': '001',
+			'firstName': 'Mmayen',
+			'lastName': 'Ewang',
+			'email': 'mewan074@uottawa.ca',
+			'password': 'password'
 		};
 		
 		const email = 'mewan074@uottawa.ca';
@@ -40,5 +38,4 @@ describe('Test Login API', () => {
 			done();
 		});
 	});
-
 });

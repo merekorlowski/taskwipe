@@ -39,7 +39,7 @@ class Projects extends Component {
 					<li>
 						<form className="container" onSubmit={this.addProject.bind(this)}>
 							<span className="col-sm-11 col-md-5 col-lg-5">
-								<input name="title" type="text" className="form-elem" 
+								<input name="title" type="text" className="form-elem"
 									placeholder="Enter new project" required="true" value={this.state.newProject.title}
 									onChange={this.handleNewProjectChange.bind(this)}/>
 							</span>
@@ -134,7 +134,6 @@ class Projects extends Component {
 			console.error(err);
 		});
 	}
-
 }
 
 export default Projects;

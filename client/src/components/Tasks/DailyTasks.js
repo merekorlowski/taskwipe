@@ -43,7 +43,7 @@ class DailyTasks extends Component {
 					<li>
 						<form className="container" onSubmit={this.addTask.bind(this)}>
 							<span className="col-sm-11 col-md-5 col-lg-5">
-								<input name="title" type="text" autoFocus={this.isToday ? 'on' : ''} className="form-elem" 
+								<input name="title" type="text" autoFocus={this.isToday ? 'on' : ''} className="form-elem"
 									placeholder="Enter new task" required="true" value={this.state.newTask.title}
 									onChange={this.handleNewTaskChange.bind(this)}/>
 							</span>

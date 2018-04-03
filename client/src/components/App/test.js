@@ -7,10 +7,6 @@ import 'jasmine-local-storage';
 
 configure({adapter: new Adapter()});
 
-beforeEach(() => {
-	mockLocalStorage();
-});
-
 describe('App Component', () => {
 	it('renders without crashing', () => {
 		const wrapper = mount(
