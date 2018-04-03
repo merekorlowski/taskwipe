@@ -10,7 +10,7 @@ class Nav extends Component {
 				<header>
 					<nav className="bg-theme">
 						<div className="container">
-							<span className="col-xs-11">
+							<span className="col-xs-10">
 								<span id="logo">
 									{this.isLoggedIn() ? (
 										<NavLink to="/tasks" activeClassName="none" className="">
@@ -34,8 +34,8 @@ class Nav extends Component {
 							</span>
 							{this.isLoggedIn() ? (
 								<span>
-									<span className="employeeName">{'Hello ' + localStorage.getItem('employeeName')}</span>
-									<ul className="col-xs-1">
+									<ul className="col-xs-2">
+										<span>{'Hello ' + localStorage.getItem('employeeName')}</span>
 										<li className={this.isActive('/settings') ? 'active' : ''}>
 											<NavLink to="/settings" activeClassName="active" className="bg-theme-link">
 												<i className="fa fa-cog" />
