@@ -3,14 +3,14 @@
     "employeeId": "e1",
     "numOfWeeksAhead": 3,
     "showDeadlineForTask": true,
-    "teamColor": "#ffffff",
+    "teamColor": "#19334d",
     "teamName": "t001"
   },
   {
     "employeeId": "e2",
     "numOfWeeksAhead": 5,
     "showDeadlineForTask": false,
-    "teamColor": "#19334d",
+    "teamColor": "#ffffff",
     "teamName": "t002"
 	}
 ]
