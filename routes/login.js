@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const employeeData = require('./employeeData.json');
+const employeeData = require('./dummyData/employee.json');
 
 /**
  * Verifies the login credentials provided by the user and sends a response to the user

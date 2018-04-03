@@ -25,8 +25,11 @@ class ProjectService {
 	 * Add a project
 	 * @return Returns a promise
 	 */
-	addProject(project) {
-		return axios.post(`${this.endPoint}/project`, project);
+	addProject(employeeId, project) {
+		return axios.post(`${this.endPoint}/project`, {
+			employeeId: employeeId,
+			project: project
+		});
 	}
 
 	/**
@@ -34,7 +37,7 @@ class ProjectService {
 	 * @return Returns a promise
 	 */
 	updateProject(project) {
-		return axios.put(`${this.endPoint}/project`, project);
+		return axios.put(`${this.endPoint}/project/${project.projectId}`, project);
 	}
 
 	/**
@@ -42,7 +45,7 @@ class ProjectService {
 	 * @return Returns a promise
 	 */
 	deleteProject(projectId) {
-		return axios.delete(`${this.endPoint}/project`, {projectId: projectId});
+		return axios.delete(`${this.endPoint}/project/${projectId}`);
 	}
 }
 

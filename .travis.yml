@@ -9,5 +9,6 @@ script:
  - npm run eslint 
  - npm run jsdoc
  - npm run build
+ - npm test
 after_script:
  - cd ..

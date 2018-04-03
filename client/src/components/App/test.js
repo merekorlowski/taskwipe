@@ -1,15 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './index';
-import { BrowserRouter } from 'react-router-dom';
+import App from './';
+import Nav from '../Nav';
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import 'jasmine-local-storage';
 
-it('renders without crashing', () => {
-	const div = document.createElement('div');
-	ReactDOM.render(
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>,
-		div
-	);
-	ReactDOM.unmountComponentAtNode(div);
+configure({adapter: new Adapter()});
+
+beforeEach(() => {
+	mockLocalStorage();
+});
+
+describe('App Component', () => {
+	it('renders without crashing', () => {
+		const wrapper = mount(
+			<App/>
+		);
+		expect(wrapper.find(Nav)).toHaveLength(1);
+	});
 });

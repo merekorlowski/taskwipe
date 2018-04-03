@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import TaskService from '../../services/tasks';
+import ProjectService from '../../services/projects';
 import moment from 'moment';
 
 class TaskListItem extends Component {
@@ -18,13 +19,11 @@ class TaskListItem extends Component {
 			type: task.type,
 			projectId: task.projectId,
 			comments: task.comments,
+			projects: [],
 			onGoingTime: null,
 			isExpanded: false,
 			mouseover: false
 		};
-
-		this.taskService = new TaskService();
-		this.getOnGoingTimeLog();
 	}
 
 	/**
@@ -40,6 +39,13 @@ class TaskListItem extends Component {
 		};
 	};
 
+	componentDidMount() {
+		this.taskService = new TaskService();
+		this.projectService = new ProjectService();
+		this.getOnGoingTimeLog();
+		this.getProjects();
+	}
+
 	/**
 	 * Renders the task list item
 	 */
@@ -47,13 +53,14 @@ class TaskListItem extends Component {
 		return (
 			<div className="container">
 				<span className="col-md-5 col-lg-5 col-sm-12" onClick={this.toggleExpand.bind(this)}>
-					<i className={`fa ${this.state.isExpanded ? 'fa-angle-up' : 'fa-angle-down'} task-expand-icon`}></i>
+					<i className={`fa ${this.state.isExpanded ? 'fa-angle-up' : 'fa-angle-down'} expand-icon`}></i>
 					{this.state.title}
 				</span>
 				<span className="col-md-3 col-lg-3 col-sm-5">
 					<select name="projectId" className="form-elem" value={this.state.projectId} onChange={this.handleChange.bind(this)}>
-						<option value="Capstone">Capstone</option>
-						<option value="P1">P1</option>
+						{this.state.projects.map((project, index) => (
+							<option key={index} value={project.projectId}>{project.title}</option>
+						))}
 					</select>
 				</span>
 				<span className="col-md-2 col-lg-2 col-sm-3">
@@ -149,6 +156,16 @@ class TaskListItem extends Component {
 					this.setDuration(res.data.startTime);
 				}, 1000);
 			}
+		}).catch(err => {
+			console.error(err);
+		});
+	}
+
+	getProjects() {
+		this.projectService.getProjects(localStorage.getItem('employeeId')).then(res => {
+			this.setState({projects: res.data});
+		}).catch(err => {
+			console.error(err);
 		});
 	}
 

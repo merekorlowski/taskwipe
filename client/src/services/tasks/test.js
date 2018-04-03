@@ -1,13 +1,21 @@
+import TaskService from './';
+import axios from 'axios';
 
-import TaskService from './index';
+describe('Tasks API', () => {
 
-describe('Get tasks', () => {
-	it('Returns the tasks for a given employee.', () => {
-		let taskService = new TaskService();
-		taskService.getTasks('e1').then(res => {
-			let tasks = res.data;
+	let taskService = new TaskService();
 
-			expect(tasks[0].title).toEqual('Task 1');
+	it('Returns the tasks for the given date.', (done) => {
+
+		const date = '2018-04-02';
+		const employeeId = '003';
+		const taskIds = ['t004', 't005'];
+
+		taskService.getTasks(employeeId, date).then(res => {
+			for (let i = 0; i < res.data.length; i++) {
+				expect(res.data[i].taskId).toBe(taskIds[i]);
+			}
+			done();
 		});
 	});
 });

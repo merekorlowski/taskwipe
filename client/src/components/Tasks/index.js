@@ -15,6 +15,9 @@ class Tasks extends Component {
 		this.state = {
 			weeks: []
 		};
+	}
+
+	componentDidMount() {
 		this.taskService = new TaskService();
 		this.getWeeks();
 	}
@@ -25,7 +28,9 @@ class Tasks extends Component {
 	render() {
 		let { weeks } = this.state;
 		return (
-			<div className="container main-section">
+			<div className="container">
+				<h2>Tasks</h2>
+				<div className="title-underline bg-theme"></div>
 				<ul>
 					{weeks.map((week, index) => (
 						<li key={`week-${index}`} className="task-week">
@@ -70,7 +75,7 @@ class Tasks extends Component {
 	}
 
 	getTasks(weeks, i, j, day) {
-		this.taskService.getTasks('e1', day.format('YYYY-MM-DD')).then(res => {
+		this.taskService.getTasks(localStorage.getItem('employeeId'), day.format('YYYY-MM-DD')).then(res => {
 			weeks[i][j] = {
 				date: day.format('YYYY-MM-DD'),
 				tasks: res.data
