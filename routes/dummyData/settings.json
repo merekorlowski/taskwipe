@@ -1,5 +1,5 @@
 [
-	{
+  {
     "employeeId": "e1",
     "numOfWeeksAhead": 3,
     "showDeadlineForTask": true,
@@ -12,5 +12,5 @@
     "showDeadlineForTask": false,
     "teamColor": "#ffffff",
     "teamName": "t002"
-	}
+  }
 ]

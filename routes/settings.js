@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const settingsData = require('./settingsData.json');
+const settingsData = require('./dummyData/settings.json');
 
 /**
  * Returns the settings for a given user
