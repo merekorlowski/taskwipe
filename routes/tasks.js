@@ -8,10 +8,17 @@ let taskIdIncrement = 1;
 let onGoingTaskId = null;
 let startTime = null;
 
-/**
- * Returns all of the tasks for a given user
- */
-router.get('/api/tasks', (req, res, next) => {
+router.get('/api/tasks', (req, res) => getTasks(req, res));
+router.post('/api/task', (req, res) => addTask(req, res));
+router.put('/api/task/:taskId', (req, res) => updateTask(req, res));
+router.delete('/api/task/:taskId', (req, res) => deleteTask(req, res));
+router.get('/api/task/:taskId/ongoing-timelog', (req, res) => getOnGoingTimeLog(req, res));
+router.post('/api/task/:taskId/start', (req, res) => startTimer(req, res));
+router.post('/api/task/:taskId/stop', (req, res, next) => stopTimer(req, res));
+router.put('/api/task/:taskId/archive', (req, res) => archiveTask(req, res));
+router.put('/api/task/:taskId/push', (req, res) => pushTask(req, res));
+
+function getTasks(req, res) {
 	let employeeId = req.query.employeeId;
 	let date = req.query.date;
 
@@ -24,12 +31,9 @@ router.get('/api/tasks', (req, res, next) => {
 	}
 
 	res.json(tasks);
-});
+}
 
-/**
- * Adds a new task to the user's task list
- */
-router.post('/api/task', (req, res, next) => {
+function addTask(req, res) {
 	let task = req.body;
 	task.taskId = taskIdIncrement;
 	taskIdIncrement++;
@@ -37,13 +41,9 @@ router.post('/api/task', (req, res, next) => {
 	taskData.push(task);
 
   res.json(task);
-});
+}
 
-
-/**
- * Updates a task in the user's task list
- */
-router.put('/api/task/:taskId', (req, res, next) => {
+function updateTask(req, res) {
 	let taskId = req.params.taskId;
 	let attribute = req.body.attribute;
 	let value = req.body.value;
@@ -59,12 +59,9 @@ router.put('/api/task/:taskId', (req, res, next) => {
 		attribute: attribute,
 		value: value
 	});
-});
+}
 
-/**
- * Deletes a task from the user's task list
- */
-router.delete('/api/task/:taskId', (req, res, next) => {
+function deleteTask(req, res) {
 	let taskId = req.params.taskId;
 	
 	for (let i = 0; i < taskData.length; i++) {
@@ -75,12 +72,9 @@ router.delete('/api/task/:taskId', (req, res, next) => {
 	}
 
   res.json({taskId: taskId});
-});
+}
 
-/**
- * Gets the current time log
- */
-router.get('/api/task/:taskId/ongoing-timelog', (req, res, next) => {
+function getOnGoingTimeLog(req, res) {
 	if (req.params.taskId === onGoingTaskId) {
 		res.json({
 			taskId: onGoingTaskId,
@@ -89,12 +83,9 @@ router.get('/api/task/:taskId/ongoing-timelog', (req, res, next) => {
 	} else {
 		res.json({});
 	}
-});
+}
 
-/**
- * Starts a timer for a task
- */
-router.post('/api/task/:taskId/start', (req, res, next) => {
+function startTimer(req, res) {
 	let taskId = req.params.taskId;
 	startTime = moment();
 
@@ -104,12 +95,9 @@ router.post('/api/task/:taskId/start', (req, res, next) => {
 		taskId: taskId,
 		startTime: startTime.format('YYYY-MM-DD HH:mm:ss')
 	});
-});
+}
 
-/**
- * Stops a timer for a task
- */
-router.post('/api/task/:taskId/stop', (req, res, next) => {
+function stopTimer(req, res) {
 	let taskId = req.params.taskId;
 
 	onGoingTaskId = null;
@@ -117,12 +105,9 @@ router.post('/api/task/:taskId/stop', (req, res, next) => {
   res.json({
 		taskId: taskId
 	});
-});
+}
 
-/**
- * Archives a task into a project comment
- */
-router.put('/api/task/:taskId/archive', (req, res) => {
+function archiveTask(req, res) {
 	let taskId = req.params.taskId;
 
 	for (let i = 0; i < taskData.length; i++) {
@@ -138,12 +123,9 @@ router.put('/api/task/:taskId/archive', (req, res) => {
 	}
 
 	res.json(taskId);
-});
+}
 
-/**
- * Pushes a task to the next day
- */
-router.put('/api/task/:taskId/push', (req, res) => {
+function pushTask(req, res) {
 	let taskId = req.params.taskId;
 
 	for (let i = 0; i < taskData.length; i++) {
@@ -153,6 +135,6 @@ router.put('/api/task/:taskId/push', (req, res) => {
 	}
 
 	res.json(taskId);
-});
+}
 
 module.exports = router;
