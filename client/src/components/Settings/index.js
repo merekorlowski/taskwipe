@@ -3,7 +3,7 @@ import SettingsService from '../../services/settings';
 import './styles.css';
 
 class Settings extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.settingsService = new SettingsService();
 
@@ -12,11 +12,10 @@ class Settings extends Component {
 			numOfWeeksAhead: '',
 			showDeadlineForTask: false,
 			teamColor: '',
-			teamName:''
+			teamName: ''
 		};
 
 		this.getUserSettings();
-
 	}
 
 	render() {
@@ -64,8 +63,6 @@ class Settings extends Component {
 	 * @param {*} event
 	 */
 	handleChange(event) {
-		//this.setState({[event.target.name]: event.target.value});
-
 		const target = event.target;
 		const value = target.type === 'checkbox' ? target.checked : target.value;
 		const name = target.name;

@@ -27,10 +27,9 @@ class SettingsService {
 	 * @param {string} userSettings - The user settings to be updated
 	 * @return Returns a promise
 	 */
-	setUserSettings(employeeId,userSettings) {
+	setUserSettings(employeeId, userSettings) {
 		return axios.put(`${this.endPoint}/settings/${employeeId}`, userSettings);
 	}
-
 }
 
 export default SettingsService;
