@@ -11,11 +11,11 @@ describe('Settings API', () => {
 		done();
 	});
 
-	it('tests "Team Name" setting', (done) => {
+	it('tests "Team name" setting', (done) => {
 		done();
 	});
 
-	it('tests "Team Color" setting', (done) => {
+	it('tests "Team color" setting', (done) => {
 		done();
 	});
 });
