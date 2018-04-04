@@ -1,7 +1,4 @@
-import SettingsService from './';
-
 describe('Settings API', () => {
-
 	it('tests "Number of weeks to be shown on Tasks Page" setting', (done) => {
 		done();
 	});
