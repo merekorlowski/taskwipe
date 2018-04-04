@@ -3,7 +3,7 @@ import './styles.css';
 import TaskService from '../../services/tasks';
 import DailyTasks from './DailyTasks';
 import moment from 'moment';
-// import EmployeeDropdown from '../EmployeeDropdown';
+import EmployeeDropdown from '../EmployeeDropdown';
 
 class Tasks extends Component {
 	/**
@@ -32,6 +32,7 @@ class Tasks extends Component {
 			<div className="container">
 				<h2>Tasks</h2>
 				<div className="title-underline bg-theme"></div>
+				<EmployeeDropdown/>
 				<ul>
 					{weeks.map((week, index) => (
 						<li key={`week-${index}`} className="task-week">

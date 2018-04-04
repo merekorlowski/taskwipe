@@ -3,7 +3,8 @@
 		"taskId": "t001",
 		"title": "Task 1",
 		"type": "Priority",
-		"projectId": "Capstone",
+		"projectId": "p001",
+		"employeeId": "001",
 		"comments": "Comments regarding task 1",
 		"date": "2018-03-23"
 	},
@@ -11,15 +12,17 @@
 		"taskId": "t002",
 		"title": "Task 2",
 		"type": "Optional",
-		"projectId": "p1",
+		"projectId": "p001",
+		"employeeId": "001",
 		"comments": "Comments regarding task 2",
-		"date": "2018-03-22"
+		"date": "2018-03-23"
 	},
 	{
 		"taskId": "t003",
 		"title": "Task 3",
 		"type": "Priority",
 		"projectId": "p001",
+		"employeeId": "001",
 		"comments": "Comments regarding task 3",
 		"date": "2018-03-22"
 	},
@@ -28,6 +31,7 @@
 		"title": "Task 4",
 		"type": "Priority",
 		"projectId": "p001",
+		"employeeId": "003",
 		"comments": "Comments regarding task 4",
 		"date": "2018-04-02"
 	},
@@ -36,6 +40,7 @@
 		"title": "Task 5",
 		"type": "Priority",
 		"projectId": "p002",
+		"employeeId": "003",
 		"comments": "Comments regarding task 5",
 		"date": "2018-04-02"
 	},
@@ -44,7 +49,8 @@
 		"title": "Task 6",
 		"type": "Priority",
 		"projectId": "p001",
+		"employeeId": "004",
 		"comments": "Comments regarding task 6",
-		"date": "2018-04-03"
+		"date": "2018-04-04"
 	}
 ]
