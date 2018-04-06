@@ -5,7 +5,7 @@ env:
   global:
    - WEBSERVICE_GH_REPO="git@github.com:merekorlowski/tw-webservice.git"
 before_install:
- - git clone ${WEBSERVICE_GH_REPO} ../tw-webservice
+ - cd .. && git clone ${WEBSERVICE_GH_REPO}
 install:
  - npm install
  - cd ../tw-webservice
