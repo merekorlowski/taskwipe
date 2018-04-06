@@ -3,15 +3,8 @@ node_js:
  - "8"
 install:
  - npm install
- - cd client
- - npm install
- - cd ..
 script:
- - npm start &
- - cd client
- - npm run eslint 
+ - npm run eslint
  - npm run jsdoc
  - npm test
  - npm run build
-after_script:
- - cd ..

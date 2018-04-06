@@ -1,41 +1,35 @@
 # Taskwipe 
-[![BCH compliance](https://bettercodehub.com/edge/badge/merekorlowski/taskwipe?branch=dev)](https://bettercodehub.com/)
-[![Build Status](https://travis-ci.org/merekorlowski/taskwipe.svg?branch=dev)](https://travis-ci.org/merekorlowski/taskwipe)
+[![BCH compliance](https://bettercodehub.com/edge/badge/merekorlowski/tw-client?branch=dev)](https://bettercodehub.com/)
+[![Build Status](https://travis-ci.org/merekorlowski/tw-client.svg?branch=dev)](https://travis-ci.org/merekorlowski/tw-client)
 
 ## Dependencies
 * [Node.js LTS version](https://nodejs.org/en/)
 
-## Client
 ### Install Dependencies
-In theclient directory, run the following command: 
-* `npm install`
+* `npm install`  
 
 This will install all of the dependencies listed in the package.json file.
 
+## Run Scripts
+
+### ESLint
+* `npm run eslint`  
+
+### JSDoc
+* `npm run jsdoc`  
+
 ### Build
-In theclient directory, run the following command:
-* `npm run build`
+* `npm run build`  
 
 ### Run dev server
-In theclient directory, run the following command:
 * `npm start`  
 
 This will run the client dev server at http://localhost:3000.  
 
 ### Run unit tests
-In theclient directory, run the following command:
 * `npm run test`  
 
-## Web Server
-### Install Dependencies
-In the src directory, run the following command: 
-* `npm install`
-
-This will install all of the dependencies listed in the package.json file.
-
-### Run the web server
-In the src directory, run the following command:
-* `PORT=3001 npm start`  or
-* `PORT=3001 nodemon bin/www` to automatically restart the server when there is a modification
-
-This will run the web server at http://localhost:3001.
+## Web Service
+* Repository: https://github.com/merekorlowski/tw-webservice
+* Host: http://ec2-18-219-180-211.us-east-2.compute.amazonaws.com
+* Port: 3001
