@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import TaskService from '../../services/tasks';
 import ProjectService from '../../services/projects';
 import moment from 'moment';
-import './styles.css'
+import './styles.css';
 
 class TaskListItem extends Component {
 	/**
@@ -54,7 +54,7 @@ class TaskListItem extends Component {
 	 */
 	render() {
 		return (
-			<div className={`container task-list-item ${this.state.isExpanded ? 'expanded': ''}`}>
+			<div className={`container task-list-item ${this.state.isExpanded ? 'expanded' : ''}`}>
 				<span className="col-md-1 col-lg-1 col-sm-1" onClick={this.toggleExpand.bind(this)}>
 					<i className={`fa ${this.state.isExpanded ? 'fa-angle-up' : 'fa-angle-down'} expand-icon`}></i>
 				</span>
@@ -89,7 +89,7 @@ class TaskListItem extends Component {
 						</button>)}
 				</span>
 				<div className="col-xs-11 list-elem-details">
-					<textarea name="comments"  autoFocus="on" placeholder="Notes"
+					<textarea name="comments" autoFocus="on" placeholder="Notes"
 						value={this.state.comments} onChange={this.handleChange.bind(this)}></textarea>
 				</div>
 			</div>

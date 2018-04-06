@@ -12,7 +12,7 @@ class Nav extends Component {
 						<div className="container">
 							<span className="col-xs-9">
 								<span id="logo">
-									{this.isLoggedIn() 
+									{this.isLoggedIn()
 										? <NavLink to="/tasks" activeClassName="none" className="">taskwipe</NavLink>
 										: <span>taskwipe</span>
 									}
