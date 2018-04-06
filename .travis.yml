@@ -1,18 +1,9 @@
 language: node_js
 node_js:
  - "8"
-env:
-  global:
-   - WEBSERVICE_GH_REPO="github.com:merekorlowski/tw-webservice.git"
-before_install:
- - cd .. && git clone ${GH_API_KEY}@${WEBSERVICE_GH_REPO}
 install:
  - npm install
- - cd ../tw-webservice
- - npm install
- - cd ../tw-client
 script:
- - cd ../tw-webservice && npm start && cd ../tw-client
  - npm run eslint
  - npm run jsdoc
  - npm test
