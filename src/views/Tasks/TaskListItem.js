@@ -232,9 +232,11 @@ class TaskListItem extends Component {
 	 * @param {string} startTime
 	 */
 	setDuration(startTime) {
-		let ms = moment().diff(moment(startTime, 'YYYY-MM-DD HH:mm:ss'));
+		console.log(startTime)
+		console.log(moment().utc().format('YYYY-MM-DD HH:mm:ss'))
+		let ms = moment().utc().diff(moment.utc(startTime, 'YYYY-MM-DD HH:mm:ss'));
 		let d = moment.duration(ms);
-		let s = Math.floor(d.asHours()) + moment.utc(ms).format(':mm:ss');
+		let s = Math.floor(d.asHours()) + moment(ms).format(':mm:ss');
 
 		this.setState({
 			onGoingTime: s
