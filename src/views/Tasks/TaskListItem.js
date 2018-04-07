@@ -232,8 +232,6 @@ class TaskListItem extends Component {
 	 * @param {string} startTime
 	 */
 	setDuration(startTime) {
-		console.log(startTime)
-		console.log(moment().utc().format('YYYY-MM-DD HH:mm:ss'))
 		let ms = moment().utc().diff(moment.utc(startTime, 'YYYY-MM-DD HH:mm:ss'));
 		let d = moment.duration(ms);
 		let s = Math.floor(d.asHours()) + moment(ms).format(':mm:ss');

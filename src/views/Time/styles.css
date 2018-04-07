@@ -1,47 +1,65 @@
 
-.calendar {
-	width: 600px;
-	height: 500px;
-	box-shadow: 1px 1px 3px #222;
-	border-radius: 5px;
+.day {
+	text-align: center;
+	border-right: 1px solid #cecece;
+	border-bottom: 1px solid #cecece;
+	height: 20px;
+	line-height: 20px;
 }
 
-.current-week {
-  width: 100%;
+.timeslot {
+	width: 100%;
+	height: 100%;
+	display: inline-block;
 }
 
-.calendar ul {
-  list-style-type: none;
-  display: table;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+.day-title {
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #cecece;
+	border-top: 1px solid #cecece;
 }
 
-.calendar li {
-  display: table-cell;
+.empty-square {
+	line-height: 30px;
+	height: 30px;
+	border-bottom: 1px solid #cecece;
+	border-right: 1px solid #cecece;
 }
 
-.hours li {
-  display: block;
-  width: 100px;
-  font-size: 14px;
-  padding: 5px;
+.hour .day:first-child {
+	border-left: 1px solid #cecece;
+}
+
+.day-title:first-child {
+	border-left: 1px solid #cecece;
+	border-top-left-radius: 5px;
+}
+
+.day-title:last-child {
+	border-top-right-radius: 5px;
+}
+
+.hour:last-child .day:first-child {
+	border-bottom-left-radius: 5px;
+}
+
+.hour:last-child .day:last-child {
+	border-bottom-right-radius: 5px;
+}
+
+.week {
+	width: 100%;
+	margin-bottom: 200px;
+	box-shadow: 1px 1px 5px #cecece;
 }
 
 .day {
-  display: table-cell;
+	display: inline-block;
+	height: 100%;
+	width: 12.5%;
 }
 
-.day li {
-  display: block;
-}
-
-.time-slot {
-	display: block;
-	padding: 5px;
+.hour {
 	width: 100%;
-	height: 75px;
-	font-size: 12px;
 }
-

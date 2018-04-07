@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 
-// import Calendar from './Calendar';
+import Calendar from './Calendar';
 
 class Time extends Component {
 	render() {
@@ -10,7 +10,7 @@ class Time extends Component {
 				<h2>Time</h2>
 				<div className="title-underline bg-theme"></div>
 				<div>
-					
+					<Calendar/>
 				</div>
 			</div>
 		);
