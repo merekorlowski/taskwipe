@@ -99,6 +99,10 @@ class TaskService {
 	pushTask(taskId) {
 		return axios.put(`${this.endPoint}/task/${taskId}/push`);
 	}
+
+	getTaskTimelogs(day, hour) {
+		return axios.get(`${this.endPoint}/task/timelogs?day=${day}&hour=${hour}`);
+	}
 }
 
 export default TaskService;

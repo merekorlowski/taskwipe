@@ -1,65 +1,51 @@
 
-.day {
-	text-align: center;
-	border-right: 1px solid #cecece;
-	border-bottom: 1px solid #cecece;
-	height: 20px;
-	line-height: 20px;
+.timeslot {
+	display: block;
+	position: relative;
+	height: 100%;
+	width: 100%;
 }
 
-.timeslot {
+.task-time-block {
+	position: absolute;
 	width: 100%;
-	height: 100%;
-	display: inline-block;
+	display: block;
+	top: 0;
 }
 
 .day-title {
 	height: 30px;
 	line-height: 30px;
-	border-bottom: 1px solid #cecece;
-	border-top: 1px solid #cecece;
-}
-
-.empty-square {
-	line-height: 30px;
-	height: 30px;
-	border-bottom: 1px solid #cecece;
-	border-right: 1px solid #cecece;
-}
-
-.hour .day:first-child {
-	border-left: 1px solid #cecece;
-}
-
-.day-title:first-child {
-	border-left: 1px solid #cecece;
-	border-top-left-radius: 5px;
-}
-
-.day-title:last-child {
-	border-top-right-radius: 5px;
-}
-
-.hour:last-child .day:first-child {
-	border-bottom-left-radius: 5px;
-}
-
-.hour:last-child .day:last-child {
-	border-bottom-right-radius: 5px;
+	font-weight: bold;
 }
 
 .week {
 	width: 100%;
 	margin-bottom: 200px;
 	box-shadow: 1px 1px 5px #cecece;
+	border-radius: 5px;
+	border-collapse: collapse;
 }
 
-.day {
-	display: inline-block;
-	height: 100%;
+.week td, .week th {
+	text-align: center;
+	border-right: 1px solid #cecece;
 	width: 12.5%;
+	height: 25px;
+}
+
+.week td:last-child, .week th:last-child {
+	border-right: none;
+}
+
+.week tr {
+	border-bottom: 1px solid #cecece;
+}
+
+.week tbody tr:last-child {
+	border-bottom: none;
 }
 
 .hour {
-	width: 100%;
+	font-weight: 500;
 }
