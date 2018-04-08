@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 
-import Calendar from './Calendar';
+import Calendar from '../../components/Calendar';
 
 class Time extends Component {
 	render() {

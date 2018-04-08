@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 import TaskService from '../../services/tasks';
-import DailyTasks from './DailyTasks';
+import DailyTasks from '../../components/DailyTasks';
 import moment from 'moment';
 import EmployeeDropdown from '../../components/EmployeeDropdown';
 

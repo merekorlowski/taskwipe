@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import Timeslot from './Timeslot';
+import Timeslot from '../Timeslot';
 import './styles.css';
 
 class Calendar extends Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskListItem from './TaskListItem';
+import TaskListItem from './';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import 'jasmine-local-storage';

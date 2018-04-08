@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import TaskService from '../../services/tasks';
 import ProjectService from '../../services/projects';
-import TaskListItem from './TaskListItem';
+import TaskListItem from '../TaskListItem';
 import moment from 'moment';
 
 const DEFAULT_TYPE = 'Priority';

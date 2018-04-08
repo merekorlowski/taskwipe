@@ -1,6 +1,6 @@
 import React from 'react';
-import DailyTasks from './DailyTasks';
-import TaskListItem from '../Tasks/TaskListItem';
+import DailyTasks from './';
+import TaskListItem from '../TaskListItem';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import 'jasmine-local-storage';

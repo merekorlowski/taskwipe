@@ -22,6 +22,10 @@ class Timeslot extends Component {
 							top: `${taskTimelog.top}%`,
 							bottom: `${taskTimelog.bottom}%`
 						}}>
+							<span className="task-timelog-title">
+								{taskTimelog.title}
+								<button className="edit-task-btn"><i className="fas fa-edit"></i></button>
+							</span>
 						</div>
 					))}
 				</div>
@@ -49,6 +53,7 @@ class Timeslot extends Component {
 
 		let isStartBetween = start.isBetween(startOfTimeslot, endOfTimeslot);
 		let isEndBetween = end.isBetween(startOfTimeslot, endOfTimeslot);
+		let isBeforeAndAfter = start.isBefore(startOfTimeslot) && end.isAfter(endOfTimeslot);
 
 		if (isStartBetween) {
 			let diffInSeconds = start.diff(startOfTimeslot, 'seconds');
@@ -67,6 +72,13 @@ class Timeslot extends Component {
 			taskTimelogs.push(taskTimelog);
 			this.setState({taskTimelogs: taskTimelogs});
 		} else {
+			taskTimelog.bottom = 0;
+			taskTimelogs.push(taskTimelog);
+			this.setState({taskTimelogs: taskTimelogs});
+		}
+
+		if (isBeforeAndAfter) {
+			taskTimelog.top = 0;
 			taskTimelog.bottom = 0;
 			taskTimelogs.push(taskTimelog);
 			this.setState({taskTimelogs: taskTimelogs});

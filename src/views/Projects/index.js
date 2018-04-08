@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 import ProjectService from '../../services/projects';
-import ProjectListItem from './ProjectListItem';
+import ProjectListItem from '../../components/ProjectListItem';
 
 const DEFAULT_STATUS = 'In Progress';
 
