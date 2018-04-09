@@ -1,0 +1,65 @@
+.on-going-time {
+	background-color: #008040;
+	font-size: 14px;
+}
+
+.task-list-item {
+	transition: .2s height linear;
+	height: 60px;
+}
+
+.task-list-item.expanded {
+	height: 160px;
+}
+
+.task-list-item .list-elem-details textarea {
+	height: 0;
+	padding: 0px;
+	transition: .2s height linear;
+	display: block;
+	box-shadow: none;
+	float: left;
+	display: none;
+}
+
+.task-list-item.expanded .list-elem-details textarea {
+	height: 100px;
+	padding: 10px;
+	float: none;
+	display: block;
+}
+
+.task-title {
+	line-height: 1em;
+	font-weight: bold;
+	width: 100%;
+}
+
+.task-project {
+	width: 60%;
+}
+
+.task-type {
+	width: 30%;
+}
+
+.task-deadline {
+	width: 30%;
+}
+
+.task-start-button button, .task-create-button button {
+	width: 70px;
+}
+
+.edit-task {
+	display: block;
+	width: 70%;
+}
+
+.create-task form {
+	height: 90px;
+}
+
+.create-task .task-title {
+	font-weight: normal;
+}

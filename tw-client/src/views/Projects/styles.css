@@ -1,0 +1,42 @@
+
+.project-list-item {
+	transition: .2s height linear;
+	height: 60px;
+}
+
+.project-title {
+	width: 100%;
+}
+
+.project-list-item.expanded {
+	height: 170px;
+}
+
+.project-list-item .list-elem-details textarea {
+	height: 0;
+	padding: 0px;
+	transition: .2s height linear;
+	display: block;
+	box-shadow: none;
+	float: left;
+	display: none;
+}
+
+.project-list-item.expanded .list-elem-details textarea {
+	height: 100px;
+	padding: 10px;
+	float: none;
+	display: block;
+}
+
+.create-project form {
+	height: 80px;
+}
+
+.create-project .project-title {
+	font-weight: normal;
+}
+
+.project-create-btn {
+	width: 70px;
+}
