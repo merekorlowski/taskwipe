@@ -13,8 +13,9 @@ install:
  - cd client && npm install && cd ..
  - cd webservice && npm install && cd ..
 script:
- - cd webservice && npm start & && cd ..
- - cd client
+ - cd webservice
+ - npm start &
+ - cd ../client
  - npm run eslint
  - npm run jsdoc
  - npm test
