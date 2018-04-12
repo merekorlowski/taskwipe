@@ -38,7 +38,6 @@ describe('Login Flow Tests', () => {
 		done();
 	});
 
-	
 	it('should enter password', (done) => {
 		password.simulate('focus');
 		password.simulate('change', {
