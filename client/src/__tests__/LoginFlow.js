@@ -1,6 +1,5 @@
 import React from 'react';
 import App from '../views/App';
-import Login from '../views/Login';
 import Tasks from '../views/Tasks';
 import { MemoryRouter } from 'react-router-dom';
 import { mount, configure } from 'enzyme';
