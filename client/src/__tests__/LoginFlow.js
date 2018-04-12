@@ -12,17 +12,8 @@ import httpAdapter from 'axios/lib/adapters/http';
 axios.defaults.adapter = httpAdapter;
 configure({adapter: new Adapter()});
 
-let originalTimeout;
-
-beforeEach((done) => {
-	originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-	jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000;
+beforeEach(() => {
 	mockLocalStorage();
-	done();
-});
-
-afterEach(() => {
-	jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
 });
 
 describe('Login Flow Tests', () => {
@@ -36,32 +27,32 @@ describe('Login Flow Tests', () => {
 	let email = wrapper.find('#email').first();
 	let password = wrapper.find('#password').first();
 
-	email.simulate('focus');
-	email.simulate('change', {
-		target: {
-			name: 'email',
-			value: 'morlo088@uottawa.ca'
-		}
-	});
-	password.simulate('focus');
-	password.simulate('change', {
-		target: {
-			name: 'password',
-			value: 'password'
-		}
-	});
-	form.simulate('submit');
-
 	it('should enter email', (done) => {
+		email.simulate('focus');
+		email.simulate('change', {
+			target: {
+				name: 'email',
+				value: 'morlo088@uottawa.ca'
+			}
+		});
 		expect(email.instance().value).toBe('morlo088@uottawa.ca');
 		done();
 	});
 
 	
 	it('should enter password', (done) => {
+		password.simulate('focus');
+		password.simulate('change', {
+			target: {
+				name: 'password',
+				value: 'password'
+			}
+		});
 		expect(password.instance().value).toBe('password');
 		done();
 	});
+
+	form.simulate('submit');
 
 	// it('should submit login successfully', (done) => {
 	// 	setTimeout(() => {
