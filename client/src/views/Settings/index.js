@@ -53,39 +53,47 @@ class Settings extends Component {
 					</li>
 					<li>
 						<h3>Team Management</h3>
-						{this.state.team ? (
-							<div>
-								<div className="settings-section">
-									<label htmlFor="teamName">Team Name:</label>
-									<input id="teamName" type="text" className="form-elem" name="name" value={this.state.team.name} onChange={this.handleChange.bind(this)}/>
-								</div>
-								<div className="settings-section">
-									<label>Team Color:</label>
-									<span>
-										<input type="color" name="teamColor" className="form-elem" value={this.state.team.color} onChange={this.handleChange.bind(this)}/>
-									</span>
-								</div>
-							</div>
-						) : (
-							<div className="settings-section">
-								<h4>Create Team</h4>
-								<form onSubmit={this.createTeam.bind(this)}>
-									<label htmlFor="newTeamName">Team name:</label>
-									<input type="text" id="newTeamName" name="name" placeholder="Team name" className="form-elem" required="true" value={this.state.newTeam.name}
-										onChange={this.handleNewTeamChange.bind(this)} />
-									<label htmlFor="newTeamColor">Team color:</label>
-									<input type="color" id="newTeamColor" name="color" className="form-elem" value={this.state.newTeam.color}
-										onChange={this.handleNewTeamChange.bind(this)} />
-									<label htmlFor="newTeamMembers">Team members:</label>
-									<select id="newTeamMembers" name="members" className="form-elem" value={this.state.newTeam.members} onChange={this.handleNewTeamChange.bind(this)}>
-										<option value="001">Merek Orlowski</option>
-									</select>
-									<button type="submit" className="btn create-btn">Create</button>
-								</form>
-							</div>
-						)}
+						{this.state.team ? this.displayTeam() : this.displayCreateTeam()}
 					</li>
 				</ul>
+			</div>
+		);
+	}
+
+	displayTeam() {
+		return (
+			<div>
+				<div className="settings-section">
+					<label htmlFor="teamName">Team Name:</label>
+					<input id="teamName" type="text" className="form-elem" name="name" value={this.state.team.name} onChange={this.handleChange.bind(this)}/>
+				</div>
+				<div className="settings-section">
+					<label>Team Color:</label>
+					<span>
+						<input type="color" name="teamColor" className="form-elem" value={this.state.team.color} onChange={this.handleChange.bind(this)}/>
+					</span>
+				</div>
+			</div>
+		);
+	}
+
+	displayCreateTeam() {
+		return (
+			<div className="settings-section">
+				<h4>Create Team</h4>
+				<form onSubmit={this.createTeam.bind(this)}>
+					<label htmlFor="newTeamName">Team name:</label>
+					<input type="text" id="newTeamName" name="name" placeholder="Team name" className="form-elem" required="true" value={this.state.newTeam.name}
+						onChange={this.handleNewTeamChange.bind(this)} />
+					<label htmlFor="newTeamColor">Team color:</label>
+					<input type="color" id="newTeamColor" name="color" className="form-elem" value={this.state.newTeam.color}
+						onChange={this.handleNewTeamChange.bind(this)} />
+					<label htmlFor="newTeamMembers">Team members:</label>
+					<select id="newTeamMembers" name="members" className="form-elem" value={this.state.newTeam.members} onChange={this.handleNewTeamChange.bind(this)}>
+						<option value="001">Merek Orlowski</option>
+					</select>
+					<button type="submit" className="btn create-btn">Create</button>
+				</form>
 			</div>
 		);
 	}
