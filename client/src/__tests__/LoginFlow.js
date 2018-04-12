@@ -11,9 +11,9 @@ import httpAdapter from 'axios/lib/adapters/http';
 axios.defaults.adapter = httpAdapter;
 configure({adapter: new Adapter()});
 
-beforeEach(() => {
-	mockLocalStorage();
-});
+// beforeEach(() => {
+// 	mockLocalStorage();
+// });
 
 describe('Login Flow Tests', () => {
 	localStorage.setItem('loggedIn', 'false');
