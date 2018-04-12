@@ -1,0 +1,12 @@
+[
+    {
+        "employeeId": "001",
+        "projectId": "p001",
+        "isAdmin": true
+    },
+    {
+        "employeeId": "001",
+        "projectId": "p002",
+        "isAdmin": false
+    }
+]

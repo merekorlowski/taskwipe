@@ -35,6 +35,14 @@ class EmployeeService {
 	getEmployeesbyTeam(teamId) {
 		return axios.get(`${this.endPoint}/employees/team/${teamId}`);
 	}
+
+	getUserTeam(userId) {
+		return axios.get(`${this.endPoint}/employees/${userId}/team`);
+	}
+
+	createTeam(team) {
+		return axios.post(`${this.endPoint}/employees/${team.employeeId}/team`, team);
+	}
 }
 
 export default EmployeeService;

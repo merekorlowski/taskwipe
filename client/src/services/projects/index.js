@@ -36,8 +36,8 @@ class ProjectService {
 	 * Update a project
 	 * @return Returns a promise
 	 */
-	updateProject(project) {
-		return axios.put(`${this.endPoint}/project/${project.projectId}`, project);
+	updateProject(projectId, fieldsToUpdate) {
+		return axios.put(`${this.endPoint}/project/${projectId}`, fieldsToUpdate);
 	}
 
 	/**
