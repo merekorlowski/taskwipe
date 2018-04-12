@@ -7,13 +7,6 @@
 
 ## Web Service
 
-### Run Scripts
-
-#### Run server
-* `npm start`  
-
-This will run the client dev server at http://localhost:3001.  
-
 ### Directory
 * `cd webservice`
 
@@ -21,6 +14,13 @@ This will run the client dev server at http://localhost:3001.
 * `npm install`  
 
 This will install all of the dependencies listed in the package.json file.
+
+### Run Scripts
+
+#### Run server
+* `npm start`  
+
+This will run the client dev server at http://localhost:3001.  
 
 ## Client
 
