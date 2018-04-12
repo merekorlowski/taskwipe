@@ -38,35 +38,32 @@ class ProjectListItem extends Component {
 	render() {
 		return (
 			<div className={`project-list-item ${this.state.isExpanded ? 'expanded' : ''}`}>
-				<div className="list-item-row">
+				<div>
 					<span onClick={this.toggleExpand.bind(this)}>
 						<i className={`fa ${this.state.isExpanded ? 'fa-angle-up' : 'fa-angle-down'} expand-icon`}></i>
-						<strong>{this.state.title}</strong>
+						<span>{this.state.title}</span>
 					</span>
+				</div>
+				<div>
+					<input name="url" className="form-elem" placeholder="http://example.com" value={this.state.url} onChange={this.handleChange.bind(this)}/>
+					<select name="teammembers" className="form-elem" value={this.state.teamMembers} onChange={this.handleChange.bind(this)}>
+						<option value="morlo">Merek Orlowski</option>
+					</select>
+					<select name="status" className="form-elem" value={this.state.status} onChange={this.handleChange.bind(this)}>
+						<option value="In Progress">In Progress</option>
+						<option value="Paused">Paused</option>
+						<option value="Completed">Completed</option>
+						<option value="Delete">Delete</option>
+					</select>
 				</div>
 				{this.state.isExpanded
 					? (
-						<div className="list-item-row list-elem-details">
-							<textarea name="comments" rows="50" autoFocus="on" placeholder="Notes"
+						<div className="list-elem-details">
+							<textarea name="comments" autoFocus="on" placeholder="Notes"
 								value={this.state.comments} onChange={this.handleChange.bind(this)}></textarea>
 						</div>
 					) : ''
 				}
-				<div className="list-item-row">
-					<span>
-						<select name="teammembers" className="form-elem project-team" value={this.state.teamMembers} onChange={this.handleChange.bind(this)}>
-							<option value="morlo">Merek Orlowski</option>
-						</select>
-					</span>
-					<span>
-						<select name="status" className="form-elem project-status" value={this.state.status} onChange={this.handleChange.bind(this)}>
-							<option value="In Progress">In Progress</option>
-							<option value="Paused">Paused</option>
-							<option value="Completed">Completed</option>
-							<option value="Delete">Delete</option>
-						</select>
-					</span>
-				</div>
 			</div>
 		);
 	}

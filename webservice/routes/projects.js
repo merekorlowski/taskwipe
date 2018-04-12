@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const projectData = require('./dummyData/project.json');
-const employeeProjectData = require('./dummyData/employeeProject.json');
+const projectData = require('../dummyData/project.json');
+const employeeProjectData = require('../dummyData/employeeProject.json');
 
 let projectIdIncrement = 1;
 

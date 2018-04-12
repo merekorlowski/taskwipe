@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import TaskService from '../../services/tasks';
 import ProjectService from '../../services/projects';
 import moment from 'moment';
-import './styles.css';
+import './styles.scss';
 
 class TaskListItem extends Component {
 	/**
@@ -18,6 +18,8 @@ class TaskListItem extends Component {
 			taskId: task.taskId,
 			title: task.title,
 			type: task.type,
+			date: task.date,
+			deadline: task.deadline,
 			projectId: task.projectId,
 			comments: task.comments,
 			projects: [],
@@ -55,57 +57,56 @@ class TaskListItem extends Component {
 	render() {
 		return (
 			<div className={`task-list-item ${this.state.isExpanded ? 'expanded' : ''}`}>
-				<div className="list-item-row">
-					<span onClick={this.toggleExpand.bind(this)}>
+				<div>
+					<span className="expand-icon-section left" onClick={this.toggleExpand.bind(this)}>
 						<i className={`fa ${this.state.isExpanded ? 'fa-angle-up' : 'fa-angle-down'} expand-icon`}></i>
 					</span>
-					<span className="task-title">{this.state.title}</span>
+					<span>{this.state.title}</span>
+					<span className="right">
+						{this.state.onGoingTime === null
+							? (
+								<button className={`btn ${!this.checkIfCanStart ? 'disabled-btn' : ''}`}
+									onClick={this.startTimer.bind(this)} disabled={!this.checkIfCanStart}>
+										Start
+								</button>
+							)
+							: (
+								<button className="btn on-going-time"
+									onClick={this.stopTimer.bind(this)}
+									onMouseEnter={this.onMouseEnter.bind(this)}
+									onMouseLeave={this.onMouseLeave.bind(this)}>
+									{this.state.mouseover
+										? 'Stop'
+										: this.state.onGoingTime
+									}
+								</button>
+							)
+						}
+					</span>
+				</div>
+				<div>
+					<input type="date" name="date" value={this.state.date} className="form-elem" onChange={this.handleChange.bind(this)}/>
+					<input type="date" name="deadline" value={this.state.deadline} className="form-elem" onChange={this.handleChange.bind(this)}/>
+					<select name="type" className="form-elem" value={this.state.type} onChange={this.handleChange.bind(this)}>
+						<option value="Priority">Priority</option>
+						<option value="Archive">Archive</option>
+						<option value="Optional">Optional</option>
+						<option value="Delete">Delete</option>
+					</select>
+					<select name="projectId" className="form-elem" value={this.state.projectId} onChange={this.handleChange.bind(this)}>
+						{this.state.projects.map((project, index) => (
+							<option key={index} value={project.projectId}>{project.title}</option>
+						))}
+					</select>
 				</div>
 				{this.state.isExpanded
 					? (
-						<div className="list-item-row list-elem-details">
+						<div className="list-elem-details">
 							<textarea name="comments" autoFocus="on" placeholder="Notes"
 								value={this.state.comments} onChange={this.handleChange.bind(this)}></textarea>
 						</div>
 					) : ''
 				}
-				<div className="list-item-row">
-					<span className="edit-task left">
-						<select name="projectId" className="form-elem task-project" value={this.state.projectId} onChange={this.handleChange.bind(this)}>
-							{this.state.projects.map((project, index) => (
-								<option key={index} value={project.projectId}>{project.title}</option>
-							))}
-						</select>
-						<select name="type" className="form-elem task-type" value={this.state.type} onChange={this.handleChange.bind(this)}>
-							<option value="Priority">Priority</option>
-							<option value="Push">Push</option>
-							<option value="Archive">Archive</option>
-							<option value="Optional">Optional</option>
-							<option value="Delete">Delete</option>
-						</select>
-					</span>
-					<span className="task-start-button right">
-						{this.state.onGoingTime === null
-							? (
-									<button className={`bg-theme-btn ${!this.checkIfCanStart ? 'disabled-btn' : ''}`}
-										onClick={this.startTimer.bind(this)} disabled={!this.checkIfCanStart}>
-											Start
-									</button>
-								)
-							: (
-									<button className="bg-theme-btn on-going-time"
-										onClick={this.stopTimer.bind(this)}
-										onMouseEnter={this.onMouseEnter.bind(this)}
-										onMouseLeave={this.onMouseLeave.bind(this)}>
-										{this.state.mouseover
-											? 'Stop'
-											: this.state.onGoingTime
-										}
-									</button>
-								)
-						}
-					</span>
-				</div>
 			</div>
 		);
 	}
@@ -194,17 +195,6 @@ class TaskListItem extends Component {
 	getProjects() {
 		this.projectService.getProjects(localStorage.getItem('employeeId')).then(res => {
 			this.setState({projects: res.data});
-		}).catch(err => {
-			console.error(err.message);
-		});
-	}
-
-	/**
-	 * Retrieves all of the time logs for this task
-	 */
-	getTimeLogs() {
-		this.taskService.getTimeLogs(this.state.taskId).then(res => {
-			this.setState({timeLogs: res.data});
 		}).catch(err => {
 			console.error(err.message);
 		});

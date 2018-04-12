@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProjectService from '../../services/projects';
 import ProjectListItem from '../../components/ProjectListItem';
-import './styles.css';
+import './styles.scss';
 
 const DEFAULT_STATUS = 'In Progress';
 
@@ -16,6 +16,7 @@ class Projects extends Component {
 		super(props);
 		this.newProject = {
 			title: '',
+			url: '',
 			status: DEFAULT_STATUS,
 			comments: ''
 		};
@@ -33,29 +34,26 @@ class Projects extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h2>Projects</h2>
-				<div className="title-underline bg-theme"></div>
+				<h1 className="page-title">Projects</h1>
 				<ul className="list">
-					<li className="create-project">
+					<li className="project-list-item">
 						<form onSubmit={this.addProject.bind(this)}>
-							<div className="list-item-row">
-								<span className="">
-									<input name="title" type="text" autoComplete="off" className="form-elem project-title" autoFocus="on"
-										placeholder="Enter new project" required="true" value={this.state.newProject.title}
-										onChange={this.handleNewProjectChange.bind(this)}/>
-								</span>
-							</div>
-							<div className="list-item-row">
-								<span>
-									<select name="teammembers" className="form-elem project-team" value={this.state.newProject.teamMembers} onChange={this.handleNewProjectChange.bind(this)}>
-										<option value="morlo">Merek Orlowski</option>
-									</select>
-								</span>
+							<div>
+								<input name="title" type="text" autoComplete="off" className="form-elem" autoFocus="on"
+									placeholder="Enter new project" required="true" value={this.state.newProject.title}
+									onChange={this.handleNewProjectChange.bind(this)}/>
 								<span className="project-create-btn right">
-									<button className="bg-theme-btn">
+									<button className="btn">
 										Create
 									</button>
 								</span>
+							</div>
+							<div>
+								<input name="url" className="form-elem" placeholder="http://example.com" value={this.state.newProject.url}
+									onChange={this.handleNewProjectChange.bind(this)}/>
+								<select name="teammembers" className="form-elem" value={this.state.newProject.teamMembers} onChange={this.handleNewProjectChange.bind(this)}>
+									<option value="morlo">Merek Orlowski</option>
+								</select>
 							</div>
 						</form>
 					</li>

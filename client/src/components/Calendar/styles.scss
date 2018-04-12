@@ -1,9 +1,11 @@
+@import '../../styles.scss';
 
 .timeslot {
 	display: block;
 	position: relative;
 	height: 100%;
 	width: 100%;
+	padding: 0;
 }
 
 .task-time-block {
@@ -27,18 +29,18 @@
 	border-collapse: collapse;
 	border: 1px solid #cecece;
 	border-radius: 5px;
-	background-color: #f8f8f8;
-}
+	background-color: $item-background-color;
 
-.week td, .week th {
-	text-align: center;
-	border-right: 1px solid #cecece;
-	width: 12.5%;
-	height: 25px;
-}
+	td, th {
+		text-align: center;
+		border-right: 1px solid #cecece;
+		width: 12.5%;
+		height: 25px;
+	}
 
-.week td:last-child, .week th:last-child {
-	border-right: none;
+	td:last-child, th:last-child {
+		border-right: none;
+	}
 }
 
 .week tr {
@@ -80,4 +82,11 @@
 	color: #fff;
 	border: none;
 	float: right;
+}
+
+.form-elem.time-week {
+	margin-left: 0;
+	margin-bottom: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }

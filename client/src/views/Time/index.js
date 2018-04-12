@@ -7,8 +7,7 @@ class Time extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h2>Time</h2>
-				<div className="title-underline bg-theme"></div>
+				<h1 className="page-title">Time</h1>
 				<div>
 					<Calendar/>
 				</div>

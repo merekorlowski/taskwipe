@@ -4,8 +4,9 @@ import TaskService from '../../services/tasks';
 import ProjectService from '../../services/projects';
 import TaskListItem from '../TaskListItem';
 import moment from 'moment';
+import './styles.scss';
 
-const DEFAULT_TYPE = 'Priority';
+const DEFAULT_TYPE = 'Normal';
 
 class DailyTasks extends Component {
 	constructor(props) {
@@ -25,6 +26,7 @@ class DailyTasks extends Component {
 			onGoingId: null,
 			projects: []
 		};
+
 		this.taskService = new TaskService();
 		this.projectService = new ProjectService();
 	}
@@ -38,29 +40,32 @@ class DailyTasks extends Component {
 			<div>
 				<h5 className="display-date">{this.state.displayDate}</h5>
 				<ul className="list">
-					<li className="create-task">
+					<li>
 						<form className="task-list-item" onSubmit={this.addTask.bind(this)}>
-							<div className="list-item-row">
+							<div>
 								<input name="title" autoComplete="off" type="text" autoFocus={this.isToday ? 'on' : ''} className="form-elem task-title"
 									placeholder="Enter new task" required="true" value={this.state.newTask.title}
 									onChange={this.handleNewTaskChange.bind(this)}/>
+								<button className="btn create-btn">
+									Create
+								</button>
 							</div>
-							<div className="list-item-row">
-								<span className="left edit-task">
-									<select name="projectId" className="form-elem task-project" value={this.state.newTask.projectId}
-										onChange={this.handleNewTaskChange.bind(this)}>
-										{this.state.projects.map((project, index) => (
-											<option key={index} value={project.projectId}>{project.title}</option>
-										))}
-									</select>
-									<input name="deadline" type="date" className="form-elem task-deadline" value={this.state.newTask.deadline}
-										onChange={this.handleNewTaskChange.bind(this)} />
-								</span>
-								<span className="task-create-button right">
-									<button className="bg-theme-btn">
-										Create
-									</button>
-								</span>
+							<div>
+								<input name="date" type="date" className="form-elem" value={this.state.newTask.date}
+									onChange={this.handleNewTaskChange.bind(this)} />
+								<input name="deadline" type="date" className="form-elem" value={this.state.newTask.deadline}
+									onChange={this.handleNewTaskChange.bind(this)} />
+								<select name="type" className="form-elem" value={this.state.newTask.type} onChange={this.handleNewTaskChange.bind(this)}>
+									<option value="Normal">Normal</option>
+									<option value="Priority">Priority</option>
+									<option value="Optional">Optional</option>
+								</select>
+								<select name="projectId" className="form-elem task-project" required="true" value={this.state.newTask.projectId}
+									onChange={this.handleNewTaskChange.bind(this)}>
+									{this.state.projects.map((project, index) => (
+										<option key={index} value={project.projectId}>{project.title}</option>
+									))}
+								</select>
 							</div>
 						</form>
 					</li>
@@ -77,9 +82,7 @@ class DailyTasks extends Component {
 							</li>
 						))
 						: (
-							<li className="empty-list">
-								There are no tasks specified for this day.
-							</li>
+							''
 						)
 					}
 				</ul>

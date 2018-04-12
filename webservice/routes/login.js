@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const employeeData = require('./dummyData/employee.json');
+const employeeData = require('../dummyData/employee.json');
 
 /**
  * Verifies the login credentials provided by the user and sends a response to the user
@@ -24,8 +24,8 @@ function login(req, res) {
 	if (employee) {
 		res.json(employee);
 	} else {
-		res.json({
-			'unauthenticated': true
+		res.status(401).send({
+			error: 'Unauthorized'
 		});
 	}
 }

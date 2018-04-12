@@ -22,6 +22,7 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
+    "dyson": "^2.0.0",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.7.0",
     "jsdoc": "^3.5.5"

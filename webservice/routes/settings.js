@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const settingsData = require('./dummyData/settings.json');
+const settingsData = require('../dummyData/settings.json');
 
 /**
  * Settings routes

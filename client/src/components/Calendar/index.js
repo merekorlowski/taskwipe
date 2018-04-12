@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Timeslot from '../Timeslot';
-import './styles.css';
+import './styles.scss';
 
 class Calendar extends Component {
 	constructor(props) {
@@ -25,7 +25,8 @@ class Calendar extends Component {
 		return (
 			<div>
 				<div className="current-week">
-					<input name="week" type="week" value={this.state.week} onChange={this.handleChange.bind(this)} />
+					<input name="week" type="week" className="form-elem time-week" value={this.state.week}
+						onChange={this.handleChange.bind(this)} />
 				</div>
 				<table className="week">
 					<thead>
@@ -56,11 +57,20 @@ class Calendar extends Component {
 	}
 
 	handleChange(event) {
-		this.setState({[event.target.name]: event.target.value});
+		if (event.target.name === 'week') {
+			let isAfter = moment(event.target.value, 'YYYY-Www').isAfter(moment());
+			if (!isAfter) {
+				this.setState({[event.target.name]: event.target.value}, () => {
+					this.setDays();
+				});
+			} else {
+				alert('Can not view time in the future!');
+			}
+		}
 	}
 
 	getDay(i) {
-		let currentDate = moment().week(parseInt(this.state.week.split('-W')[1]));
+		let currentDate = moment().week(parseInt(this.state.week.split('-W')[1])).startOf('isoWeek');
 		currentDate.weekYear(parseInt(this.state.week.split('-W')[0]));
 		currentDate.add({days: i});
 		return currentDate;
@@ -79,7 +89,6 @@ class Calendar extends Component {
 			this.hours.push(moment().hour(i).minute(0));
 		}
 	}
-
 }
 
 export default Calendar;

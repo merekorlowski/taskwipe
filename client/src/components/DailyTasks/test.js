@@ -9,8 +9,8 @@ configure({adapter: new Adapter()});
 
 describe('DailyTasks Component Tests', () => {
 	it('renders tasks for employee 003 on the date 2018-04-02', (done) => {
-		localStorage.setItem('employeeId', '003');
-		const date = '2018-04-02';
+		localStorage.setItem('employeeId', '000');
+		const date = '2018-04-01';
 		const tasks = [
 			{
 				'taskId': 't004',

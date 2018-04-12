@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import moment from 'moment';
-import './styles.css';
 import TaskService from '../../services/tasks';
+import './styles.scss';
 
 class Timeslot extends Component {
 	constructor(props) {
 		super(props);
 		this.taskService = new TaskService();
 		this.state = {
-			taskTimelogs: []
+			taskTimelogs: [],
+			day: this.props.day,
+			hour: this.props.hour
 		};
 	}
 
@@ -33,6 +35,16 @@ class Timeslot extends Component {
 		);
 	}
 
+	componentWillReceiveProps(props) {
+		this.setState({
+			taskTimelogs: [],
+			day: props.day,
+			hour: props.hour
+		}, () => {
+			this.getTaskTimelogs();
+		});
+	}
+
 	componentDidMount() {
 		this.getTaskTimelogs();
 	}
@@ -48,12 +60,15 @@ class Timeslot extends Component {
 		let taskTimelogs = this.state.taskTimelogs;
 		let start = moment(taskTimelog.start, 'YYYY-MM-DD HH:mm:ss');
 		let end = moment(taskTimelog.end, 'YYYY-MM-DD HH:mm:ss');
-		let startOfTimeslot = moment(`${this.props.day} ${this.props.hour}`);
-		let endOfTimeslot = moment(`${this.props.day} ${this.props.hour}`).add(1, 'h');
+		let startOfTimeslot = moment(`${this.state.day} ${this.state.hour}`);
+		let endOfTimeslot = moment(`${this.state.day} ${this.state.hour}`).add(1, 'h');
 
 		let isStartBetween = start.isBetween(startOfTimeslot, endOfTimeslot);
 		let isEndBetween = end.isBetween(startOfTimeslot, endOfTimeslot);
 		let isBeforeAndAfter = start.isBefore(startOfTimeslot) && end.isAfter(endOfTimeslot);
+
+		taskTimelog.top = 0;
+		taskTimelog.bottom = 100;
 
 		if (isStartBetween) {
 			let diffInSeconds = start.diff(startOfTimeslot, 'seconds');
@@ -86,15 +101,15 @@ class Timeslot extends Component {
 	}
 
 	getTaskTimelogs() {
-		this.taskService.getTaskTimelogs(this.props.day, this.props.hour).then(res => {
-			if (res.data.length  > 0) {
+		this.taskService.getTaskTimelogs(this.state.day, this.state.hour).then(res => {
+			if (res.data.length > 0) {
 				for (let i = 0; i < res.data.length; i++) {
 					this.setTimeBlock(res.data[i]);
 				}
 			}
 		}).catch(err => {
 			console.error(err.message);
-		})
+		});
 	}
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoginService from '../../services/login';
 import { PropTypes } from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import './styles.css';
+import './styles.scss';
 
 /** Login page component */
 class Login extends Component {
@@ -76,8 +76,7 @@ class Login extends Component {
 		} else {
 			return (
 				<div className="container">
-					<h2>Login</h2>
-					<div className="title-underline bg-theme"></div>
+					<h1 className="page-title">Login</h1>
 					<form onSubmit={this.login}>
 						<div>
 							<div className="login-form-row">
@@ -89,7 +88,7 @@ class Login extends Component {
 									value={this.state.password} onChange={this.handleChange} />
 							</div>
 							<div className="login-form-row">
-								<button type="submit" className="bg-theme-btn right">Sign in</button>
+								<button type="submit" className="btn right">Sign in</button>
 							</div>
 						</div>
 					</form>

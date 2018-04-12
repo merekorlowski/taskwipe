@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './styles.css';
+import moment from 'moment';
 import TaskService from '../../services/tasks';
 import DailyTasks from '../../components/DailyTasks';
-import moment from 'moment';
-import EmployeeDropdown from '../../components/EmployeeDropdown';
+import './styles.scss';
+// import EmployeeDropdown from '../../components/EmployeeDropdown';
 
 class Tasks extends Component {
 	/**
@@ -30,9 +30,8 @@ class Tasks extends Component {
 		let { weeks } = this.state;
 		return (
 			<div className="container">
-				<h2>Tasks</h2>
-				<div className="title-underline bg-theme"></div>
-				{/*<EmployeeDropdown/>*/}
+				<h1 className="page-title">Tasks</h1>
+				{/* <EmployeeDropdown/> */}
 				<ul>
 					{weeks.map((week, index) => (
 						<li key={`week-${index}`} className="task-week">

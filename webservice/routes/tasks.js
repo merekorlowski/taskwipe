@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 
-const taskData = require('./dummyData/task.json');
-const projectData = require('./dummyData/project.json');
-const timelogData = require('./dummyData/timelog.json');
+const taskData = require('../dummyData/task.json');
+const projectData = require('../dummyData/project.json');
+const timelogData = require('../dummyData/timelog.json');
 let taskIdIncrement = 1;
 let timelogIdIncrement = 1;
 let onGoingTaskId = null;
