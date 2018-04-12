@@ -1,6 +1,0 @@
-
-export default {
-	host: 'http://ec2-18-219-180-211.us-east-2.compute.amazonaws.com',
-	basePath: 'api',
-	port: 3001
-};

@@ -1,0 +1,76 @@
+@import '../../styles.scss';
+
+$header-height: 60px;
+$header-shadow: 1px 1px 5px gray;
+
+header {
+	height: $header-height;
+	margin-bottom: 25px;
+}
+
+nav {
+	box-shadow: 1px 1px 5px #222;
+	height: $header-height;
+	background-color: $primary;
+	z-index: 2;
+	width: 100%;
+	left: 0;
+	top: 0;
+	padding: 0;
+	position: fixed;
+
+	ul {
+		display: inline-block;
+	}
+
+	li {
+		display: inline-block;
+		height: $header-height;
+		text-decoration: none;
+
+		a {
+			display: block;
+			padding: 0 10px;
+			text-align: center;
+			line-height: $header-height;
+			height: $header-height;
+			color: #ffffff;
+			background-color: $primary;
+		}
+
+		a:hover {
+			filter: grayscale(50%);
+		}
+
+		a:active, a.active {
+			filter: grayscale(50%);
+		}
+	 }
+}
+
+#logo {
+	font-size: 20px;
+	height: 100%;
+	margin-right: 20px;
+	display: inline-block;
+
+	a {
+		line-height: 40px;
+	}
+
+	span {
+		line-height: 60px;
+	}
+
+	a, span {
+		color: #ffffffd5;
+		text-decoration: none;
+		display: block;
+	}
+}
+
+.sign-out-btn {
+	color: #ffffff;
+	border: none;
+	background: none;
+}

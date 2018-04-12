@@ -1,0 +1,8 @@
+# dependencies
+node_modules
+
+# misc
+out
+npm-debug.log*
+.idea
+.DS_Store

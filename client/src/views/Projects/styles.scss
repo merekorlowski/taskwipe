@@ -1,0 +1,49 @@
+
+.project-list-item {
+	transition: .2s height linear;
+}
+
+.project-list-item .list-elem-details textarea {
+	height: 0;
+	padding: 0px;
+	transition: .2s height linear;
+	display: block;
+	box-shadow: none;
+	display: none;
+}
+
+.project-list-item.expanded .list-elem-details textarea {
+	height: 100px;
+	padding: 10px;
+	display: block;
+}
+
+.create-project .project-title {
+	font-weight: normal;
+}
+
+.project-create-btn {
+	width: 65px;
+}
+
+.project-list-item {
+	font-size: 12px;
+}
+
+.project-list-item {
+	.list-item-row:last-child {
+		margin-left: 10px;
+	}
+
+	.form-elem, button {
+		font-size: 12px;
+	}
+
+	.form-elem {
+		padding: 5px;
+	}
+
+	button {
+		width: 65px;
+	}
+}
