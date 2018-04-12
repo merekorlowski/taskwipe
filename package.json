@@ -1,0 +1,21 @@
+{
+  "name": "taskwipe",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+		"start:dev": "npm run start:webservice:dev && npm run start:client:dev",
+		"start:webservice:dev": "cd webservice && nodemon bin/www & cd ..",
+		"start:client:dev": "cd client && npm start & cd ..",
+		"start": "npm run build && npm run start:webservice && npm start:client",
+		"start:webservice": "cd webservice && npm start & cd ..",
+		"start:client": "cd client && serve build & cd ..",
+    "build": "cd client && npm run build && cd ..",
+    "test": "cd client && npm run test && cd ..",
+    "eslint": "cd client && npm run eslint && cd ..",
+    "jsdoc": "cd client && npm run jsdoc && cd .."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:merekorlowski/taskwipe.git"
+	}
+}
