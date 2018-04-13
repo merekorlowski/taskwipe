@@ -1,10 +1,15 @@
 const express = require('express');
-const router = express.Router();
-
 const projectData = require('../dummyData/project.json');
 const employeeProjectData = require('../dummyData/employeeProject.json');
 
+const router = express.Router();
+
 let projectIdIncrement = 1;
+
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable eqeqeq */
 
 /**
  * Project routes
@@ -18,8 +23,8 @@ router.delete('/api/project/:projectId', (req, res) => deleteProject(req, res));
  * Returns all of the projects for a given user
  */
 function getAllUserProjects(req, res) {
-	let employeeId = req.query.employeeId;
-	let projects = [];
+	const { employeeId } = req.query;
+	const projects = [];
 
 	for (let i = 0; i < employeeProjectData.length; i++) {
 		if (employeeProjectData[i].employeeId == employeeId) {
@@ -30,63 +35,62 @@ function getAllUserProjects(req, res) {
 			}
 		}
 	}
-	
+
 	res.json(projects);
-	
-	// res.json(projectData)
 }
 
 /**
  * Adds a new project to the user's project list
  */
 function addProject(req, res) {
-	let project = req.body.project;
-	let employeeId = req.body.employeeId;
+	const { project, employeeId } = req.body;
 	project.projectId = projectIdIncrement;
 	projectIdIncrement++;
 
 	projectData.push(project);
 	employeeProjectData.push({
-		employeeId: employeeId,
+		employeeId,
 		projectId: project.projectId,
 		projectAdmin: true
 	});
 
-  res.json(project);
+	res.json(project);
 }
 
 /**
  * Updates a project in the user's project list
  */
 function updateProject(req, res) {
-	let projectId = req.params.projectId;
-  let fieldsToUpdate = req.body;
+	const { projectId } = req.params;
+	const fieldsToUpdate = req.body;
 
-	for (let project of projectData) {
-		if (projectId == project.projectId) {
-			for (let field in fieldsToUpdate) {
-				project[field] = fieldsToUpdate[field];
+	for (let i = 0; i < projectData.length; i++) {
+		if (projectId == projectData[i].projectId) {
+			for (const field in fieldsToUpdate) {
+				if (Object.prototype.hasOwnProperty.call(fieldsToUpdate, field)) {
+					projectData[i][field] = fieldsToUpdate[field];
+				}
 			}
 		}
 	}
 
-  res.json(projectId);
+	res.json(projectId);
 }
 
 /**
  * Deletes a project from the user's project list
  */
 function deleteProject(req, res) {
-  let projectId = req.params.projectId;
-	
+	const { projectId } = req.params;
+
 	for (let i = 0; i < projectData.length; i++) {
 		if (projectData[i].projectId == projectId) {
-			projectData.splice(i, 1);
+			projectData(i, 1);
 			break;
 		}
 	}
 
-  res.json({projectId: projectId});
+	res.json({ projectId });
 }
 
 module.exports = router;

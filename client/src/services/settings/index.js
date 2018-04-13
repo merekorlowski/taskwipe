@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import httpConfig from '../httpConfig.js';
 
@@ -9,9 +8,11 @@ class SettingsService {
 	 * @constructor
 	 */
 	constructor() {
-		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${httpConfig.basePath}`;
+		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${
+			httpConfig.basePath
+		}`;
 	}
-	
+
 	/**
 	 * Return the user settings for a specific user
 	 * @param {string} employeeId - The id of the employee

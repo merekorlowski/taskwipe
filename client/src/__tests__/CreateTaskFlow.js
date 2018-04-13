@@ -7,10 +7,10 @@ import axios from 'axios';
 import httpAdapter from 'axios/lib/adapters/http';
 
 axios.defaults.adapter = httpAdapter;
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
 describe('Simulates the creation of a task', () => {
-	it('creates a task without crashing', (done) => {
+	it('creates a task without crashing', done => {
 		done();
-	})
+	});
 });

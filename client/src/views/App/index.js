@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import 'bootstrap-grid';
+
 import Nav from '../../components/Nav';
 import Login from '../Login';
 import Tasks from '../Tasks';
@@ -23,7 +24,7 @@ class App extends Component {
 						<PrivateRoute path="/projects" component={Projects} />
 						<PrivateRoute path="/time" component={Time} />
 						<PrivateRoute path="/settings" component={Settings} />
-						<Redirect from="*" to="/tasks"/>
+						<Redirect from="*" to="/tasks" />
 					</Switch>
 				</div>
 			</BrowserRouter>

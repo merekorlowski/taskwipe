@@ -6,14 +6,14 @@
 
 .task-list-item {
 	width: 100%;
-	transition: .2s height linear;
+	transition: 0.2s height linear;
 	font-size: 12px;
 }
 
 .task-list-item .list-elem-details textarea {
 	height: 0;
 	padding: 0px;
-	transition: .2s height linear;
+	transition: 0.2s height linear;
 	display: block;
 	box-shadow: none;
 	display: none;
@@ -30,7 +30,8 @@
 		margin-left: 10px;
 	}
 
-	.form-elem, button {
+	.form-elem,
+	button {
 		font-size: 12px;
 	}
 

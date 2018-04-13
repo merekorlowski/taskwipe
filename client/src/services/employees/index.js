@@ -9,7 +9,9 @@ class EmployeeService {
 	 * @constructor
 	 */
 	constructor() {
-		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${httpConfig.basePath}`;
+		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${
+			httpConfig.basePath
+		}`;
 	}
 
 	/**
@@ -41,7 +43,10 @@ class EmployeeService {
 	}
 
 	createTeam(team) {
-		return axios.post(`${this.endPoint}/employees/${team.employeeId}/team`, team);
+		return axios.post(
+			`${this.endPoint}/employees/${team.employeeId}/team`,
+			team
+		);
 	}
 }
 

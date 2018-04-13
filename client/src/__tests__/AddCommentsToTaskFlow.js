@@ -7,10 +7,10 @@ import axios from 'axios';
 import httpAdapter from 'axios/lib/adapters/http';
 
 axios.defaults.adapter = httpAdapter;
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
 describe('Simulates adding comments to a task', () => {
-	it('adds comments without crashing', (done) => {
+	it('adds comments without crashing', done => {
 		done();
-	})
+	});
 });

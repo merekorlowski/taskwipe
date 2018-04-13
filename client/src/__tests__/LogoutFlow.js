@@ -7,10 +7,10 @@ import axios from 'axios';
 import httpAdapter from 'axios/lib/adapters/http';
 
 axios.defaults.adapter = httpAdapter;
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
 describe('Simulates logging out', () => {
-	it('logs out without crashing', (done) => {
+	it('logs out without crashing', done => {
 		done();
-	})
+	});
 });

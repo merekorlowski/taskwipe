@@ -3,14 +3,14 @@ import EmployeeService from './';
 describe('Employees API', () => {
 	let employeeService = new EmployeeService();
 
-	it('returns all employees', (done) => {
+	it('returns all employees', done => {
 		employeeService.getAllEmployees().then(res => {
 			expect(res.data.length).toBe(31);
 			done();
 		});
 	});
 
-	it('creates a team for the user 000', (done) => {
+	it('creates a team for the user 000', done => {
 		let team = {
 			employeeId: '001',
 			name: 'Team A',
@@ -31,12 +31,30 @@ describe('Employees API', () => {
 		});
 	});
 
-	it('returns all of the employees in the team tm1', (done) => {
+	it('returns all of the employees in the team tm1', done => {
 		let teamId = 'tm1';
 		let response = [
-			{"employeeId":"002","firstName":"Britt","lastName":"Castelijn","email":"bcastelijn1@epa.gov","password":"2Sex0QyNjH"},
-			{"employeeId":"003","firstName":"Raffarty","lastName":"Heal","email":"rheal2@wsj.com","password":"sGGGDxQb"},
-			{"employeeId":"004","firstName":"Neal","lastName":"Iacovini","email":"niacovini3@ebay.co.uk","password":"5jS9bW"}
+			{
+				employeeId: '002',
+				firstName: 'Britt',
+				lastName: 'Castelijn',
+				email: 'bcastelijn1@epa.gov',
+				password: '2Sex0QyNjH'
+			},
+			{
+				employeeId: '003',
+				firstName: 'Raffarty',
+				lastName: 'Heal',
+				email: 'rheal2@wsj.com',
+				password: 'sGGGDxQb'
+			},
+			{
+				employeeId: '004',
+				firstName: 'Neal',
+				lastName: 'Iacovini',
+				email: 'niacovini3@ebay.co.uk',
+				password: '5jS9bW'
+			}
 		];
 
 		employeeService.getEmployeesbyTeam(teamId).then(res => {

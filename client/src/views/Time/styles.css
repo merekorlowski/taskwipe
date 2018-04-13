@@ -1,4 +1,3 @@
-
 .timeslot {
 	display: block;
 	position: relative;
@@ -28,14 +27,16 @@
 	border-collapse: collapse;
 }
 
-.week td, .week th {
+.week td,
+.week th {
 	text-align: center;
 	border-right: 1px solid #cecece;
 	width: 12.5%;
 	height: 25px;
 }
 
-.week td:last-child, .week th:last-child {
+.week td:last-child,
+.week th:last-child {
 	border-right: none;
 }
 
@@ -70,7 +71,6 @@
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
-
 }
 
 .edit-task-btn {
