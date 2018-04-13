@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import httpConfig from '../httpConfig.js';
 
@@ -9,7 +8,9 @@ class ProjectService {
 	 * @constructor
 	 */
 	constructor() {
-		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${httpConfig.basePath}`;
+		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${
+			httpConfig.basePath
+		}`;
 	}
 
 	/**

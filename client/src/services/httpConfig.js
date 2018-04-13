@@ -1,4 +1,3 @@
-
 export default {
 	host: process.env.host ? process.env.host : 'http://localhost',
 	basePath: 'api',

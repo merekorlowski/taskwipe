@@ -7,10 +7,10 @@ import axios from 'axios';
 import httpAdapter from 'axios/lib/adapters/http';
 
 axios.defaults.adapter = httpAdapter;
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
 describe('Simulates archiving a task', () => {
-	it('archives a task without crashing', (done) => {
+	it('archives a task without crashing', done => {
 		done();
-	})
+	});
 });

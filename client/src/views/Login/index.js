@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import LoginService from '../../services/login';
 import { PropTypes } from 'prop-types';
 import { Redirect } from 'react-router-dom';
+
+import LoginService from '../../services/login';
 import './styles.scss';
 
 /** Login page component */
@@ -12,17 +13,62 @@ class Login extends Component {
 	 */
 	constructor(props) {
 		super(props);
-		this.loginService = new LoginService();
 		this.state = {
-			email: '',
-			password: '',
+			data: {
+				email: '',
+				password: ''
+			},
 			invalidEmail: false,
 			invalidPassword: false
 		};
 
-		// The binding is mandatory to make "this" work in the callback
-		this.handleChange = this.handleChange.bind(this);
-		this.login = this.login.bind(this);
+		this.loginService = new LoginService();
+	}
+
+	/** Renders the login page */
+	render() {
+		if (localStorage.getItem('loggedIn') === 'true') {
+			return <Redirect to="/tasks" />;
+		} else {
+			let { data } = this.state;
+			return (
+				<div className="container">
+					<h1 className="page-title">Login</h1>
+					<form onSubmit={this.onSubmit}>
+						<div>
+							<div className="login-form-row">
+								<input
+									id="email"
+									type="text"
+									autoFocus="on"
+									className="form-elem"
+									name="email"
+									placeholder="Email"
+									value={data.email}
+									onChange={this.onChange}
+								/>
+							</div>
+							<div className="login-form-row">
+								<input
+									id="password"
+									type="password"
+									className="form-elem"
+									name="password"
+									placeholder="Password"
+									value={data.password}
+									onChange={this.onChange}
+								/>
+							</div>
+							<div className="login-form-row">
+								<button type="submit" className="btn right">
+									Sign in
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			);
+		}
 	}
 
 	static get propTypes() {
@@ -37,63 +83,44 @@ class Login extends Component {
 	 * Updates the state when a value is changed
 	 * @param {*} event
 	 */
-	handleChange(event) {
+	onChange = event => {
 		// The change is stored in the change data structure
+		let { data } = this.state;
+		data[event.target.name] = event.target.value;
 		this.setState({
-			[event.target.name]: event.target.value
+			data
 		});
-	}
+	};
 
 	/** Attempts to log in with the given credentials */
-	login(event) {
+	onSubmit = event => {
 		event.preventDefault();
+		this.login();
+	};
+
+	login() {
 		if (this.state.email === '') {
-			this.setState({invalidEmail: true});
+			this.setState({ invalidEmail: true });
 		}
 
 		if (this.state.password === '') {
-			this.setState({invalidPassword: true});
+			this.setState({ invalidPassword: true });
 		}
 
 		if (!this.state.invalidEmail && !this.state.invalidPassword) {
-			this.loginService.login(this.state.email, this.state.password).then(res => {
-				if (!('unauthenticated' in res.data)) {
-					localStorage.setItem('loggedIn', true);
-					localStorage.setItem('employeeId', res.data.employeeId);
-					localStorage.setItem('employeeName', res.data.firstName);
-					window.location = '/tasks';
-				}
-			}).catch(err => {
-				console.error(err.message);
-			});
-		}
-	}
-
-	/** Renders the login page */
-	render() {
-		if (localStorage.getItem('loggedIn') === 'true') {
-			return (<Redirect to="/tasks" />);
-		} else {
-			return (
-				<div className="container">
-					<h1 className="page-title">Login</h1>
-					<form onSubmit={this.login}>
-						<div>
-							<div className="login-form-row">
-								<input id="email" type="text" autoFocus="on" className="form-elem" name="email" placeholder="Email"
-									value={this.state.email} onChange={this.handleChange} />
-							</div>
-							<div className="login-form-row">
-								<input id="password" type="password" className="form-elem" name="password" placeholder="Password"
-									value={this.state.password} onChange={this.handleChange} />
-							</div>
-							<div className="login-form-row">
-								<button type="submit" className="btn right">Sign in</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			);
+			this.loginService
+				.login(this.state.email, this.state.password)
+				.then(res => {
+					if (!('unauthenticated' in res.data)) {
+						localStorage.setItem('loggedIn', true);
+						localStorage.setItem('employeeId', res.data.employeeId);
+						localStorage.setItem('employeeName', res.data.firstName);
+						window.location = '/tasks';
+					}
+				})
+				.catch(err => {
+					console.error(err.message);
+				});
 		}
 	}
 }

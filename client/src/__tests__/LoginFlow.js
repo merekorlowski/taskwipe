@@ -9,24 +9,24 @@ import axios from 'axios';
 import httpAdapter from 'axios/lib/adapters/http';
 
 axios.defaults.adapter = httpAdapter;
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
-// beforeEach(() => {
-// 	mockLocalStorage();
-// });
+beforeEach(() => {
+	mockLocalStorage(); // eslint-disable-line
+});
 
 describe('Login Flow Tests', () => {
 	localStorage.setItem('loggedIn', 'false');
 	const wrapper = mount(
-		<MemoryRouter initialEntries={[ '/login' ]}>
-			<App/>
+		<MemoryRouter initialEntries={['/login']}>
+			<App />
 		</MemoryRouter>
 	);
 	let form = wrapper.find('form').first();
 	let email = wrapper.find('#email').first();
 	let password = wrapper.find('#password').first();
 
-	it('should enter email', (done) => {
+	it('should enter email', done => {
 		email.simulate('focus');
 		email.simulate('change', {
 			target: {
@@ -38,7 +38,7 @@ describe('Login Flow Tests', () => {
 		done();
 	});
 
-	it('should enter password', (done) => {
+	it('should enter password', done => {
 		password.simulate('focus');
 		password.simulate('change', {
 			target: {
@@ -59,12 +59,12 @@ describe('Login Flow Tests', () => {
 	// 	}, 500);
 	// });
 
-	it('should open the Tasks page when logged in.', (done) => {
+	it('should open the Tasks page when logged in.', done => {
 		localStorage.setItem('loggedIn', true);
 		localStorage.setItem('employeeId', '000');
 		const wrapper = mount(
-			<MemoryRouter initialEntries={[ '/tasks' ]}>
-				<App/>
+			<MemoryRouter initialEntries={['/tasks']}>
+				<App />
 			</MemoryRouter>
 		);
 		expect(wrapper.find(Tasks)).toHaveLength(1);

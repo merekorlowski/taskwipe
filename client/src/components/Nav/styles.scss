@@ -42,10 +42,11 @@ nav {
 			filter: grayscale(50%);
 		}
 
-		a:active, a.active {
+		a:active,
+		a.active {
 			filter: grayscale(50%);
 		}
-	 }
+	}
 }
 
 #logo {
@@ -62,7 +63,8 @@ nav {
 		line-height: 60px;
 	}
 
-	a, span {
+	a,
+	span {
 		color: #ffffffd5;
 		text-decoration: none;
 		display: block;

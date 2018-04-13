@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+
 import TaskService from '../../services/tasks';
 import DailyTasks from '../../components/DailyTasks';
 import './styles.scss';
@@ -61,9 +62,16 @@ class Tasks extends Component {
 		let weeks = [];
 		for (let i = 0; i < numOfWeeks; i++) {
 			weeks[i] = [];
-			
-			let start = i === 0 ? moment() : moment().add(i * 7, 'd').startOf('week');
-			let endOfWeek = moment().add(i * 7, 'd').endOf('week');
+
+			let start =
+				i === 0
+					? moment()
+					: moment()
+							.add(i * 7, 'd')
+							.startOf('week');
+			let endOfWeek = moment()
+				.add(i * 7, 'd')
+				.endOf('week');
 			let numOfDays = endOfWeek.diff(start, 'd') + 1;
 
 			day = start;
@@ -76,15 +84,18 @@ class Tasks extends Component {
 	}
 
 	getTasks(weeks, i, j, day) {
-		this.taskService.getTasks(localStorage.getItem('employeeId'), day.format('YYYY-MM-DD')).then(res => {
-			weeks[i][j] = {
-				date: day.format('YYYY-MM-DD'),
-				tasks: res.data
-			};
-			this.setState({weeks: weeks});
-		}).catch(err => {
-			console.error(err.message);
-		});
+		this.taskService
+			.getTasks(localStorage.getItem('employeeId'), day.format('YYYY-MM-DD'))
+			.then(res => {
+				weeks[i][j] = {
+					date: day.format('YYYY-MM-DD'),
+					tasks: res.data
+				};
+				this.setState({ weeks: weeks });
+			})
+			.catch(err => {
+				console.error(err.message);
+			});
 	}
 }
 

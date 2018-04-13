@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+
 import Timeslot from '../Timeslot';
 import './styles.scss';
 
@@ -22,17 +23,23 @@ class Calendar extends Component {
 	}
 
 	render() {
+		let { week, days } = this.state;
 		return (
 			<div>
 				<div className="current-week">
-					<input name="week" type="week" className="form-elem time-week" value={this.state.week}
-						onChange={this.handleChange.bind(this)} />
+					<input
+						name="week"
+						type="week"
+						className="form-elem time-week"
+						value={week}
+						onChange={this.onChange}
+					/>
 				</div>
 				<table className="week">
 					<thead>
 						<tr>
 							<th className="day-title">Time</th>
-							{this.state.days.map((day, index) => (
+							{days.map((day, index) => (
 								<th className="day-title" key={index}>
 									<span>{day.format('ddd, DD')}</span>
 								</th>
@@ -43,9 +50,12 @@ class Calendar extends Component {
 						{this.hours.map(hour => (
 							<tr key={hour}>
 								<td className="hour">{hour.format('HH:mm')}</td>
-								{this.state.days.map((day, index) => (
+								{days.map((day, index) => (
 									<td key={index}>
-										<Timeslot day={day.format('YYYY-MM-DD')} hour={hour.format('HH:mm')}/>
+										<Timeslot
+											day={day.format('YYYY-MM-DD')}
+											hour={hour.format('HH:mm')}
+										/>
 									</td>
 								))}
 							</tr>
@@ -56,23 +66,25 @@ class Calendar extends Component {
 		);
 	}
 
-	handleChange(event) {
+	onChange = event => {
 		if (event.target.name === 'week') {
 			let isAfter = moment(event.target.value, 'YYYY-Www').isAfter(moment());
 			if (!isAfter) {
-				this.setState({[event.target.name]: event.target.value}, () => {
+				this.setState({ [event.target.name]: event.target.value }, () => {
 					this.setDays();
 				});
 			} else {
 				alert('Can not view time in the future!');
 			}
 		}
-	}
+	};
 
 	getDay(i) {
-		let currentDate = moment().week(parseInt(this.state.week.split('-W')[1])).startOf('isoWeek');
-		currentDate.weekYear(parseInt(this.state.week.split('-W')[0]));
-		currentDate.add({days: i});
+		let currentDate = moment()
+			.week(this.state.week.split('-W')[1])
+			.startOf('isoWeek');
+		currentDate.weekYear(this.state.week.split('-W')[0]);
+		currentDate.add({ days: i });
 		return currentDate;
 	}
 
@@ -81,12 +93,16 @@ class Calendar extends Component {
 		for (let i = 0; i < 7; i++) {
 			days[i] = this.getDay(i);
 		}
-		this.setState({days: days});
+		this.setState({ days: days });
 	}
 
 	setHours() {
 		for (let i = 1; i <= 24; i++) {
-			this.hours.push(moment().hour(i).minute(0));
+			this.hours.push(
+				moment()
+					.hour(i)
+					.minute(0)
+			);
 		}
 	}
 }

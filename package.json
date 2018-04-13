@@ -1,21 +1,31 @@
 {
-  "name": "taskwipe",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
+	"name": "taskwipe",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
 		"start:dev": "npm run start:webservice:dev && npm run start:client:dev",
 		"start:webservice:dev": "cd webservice && nodemon bin/www & cd ..",
 		"start:client:dev": "cd client && npm start & cd ..",
 		"start": "npm run build && npm run start:webservice && npm start:client",
 		"start:webservice": "cd webservice && npm start & cd ..",
 		"start:client": "cd client && serve build & cd ..",
-    "build": "cd client && npm run build && cd ..",
-    "test": "cd client && npm run test && cd ..",
-    "eslint": "cd client && npm run eslint && cd ..",
-    "jsdoc": "cd client && npm run jsdoc && cd .."
+		"build": "cd client && npm run build && cd ..",
+		"test": "cd client && npm run test && cd ..",
+		"eslint": "cd client && npm run eslint && cd ..",
+		"jsdoc": "cd client && npm run jsdoc && cd .."
 	},
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:merekorlowski/taskwipe.git"
-	}
+	},
+	"devDependencies": {
+		"eslint": "^4.19.1",
+		"eslint-config-airbnb": "^16.1.0",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-plugin-import": "^2.11.0",
+		"eslint-plugin-jsx-a11y": "^6.0.3",
+		"eslint-plugin-prettier": "^2.6.0",
+		"eslint-plugin-react": "^7.7.0"
+	},
+	"dependencies": {}
 }

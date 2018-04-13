@@ -7,10 +7,10 @@ import axios from 'axios';
 import httpAdapter from 'axios/lib/adapters/http';
 
 axios.defaults.adapter = httpAdapter;
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
 describe('Simulates setting a project as completed', () => {
-	it('sets a project as completed without crashing', (done) => {
+	it('sets a project as completed without crashing', done => {
 		done();
-	})
+	});
 });

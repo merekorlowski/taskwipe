@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import httpConfig from '../httpConfig.js';
 
@@ -9,7 +8,9 @@ class TaskService {
 	 * @constructor
 	 */
 	constructor() {
-		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${httpConfig.basePath}`;
+		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${
+			httpConfig.basePath
+		}`;
 	}
 
 	/**
@@ -19,7 +20,9 @@ class TaskService {
 	 * @return Returns a promise
 	 */
 	getTasks(employeeId, date) {
-		return axios.get(`${this.endPoint}/tasks?employeeId=${employeeId}&date=${date}`);
+		return axios.get(
+			`${this.endPoint}/tasks?employeeId=${employeeId}&date=${date}`
+		);
 	}
 
 	getOnGoingTimeLog(taskId) {

@@ -19,7 +19,7 @@ describe('Tasks API', () => {
 	// 	});
 	// });
 
-	it('does not return the tasks for the given date because not an employee', (done) => {
+	it('does not return the tasks for the given date because not an employee', done => {
 		const date = '2018-04-01';
 		const employeeId = '999';
 		const tasks = tasksForGivenDate;
@@ -30,7 +30,7 @@ describe('Tasks API', () => {
 		});
 	});
 
-	it('creates a new task and returns it with an id', (done) => {
+	it('creates a new task and returns it with an id', done => {
 		const employeeId = '000';
 		const task = {
 			title: 'Task A',
@@ -46,12 +46,12 @@ describe('Tasks API', () => {
 			for (let attribute in task) {
 				expect(res.data[attribute]).toBe(task[attribute]);
 			}
-			expect((res.data.taskId !== undefined)).toBe(true);
+			expect(res.data.taskId !== undefined).toBe(true);
 			done();
 		});
 	});
 
-	it('updates an attribute in a task', (done) => {
+	it('updates an attribute in a task', done => {
 		const taskId = 't001';
 		const attribute = 'type';
 		const value = 'Priority';
@@ -63,18 +63,18 @@ describe('Tasks API', () => {
 		});
 	});
 
-	it('deletes a task', (done) => {
+	it('deletes a task', done => {
 		const taskId = 't001';
 		const employeeId = '000';
 		const date = '2018-04-01';
-		
+
 		taskService.getTasks(employeeId, date).then(res => {
 			let numberOfTasks = res.data.length;
 			// expect(numberOfTasks).toBe(2);
-			
+
 			taskService.deleteTask(taskId).then(res => {
 				expect(res.data.taskId).toBe(taskId);
-				
+
 				taskService.getTasks(employeeId, date).then(res => {
 					// expect(res.data.length).toBe(numberOfTasks - 1);
 					done();

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import moment from 'moment';
+
 import TaskService from '../../services/tasks';
 import ProjectService from '../../services/projects';
 import TaskListItem from '../TaskListItem';
-import moment from 'moment';
 import './styles.scss';
 
 const DEFAULT_TYPE = 'Normal';
@@ -36,77 +37,119 @@ class DailyTasks extends Component {
 	}
 
 	render() {
+		let { tasks, displayDate } = this.state;
 		return (
 			<div>
-				<h5 className="display-date">{this.state.displayDate}</h5>
+				<h5 className="display-date">{displayDate}</h5>
 				<ul className="list">
-					<li>
-						<form className="task-list-item" onSubmit={this.addTask.bind(this)}>
-							<div>
-								<input name="title" autoComplete="off" type="text" autoFocus={this.isToday ? 'on' : ''} className="form-elem task-title"
-									placeholder="Enter new task" required="true" value={this.state.newTask.title}
-									onChange={this.handleNewTaskChange.bind(this)}/>
-								<button className="btn create-btn">
-									Create
-								</button>
-							</div>
-							<div>
-								<input name="date" type="date" className="form-elem" value={this.state.newTask.date}
-									onChange={this.handleNewTaskChange.bind(this)} />
-								<input name="deadline" type="date" className="form-elem" value={this.state.newTask.deadline}
-									onChange={this.handleNewTaskChange.bind(this)} />
-								<select name="type" className="form-elem" value={this.state.newTask.type} onChange={this.handleNewTaskChange.bind(this)}>
-									<option value="Normal">Normal</option>
-									<option value="Priority">Priority</option>
-									<option value="Optional">Optional</option>
-								</select>
-								<select name="projectId" className="form-elem task-project" required="true" value={this.state.newTask.projectId}
-									onChange={this.handleNewTaskChange.bind(this)}>
-									{this.state.projects.map((project, index) => (
-										<option key={index} value={project.projectId}>{project.title}</option>
-									))}
-								</select>
-							</div>
-						</form>
-					</li>
-					{this.state.tasks.length > 0
-						? this.state.tasks.map((task, index) => (
+					<li>{this.newTaskForm}</li>
+					{tasks.length > 0 &&
+						tasks.map((task, index) => (
 							<li id={task.taskId} key={task.taskId}>
-								<TaskListItem data={task}
+								<TaskListItem
+									data={task}
 									handleDelete={this.deleteTask.bind(this, task.taskId, index)}
-									handleArchive={this.archiveTask.bind(this, task.taskId, index)}
-									handlePush={this.pushTask.bind(this, task.taskId, index)}
+									handleArchive={this.archiveTask.bind(
+										this,
+										task.taskId,
+										index
+									)}
 									checkIfCanStart={this.canStartTask.bind(this, task.taskId)}
 									setOnGoingTask={this.setOnGoingTask.bind(this, task.taskId)}
-									removeOnGoingTask={this.removeOnGoingTask.bind(this)} />
+									removeOnGoingTask={this.removeOnGoingTask.bind(this)}
+								/>
 							</li>
-						))
-						: (
-							''
-						)
-					}
+						))}
 				</ul>
 			</div>
 		);
 	}
+
+	newTaskForm = () => {
+		const { newTask, projects } = this.state;
+		return (
+			<div>
+				<form className="task-list-item" onSubmit={this.addTask}>
+					<div>
+						<input
+							name="title"
+							autoComplete="off"
+							type="text"
+							autoFocus={this.isToday ? 'on' : ''}
+							className="form-elem task-title"
+							placeholder="Enter new task"
+							required="true"
+							value={newTask.title}
+							onChange={this.onNewTaskChange}
+						/>
+						<button className="btn create-btn">Create</button>
+					</div>
+					<div>
+						<input
+							name="date"
+							type="date"
+							className="form-elem"
+							value={newTask.date}
+							onChange={this.onNewTaskChange}
+						/>
+						<input
+							name="deadline"
+							type="date"
+							className="form-elem"
+							value={newTask.deadline}
+							onChange={this.onNewTaskChange}
+						/>
+						<select
+							name="type"
+							className="form-elem"
+							value={newTask.type}
+							onChange={this.onNewTaskChange}
+						>
+							<option value="Normal">Normal</option>
+							<option value="Priority">Priority</option>
+							<option value="Optional">Optional</option>
+						</select>
+						<select
+							name="projectId"
+							className="form-elem task-project"
+							required="true"
+							value={newTask.projectId}
+							onChange={this.onNewTaskChange}
+						>
+							{projects.map((project, index) => (
+								<option key={index} value={project.projectId}>
+									{project.title}
+								</option>
+							))}
+						</select>
+					</div>
+				</form>
+			</div>
+		);
+	};
 
 	static get propTypes() {
 		return {
 			date: PropTypes.string.isRequired,
 			tasks: PropTypes.array.isRequired
 		};
-	};
+	}
 
 	/**
 	 * Updates the state when a value is changed
 	 * @param {*} event
 	 */
-	handleNewTaskChange(event) {
-		let newTask = {...this.state.newTask};
+	onNewTaskChange = event => {
+		let { newTask } = this.state;
 		newTask[event.target.name] = event.target.value;
 		// The change is stored in the change data structure
-		this.setState({newTask: newTask});
-	}
+		this.setState({ newTask });
+	};
+
+	onSubmitNewTask = event => {
+		event.preventDefault();
+		this.addTask();
+	};
 
 	get isToday() {
 		let today = moment().format('ddd, MMM DD');
@@ -114,35 +157,39 @@ class DailyTasks extends Component {
 	}
 
 	getProjects() {
-		this.projectService.getProjects(localStorage.getItem('employeeId')).then(res => {
-			let newTask = {...this.state.newTask};
-			newTask.projectId = res.data[0].projectId;
-			this.setState({
-				projects: res.data,
-				newTask: newTask
+		this.projectService
+			.getProjects(localStorage.getItem('employeeId'))
+			.then(res => {
+				let { newTask } = this.state;
+				this.setState({
+					projects: res.data,
+					newTask
+				});
+			})
+			.catch(err => {
+				console.error(err.message);
 			});
-		}).catch(err => {
-			console.error(err.message);
-		});
 	}
 
 	/**
 	 * Adds a task to the user's list of tasks
 	 * @param {*} task
 	 */
-	addTask(event) {
-		event.preventDefault();
-		this.taskService.addTask(this.state.newTask).then(res => {
-			// if ther response is ready, update the task in the list
-			let tasks = this.state.tasks;
-			tasks.push(res.data);
-			this.setState({
-				tasks: tasks,
-				newTask: {...this.newTask}
+	addTask() {
+		this.taskService
+			.addTask(this.state.newTask)
+			.then(res => {
+				// if ther response is ready, update the task in the list
+				let { tasks } = this.state;
+				tasks.push(res.data);
+				this.setState({
+					tasks: tasks,
+					newTask: { ...this.newTask }
+				});
+			})
+			.catch(err => {
+				console.error(err.message);
 			});
-		}).catch(err => {
-			console.error(err.message);
-		});
 	}
 
 	/**
@@ -151,14 +198,17 @@ class DailyTasks extends Component {
 	 * @param {number} index
 	 */
 	updateTask(task, index) {
-		this.taskService.updateTask(task).then(res => {
-			// if ther response is ready, update the task in the list
-			let tasks = this.state.tasks;
-			tasks[index] = res.data;
-			this.setState({tasks: tasks});
-		}).catch(err => {
-			console.error(err.message);
-		});
+		this.taskService
+			.updateTask(task)
+			.then(res => {
+				// if ther response is ready, update the task in the list
+				let { tasks } = this.state;
+				tasks[index] = res.data;
+				this.setState({ tasks });
+			})
+			.catch(err => {
+				console.error(err.message);
+			});
 	}
 
 	/**
@@ -167,14 +217,17 @@ class DailyTasks extends Component {
 	 * @param {number} index
 	 */
 	deleteTask(taskId, index) {
-		this.taskService.deleteTask(taskId).then(res => {
-			// if ther response is ready, update the task in the list
-			let tasks = this.state.tasks;
-			tasks.splice(index, 1);
-			this.setState({tasks: tasks});
-		}).catch(err => {
-			console.error(err.message);
-		});
+		this.taskService
+			.deleteTask(taskId)
+			.then(res => {
+				// if ther response is ready, update the task in the list
+				let { tasks } = this.state;
+				tasks.splice(index, 1);
+				this.setState({ tasks });
+			})
+			.catch(err => {
+				console.error(err.message);
+			});
 	}
 
 	/**
@@ -183,28 +236,16 @@ class DailyTasks extends Component {
 	 * @param {number} index
 	 */
 	archiveTask(taskId, index) {
-		this.taskService.archiveTask(taskId).then(res => {
-			let tasks = this.state.tasks;
-			tasks.splice(index, 1);
-			this.setState({tasks: tasks});
-		}).catch(err => {
-			console.error(err.message);
-		});
-	}
-
-	/**
-	 * Pushes a task to the next day
-	 * @param {string} taskId
-	 * @param {number} index
-	 */
-	pushTask(taskId, index) {
-		this.taskService.pushTask(taskId).then(res => {
-			let tasks = this.state.tasks;
-			tasks.splice(index, 1);
-			this.setState({tasks: tasks});
-		}).catch(err => {
-			console.error(err.message);
-		});
+		this.taskService
+			.archiveTask(taskId)
+			.then(res => {
+				let { tasks } = this.state;
+				tasks.splice(index, 1);
+				this.setState({ tasks });
+			})
+			.catch(err => {
+				console.error(err.message);
+			});
 	}
 
 	canStartTask() {
@@ -217,12 +258,12 @@ class DailyTasks extends Component {
 
 	setOnGoingTask(taskId) {
 		if (this.canStartTask()) {
-			this.setState({onGoingId: taskId});
+			this.setState({ onGoingId: taskId });
 		}
 	}
 
 	removeOnGoingTask() {
-		this.setState({onGoingId: null});
+		this.setState({ onGoingId: null });
 	}
 }
 

@@ -3,15 +3,15 @@ import LoginService from './';
 describe('Test Login API', () => {
 	let loginService = new LoginService();
 
-	it('Returns the successfully logged in uses\'s information.', (done) => {
+	it("Returns the successfully logged in uses's information.", done => {
 		const response = {
-			'employeeId': '000',
-			'firstName': 'Merek',
-			'lastName': 'Orlowski',
-			'email': 'morlo088@uottawa.ca',
-			'password': 'password'
+			employeeId: '000',
+			firstName: 'Merek',
+			lastName: 'Orlowski',
+			email: 'morlo088@uottawa.ca',
+			password: 'password'
 		};
-		
+
 		const email = 'morlo088@uottawa.ca';
 		const password = 'password';
 
@@ -23,9 +23,9 @@ describe('Test Login API', () => {
 		});
 	});
 
-	it('Returns unauthenticated error.', (done) => {
+	it('Returns unauthenticated error.', done => {
 		const response = 'Unauthorized';
-		
+
 		const email = 'invalid@uottawa.ca';
 		const password = 'password';
 
