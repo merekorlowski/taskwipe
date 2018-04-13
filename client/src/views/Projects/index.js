@@ -33,11 +33,48 @@ class Projects extends Component {
 	}
 
 	render() {
+		let { newProject } = this.state;
 		return (
 			<div className="container">
 				<h1 className="page-title">Projects</h1>
 				<ul className="list">
-					<li className="project-list-item">{this.newProjectForm}</li>
+					<li className="project-list-item">
+						<form onSubmit={this.onAddProject}>
+							<div>
+								<input
+									name="title"
+									type="text"
+									autoComplete="off"
+									className="form-elem"
+									autoFocus="on"
+									placeholder="Enter new project"
+									required="true"
+									value={newProject.title}
+									onChange={this.onNewProjectChange}
+								/>
+								<span className="project-create-btn right">
+									<button className="btn">Create</button>
+								</span>
+							</div>
+							<div>
+								<input
+									name="url"
+									className="form-elem"
+									placeholder="http://example.com"
+									value={newProject.url}
+									onChange={this.onNewProjectChange}
+								/>
+								<select
+									name="teammembers"
+									className="form-elem"
+									value={newProject.teamMembers}
+									onChange={this.onNewProjectChange}
+								>
+									<option value="morlo">Merek Orlowski</option>
+								</select>
+							</div>
+						</form>
+					</li>
 					{this.state.projects.map((project, index) => (
 						<li key={project.projectId}>
 							<ProjectListItem
@@ -50,47 +87,6 @@ class Projects extends Component {
 			</div>
 		);
 	}
-
-	newProjectForm = () => {
-		let { newProject } = this.state;
-		return (
-			<form onSubmit={this.onAddProject}>
-				<div>
-					<input
-						name="title"
-						type="text"
-						autoComplete="off"
-						className="form-elem"
-						autoFocus="on"
-						placeholder="Enter new project"
-						required="true"
-						value={newProject.title}
-						onChange={this.onNewProjectChange}
-					/>
-					<span className="project-create-btn right">
-						<button className="btn">Create</button>
-					</span>
-				</div>
-				<div>
-					<input
-						name="url"
-						className="form-elem"
-						placeholder="http://example.com"
-						value={newProject.url}
-						onChange={this.onNewProjectChange}
-					/>
-					<select
-						name="teammembers"
-						className="form-elem"
-						value={newProject.teamMembers}
-						onChange={this.onNewProjectChange}
-					>
-						<option value="morlo">Merek Orlowski</option>
-					</select>
-				</div>
-			</form>
-		);
-	};
 
 	/**
 	Gets all the projects for the current user and updates the state
