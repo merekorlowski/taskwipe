@@ -39,12 +39,7 @@ function getEmployeesByProductId(req, res) {
 	const { projectId } = req.params;
 	for (let i = 0; i < empProjectData.length; i++) {
 		if (projectId == empProjectData[i].projectId) {
-			const { employeeId } = empProjectData[i];
-			for (let j = 0; j < employeeData.length; j++) {
-				if (employeeId == employeeData[j].employeeId) {
-					employees.push(employeeData[j]);
-				}
-			}
+			addEmployeeToList(empTeamData[i], employees);
 		}
 	}
 	res.json(employees);
@@ -58,15 +53,19 @@ function getEmployeesByTeamId(req, res) {
 	const { teamId } = req.params;
 	for (let i = 0; i < empTeamData.length; i++) {
 		if (teamId == empTeamData[i].teamId) {
-			const { employeeId } = empTeamData[i];
-			for (let j = 0; j < employeeData.length; j++) {
-				if (employeeId == employeeData[j].employeeId) {
-					employees.push(employeeData[j]);
-				}
-			}
+			addEmployeeToList(empTeamData[i], employees);
 		}
 	}
 	res.json(employees);
+}
+
+function addEmployeeToList(empTeam, employees) {
+	const { employeeId } = empTeam;
+	for (let i = 0; i < employeeData.length; i++) {
+		if (employeeId == employeeData[i].employeeId) {
+			employees.push(employeeData[i]);
+		}
+	}
 }
 
 function createTeam(req, res) {

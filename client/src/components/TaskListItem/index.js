@@ -203,11 +203,7 @@ class TaskListItem extends Component {
 			.getOnGoingTimeLog(this.state.taskId)
 			.then(res => {
 				if (res.data.startTime) {
-					this.props.setOnGoingTask(this.state.taskId);
-					this.setDuration(res.data.startTime);
-					this.onGoingInterval = setInterval(() => {
-						this.setDuration(res.data.startTime);
-					}, 1000);
+					this.startInterval(res.data.startTime);
 				}
 			})
 			.catch(err => {
@@ -233,11 +229,7 @@ class TaskListItem extends Component {
 		this.taskService
 			.startTimer(this.state.taskId)
 			.then(res => {
-				this.props.setOnGoingTask(this.state.taskId);
-				this.setDuration(res.data.startTime);
-				this.onGoingInterval = setInterval(() => {
-					this.setDuration(res.data.startTime);
-				}, 1000);
+				this.startInterval(res.data.startTime);
 				this.setState({ mouseover: true });
 			})
 			.catch(err => {
@@ -261,6 +253,14 @@ class TaskListItem extends Component {
 			.catch(err => {
 				console.error(err.message);
 			});
+	}
+
+	startInterval(startTime) {
+		this.props.setOnGoingTask(this.state.taskId);
+		this.setDuration(startTime);
+		this.onGoingInterval = setInterval(() => {
+			this.setDuration(startTime);
+		}, 1000);
 	}
 
 	/**
