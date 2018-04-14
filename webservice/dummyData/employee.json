@@ -5,6 +5,41 @@
         "lastName":"Orlowski",
         "email":"morlo088@uottawa.ca",
         "password":"password"
+    }, 
+    {
+        "employeeId":"031",
+        "firstName":"Precious",
+        "lastName":"Oladotun",
+        "email":"polad063@uottawa.ca",
+        "password":"password"
+    },
+    {
+        "employeeId":"032",
+        "firstName":"Opeoluwa",
+        "lastName":"Eweje",
+        "email":"oewej015@uottawa.ca",
+        "password":"password"
+    },
+    {
+        "employeeId":"033",
+        "firstName":"Karim",
+        "lastName":"Ben-Hassine",
+        "email":"kbenh016@uottawa.ca",
+        "password":"password"
+    },
+    {
+        "employeeId":"034",
+        "firstName":"Mmayen",
+        "lastName":"Ewang",
+        "email":"mewan074@uottawa.ca",
+        "password":"password"
+    },
+    {
+        "employeeId":"035",
+        "firstName":"Frank",
+        "lastName":"Bouchard",
+        "email":"frank.bouchard@uottawa.ca",
+        "password":"password"
     },
     {"employeeId":"001","firstName":"Wendel","lastName":"Pennazzi","email":"wpennazzi0@lycos.com","password":"0drdDKh0Pl"},
     {"employeeId":"002","firstName":"Britt","lastName":"Castelijn","email":"bcastelijn1@epa.gov","password":"2Sex0QyNjH"},
