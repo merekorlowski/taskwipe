@@ -13,10 +13,12 @@ class Nav extends Component {
 						<div className="container">
 							<span className="left">
 								<span id="logo">
-									{this.isLoggedIn() && (
+									{this.isLoggedIn() ? (
 										<NavLink to="/tasks" activeClassName="none">
 											taskwipe
 										</NavLink>
+									) : (
+										<span>taskwipe</span>
 									)}
 								</span>
 								{this.isLoggedIn() && (
