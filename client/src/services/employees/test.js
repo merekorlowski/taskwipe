@@ -3,13 +3,6 @@ import EmployeeService from './';
 describe('Employees API', () => {
 	let employeeService = new EmployeeService();
 
-	it('returns all employees', done => {
-		employeeService.getAllEmployees().then(res => {
-			expect(res.data.length).toBe(31);
-			done();
-		});
-	});
-
 	it('creates a team for the user 000', done => {
 		let team = {
 			employeeId: '001',
