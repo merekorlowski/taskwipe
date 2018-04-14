@@ -65,17 +65,17 @@ a {
 	box-shadow: 1px 1px 5px $shadow-color;
 }
 
+.disabled-btn,
+.disabled-btn:hover {
+	opacity: 0.5;
+}
+
 .btn:hover {
 	filter: grayscale(50%);
 }
 
 .btn:active {
 	filter: grayscale(75%);
-}
-
-.disabled-btn,
-.disabled-btn:hover {
-	filter: grayscale(0%);
 }
 
 .centered {

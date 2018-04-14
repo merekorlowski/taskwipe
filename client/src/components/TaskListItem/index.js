@@ -67,7 +67,7 @@ class TaskListItem extends Component {
 						{onGoingTime === null ? (
 							<button
 								className={`btn ${!this.checkIfCanStart ? 'disabled-btn' : ''}`}
-								onClick={this.startTimer}
+								onClick={this.onStartTimer}
 								disabled={!this.checkIfCanStart}
 							>
 								Start
@@ -75,7 +75,7 @@ class TaskListItem extends Component {
 						) : (
 							<button
 								className="btn on-going-time"
-								onClick={this.stopTimer}
+								onClick={this.onStopTimer}
 								onMouseEnter={this.onMouseEnter}
 								onMouseLeave={this.onMouseLeave}
 							>
@@ -169,15 +169,15 @@ class TaskListItem extends Component {
 	/**
 	 * Getter that calls the parent's function to verify if the user can start this task
 	 */
-	checkIfCanStart = () => {
+	get checkIfCanStart() {
 		return this.props.checkIfCanStart();
-	};
+	}
 
 	/**
 	 * Toggles the expand feature of the task
 	 */
 	toggleExpand = () => {
-		let isExpanded = this.state.isExpanded;
+		let { isExpanded } = this.state;
 		this.setState({ isExpanded: !isExpanded });
 	};
 
@@ -195,12 +195,21 @@ class TaskListItem extends Component {
 		this.setState({ mouseover: false });
 	};
 
+	onStartTimer = () => {
+		this.startTimer();
+	};
+
+	onStopTimer = () => {
+		this.stopTimer();
+	};
+
 	/**
 	 * Retrieves the last started time and starts an interval to display current time in minutes
 	 */
 	getOnGoingTimeLog() {
+		let { taskId } = this.state.data;
 		this.taskService
-			.getOnGoingTimeLog(this.state.taskId)
+			.getOnGoingTimeLog(taskId)
 			.then(res => {
 				if (res.data.startTime) {
 					this.startInterval(res.data.startTime);
@@ -226,8 +235,9 @@ class TaskListItem extends Component {
 	 * Starts a new timer
 	 */
 	startTimer() {
+		let { taskId } = this.state.data;
 		this.taskService
-			.startTimer(this.state.taskId)
+			.startTimer(taskId)
 			.then(res => {
 				this.startInterval(res.data.startTime);
 				this.setState({ mouseover: true });
@@ -241,8 +251,9 @@ class TaskListItem extends Component {
 	 * Stops the current running timer
 	 */
 	stopTimer() {
+		let { taskId } = this.state.data;
 		this.taskService
-			.stopTimer(this.state.taskId)
+			.stopTimer(taskId)
 			.then(res => {
 				this.props.removeOnGoingTask();
 				this.setState({
@@ -256,7 +267,8 @@ class TaskListItem extends Component {
 	}
 
 	startInterval(startTime) {
-		this.props.setOnGoingTask(this.state.taskId);
+		let { taskId } = this.state.data;
+		this.props.setOnGoingTask(taskId);
 		this.setDuration(startTime);
 		this.onGoingInterval = setInterval(() => {
 			this.setDuration(startTime);
@@ -280,8 +292,9 @@ class TaskListItem extends Component {
 	}
 
 	updateTask(attribute, value) {
+		let { taskId } = this.state.data;
 		this.taskService
-			.updateTask(this.state.taskId, attribute, value)
+			.updateTask(taskId, attribute, value)
 			.then(res => {
 				let { data } = this.state;
 				data[res.data.attribute] = res.data.value;

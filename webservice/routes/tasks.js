@@ -120,7 +120,7 @@ function stopTimer(req, res) {
 	onGoingTaskId = null;
 
 	for (let i = 0; i < timelogData.length; i++) {
-		if (!timelogData[i].end) {
+		if (timelogData[i].end === '') {
 			timelogData[i].end = moment().format('YYYY-MM-DD HH:mm:ss');
 			break;
 		}

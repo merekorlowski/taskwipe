@@ -22,7 +22,7 @@ class DailyTasks extends Component {
 		};
 		this.state = {
 			displayDate: moment(this.props.date, 'YYYY-MM-DD').format('ddd, MMM DD'),
-			newTask: this.newTask,
+			newTask: { ...this.newTask },
 			tasks: this.props.tasks,
 			onGoingId: null,
 			projects: []
@@ -37,12 +37,75 @@ class DailyTasks extends Component {
 	}
 
 	render() {
-		let { tasks, displayDate } = this.state;
+		let { newTask, tasks, displayDate, projects } = this.state;
 		return (
 			<div>
 				<h5 className="display-date">{displayDate}</h5>
 				<ul className="list">
-					<li>{this.newTaskForm}</li>
+					<li>
+						{
+							<div>
+								<form
+									className="task-list-item"
+									onSubmit={this.onSubmitNewTask}
+								>
+									<div>
+										<input
+											name="title"
+											autoComplete="off"
+											type="text"
+											autoFocus={this.isToday ? 'on' : ''}
+											className="form-elem task-title"
+											placeholder="Enter new task"
+											required="true"
+											value={newTask.title}
+											onChange={this.onNewTaskChange}
+										/>
+										<button className="btn create-btn">Create</button>
+									</div>
+									<div>
+										<input
+											name="date"
+											type="date"
+											className="form-elem"
+											value={newTask.date}
+											onChange={this.onNewTaskChange}
+										/>
+										<input
+											name="deadline"
+											type="date"
+											className="form-elem"
+											value={newTask.deadline}
+											onChange={this.onNewTaskChange}
+										/>
+										<select
+											name="type"
+											className="form-elem"
+											value={newTask.type}
+											onChange={this.onNewTaskChange}
+										>
+											<option value="Normal">Normal</option>
+											<option value="Priority">Priority</option>
+											<option value="Optional">Optional</option>
+										</select>
+										<select
+											name="projectId"
+											className="form-elem task-project"
+											required="true"
+											value={newTask.projectId}
+											onChange={this.onNewTaskChange}
+										>
+											{projects.map((project, index) => (
+												<option key={index} value={project.projectId}>
+													{project.title}
+												</option>
+											))}
+										</select>
+									</div>
+								</form>
+							</div>
+						}
+					</li>
 					{tasks.length > 0 &&
 						tasks.map((task, index) => (
 							<li id={task.taskId} key={task.taskId}>
@@ -64,69 +127,6 @@ class DailyTasks extends Component {
 			</div>
 		);
 	}
-
-	newTaskForm = () => {
-		const { newTask, projects } = this.state;
-		return (
-			<div>
-				<form className="task-list-item" onSubmit={this.addTask}>
-					<div>
-						<input
-							name="title"
-							autoComplete="off"
-							type="text"
-							autoFocus={this.isToday ? 'on' : ''}
-							className="form-elem task-title"
-							placeholder="Enter new task"
-							required="true"
-							value={newTask.title}
-							onChange={this.onNewTaskChange}
-						/>
-						<button className="btn create-btn">Create</button>
-					</div>
-					<div>
-						<input
-							name="date"
-							type="date"
-							className="form-elem"
-							value={newTask.date}
-							onChange={this.onNewTaskChange}
-						/>
-						<input
-							name="deadline"
-							type="date"
-							className="form-elem"
-							value={newTask.deadline}
-							onChange={this.onNewTaskChange}
-						/>
-						<select
-							name="type"
-							className="form-elem"
-							value={newTask.type}
-							onChange={this.onNewTaskChange}
-						>
-							<option value="Normal">Normal</option>
-							<option value="Priority">Priority</option>
-							<option value="Optional">Optional</option>
-						</select>
-						<select
-							name="projectId"
-							className="form-elem task-project"
-							required="true"
-							value={newTask.projectId}
-							onChange={this.onNewTaskChange}
-						>
-							{projects.map((project, index) => (
-								<option key={index} value={project.projectId}>
-									{project.title}
-								</option>
-							))}
-						</select>
-					</div>
-				</form>
-			</div>
-		);
-	};
 
 	static get propTypes() {
 		return {
@@ -183,7 +183,7 @@ class DailyTasks extends Component {
 				let { tasks } = this.state;
 				tasks.push(res.data);
 				this.setState({
-					tasks: tasks,
+					tasks,
 					newTask: { ...this.newTask }
 				});
 			})
