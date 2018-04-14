@@ -1,29 +1,31 @@
 {
-  "name": "taskwipe",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www",
-    "jsdoc": "./node_modules/.bin/jsdoc -r -c .jsdocrc.json .",
-    "build:tw": "cd tw && npm run build &&",
-    "build": "npm run build:tw"
-  },
-  "dependencies": {
-    "all": "0.0.0",
-    "body-parser": "~1.18.2",
-    "cookie-parser": "~1.4.3",
-    "cors": "^2.8.4",
-    "debug": "~2.6.9",
-    "express": "~4.15.5",
-    "jade": "~1.11.0",
-    "moment": "^2.21.0",
-    "morgan": "~1.9.0",
-    "pg": "^7.4.1",
-    "serve-favicon": "~2.4.5"
-  },
-  "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.7.0",
-    "jsdoc": "^3.5.5"
-  }
+	"name": "taskwipe",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"start:dev": "npm run start:webservice:dev && npm run start:client:dev",
+		"start:webservice:dev": "cd webservice && nodemon bin/www & cd ..",
+		"start:client:dev": "cd client && npm start & cd ..",
+		"start": "npm run build && npm run start:webservice && npm start:client",
+		"start:webservice": "cd webservice && npm start & cd ..",
+		"start:client": "cd client && serve build & cd ..",
+		"build": "cd client && npm run build && cd ..",
+		"test": "cd client && npm run test && cd ..",
+		"eslint": "cd client && npm run eslint && cd ..",
+		"jsdoc": "cd client && npm run jsdoc && cd .."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:merekorlowski/taskwipe.git"
+	},
+	"devDependencies": {
+		"eslint": "^4.19.1",
+		"eslint-config-airbnb": "^16.1.0",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-plugin-import": "^2.11.0",
+		"eslint-plugin-jsx-a11y": "^6.0.3",
+		"eslint-plugin-prettier": "^2.6.0",
+		"eslint-plugin-react": "^7.7.0"
+	},
+	"dependencies": {}
 }

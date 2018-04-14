@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import httpConfig from '../httpConfig.js';
 
@@ -9,7 +8,9 @@ class ProjectService {
 	 * @constructor
 	 */
 	constructor() {
-		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${httpConfig.basePath}`;
+		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${
+			httpConfig.basePath
+		}`;
 	}
 
 	/**
@@ -36,8 +37,8 @@ class ProjectService {
 	 * Update a project
 	 * @return Returns a promise
 	 */
-	updateProject(project) {
-		return axios.put(`${this.endPoint}/project/${project.projectId}`, project);
+	updateProject(projectId, fieldsToUpdate) {
+		return axios.put(`${this.endPoint}/project/${projectId}`, fieldsToUpdate);
 	}
 
 	/**

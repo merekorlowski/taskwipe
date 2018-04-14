@@ -1,8 +1,6 @@
-# dependencies
 node_modules
-
-# misc
+.vscode
+.DS_Store
+.idea
 out
 npm-debug.log*
-.idea
-.DS_Store

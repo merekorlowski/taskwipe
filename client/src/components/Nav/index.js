@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import './styles.css';
+
+import './styles.scss';
 
 /** Main navigation component */
 class Nav extends Component {
@@ -8,55 +9,78 @@ class Nav extends Component {
 		return (
 			<div>
 				<header>
-					<nav className="bg-theme">
+					<nav>
 						<div className="container">
-							<span className="col-xs-11">
+							<span className="left">
 								<span id="logo">
 									{this.isLoggedIn() ? (
-										<NavLink to="/tasks" activeClassName="none" className="">
+										<NavLink to="/tasks" activeClassName="none">
 											taskwipe
 										</NavLink>
-									) : <span>taskwipe</span>}
+									) : (
+										<span>taskwipe</span>
+									)}
 								</span>
-								{this.isLoggedIn() ? (
+								{this.isLoggedIn() && (
 									<ul>
 										<li className={this.isActive('/tasks') ? 'active' : ''}>
-											<NavLink to="/tasks" className="bg-theme-link">Tasks</NavLink>
+											<NavLink to="/tasks" className="bg-theme-link">
+												Tasks
+											</NavLink>
 										</li>
 										<li className={this.isActive('/projects') ? 'active' : ''}>
-											<NavLink to="/projects" className="bg-theme-link">Projects</NavLink>
+											<NavLink to="/projects" className="bg-theme-link">
+												Projects
+											</NavLink>
 										</li>
 										<li className={this.isActive('/time') ? 'active' : ''}>
-											<NavLink to="/time" className="bg-theme-link">Time</NavLink>
-										</li>
-									</ul>
-								) : ''}
-							</span>
-							{this.isLoggedIn() ? (
-								<span>
-									<ul className="col-xs-1">
-										<li className={this.isActive('/settings') ? 'active' : ''}>
-											<NavLink to="/settings" activeClassName="active" className="bg-theme-link">
-												<i className="fa fa-cog" />
+											<NavLink to="/time" className="bg-theme-link">
+												Time
 											</NavLink>
 										</li>
 									</ul>
+								)}
+							</span>
+							{this.isLoggedIn() && (
+								<span>
+									<ul className="right">
+										{/* <span className="col-xs-9">{'Hello ' + localStorage.getItem('employeeName')}</span> */}
+										<li className={this.isActive('/settings') ? 'active' : ''}>
+											<NavLink
+												to="/settings"
+												activeClassName="active"
+												className="bg-theme-link"
+											>
+												<i className="fa fa-cog" />
+											</NavLink>
+										</li>
+										<li className={this.isActive('/settings') ? 'active' : ''}>
+											<button className="sign-out-btn" onClick={this.logout}>
+												<i className="fa fa-sign-out-alt" />
+											</button>
+										</li>
+									</ul>
 								</span>
-							) : ''}
+							)}
 						</div>
 					</nav>
 				</header>
 			</div>
 		);
 	}
-	
+
 	isActive(pathname) {
-		return (window.location.pathname === pathname);
+		return window.location.pathname === pathname;
 	}
 
 	isLoggedIn() {
-		return (localStorage.getItem('loggedIn') === 'true');
+		return localStorage.getItem('loggedIn') === 'true';
 	}
+
+	logout = () => {
+		localStorage.setItem('loggedIn', 'false');
+		window.location = '/login';
+	};
 }
 
 export default Nav;

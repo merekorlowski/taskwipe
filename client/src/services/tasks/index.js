@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import httpConfig from '../httpConfig.js';
 
@@ -9,7 +8,9 @@ class TaskService {
 	 * @constructor
 	 */
 	constructor() {
-		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${httpConfig.basePath}`;
+		this.endPoint = `${httpConfig.host}:${httpConfig.port}/${
+			httpConfig.basePath
+		}`;
 	}
 
 	/**
@@ -19,7 +20,9 @@ class TaskService {
 	 * @return Returns a promise
 	 */
 	getTasks(employeeId, date) {
-		return axios.get(`${this.endPoint}/tasks?employeeId=${employeeId}&date=${date}`);
+		return axios.get(
+			`${this.endPoint}/tasks?employeeId=${employeeId}&date=${date}`
+		);
 	}
 
 	getOnGoingTimeLog(taskId) {
@@ -31,11 +34,8 @@ class TaskService {
 	 * @param {string} task - The task to add to an employee
 	 * @return Returns a promise
 	 */
-	addTask(task, employeeId) {
-		return axios.post(`${this.endPoint}/task`, {
-			task: task,
-			employeeId: employeeId
-		});
+	addTask(task) {
+		return axios.post(`${this.endPoint}/task`, task);
 	}
 
 	/**
@@ -43,8 +43,11 @@ class TaskService {
 	 * @param {string} task - The task to be updated for an employee
 	 * @return Returns a promise
 	 */
-	updateTask(task) {
-		return axios.put(`${this.endPoint}/task/${task.taskId}`, task);
+	updateTask(taskId, attribute, value) {
+		return axios.put(`${this.endPoint}/task/${taskId}`, {
+			attribute: attribute,
+			value: value
+		});
 	}
 
 	/**
@@ -92,24 +95,16 @@ class TaskService {
 		return axios.post(`${this.endPoint}/task/${taskId}/stop`);
 	}
 
-	/**
-	 * Adds a comment to a task
-	 * @param {string} taskId - The id of the task
-	 * @return Returns a promise
-	 */
-	addComment(taskId, comment) {
-		return axios.post(`${this.endPoint}/task/${taskId}/comment`, {
-			comment: comment
-		});
+	archiveTask(taskId) {
+		return axios.put(`${this.endPoint}/task/${taskId}/archive`);
 	}
 
-	/**
-	 * Deletes a comment from a task
-	 * @param {string} taskId - The id of the task to be deleted from an employee
-	 * @return Returns a promise
-	 */
-	deleteComment(taskId, commentId) {
-		return axios.delete(`${this.endPoint}/task/${taskId}/comment/${commentId}`);
+	pushTask(taskId) {
+		return axios.put(`${this.endPoint}/task/${taskId}/push`);
+	}
+
+	getTaskTimelogs(day, hour) {
+		return axios.get(`${this.endPoint}/task/timelogs?day=${day}&hour=${hour}`);
 	}
 }
 

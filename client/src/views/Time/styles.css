@@ -1,0 +1,81 @@
+.timeslot {
+	display: block;
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.task-time-block {
+	position: absolute;
+	width: 100%;
+	display: block;
+	background-color: #19334d7a;
+	top: 0;
+}
+
+.day-title {
+	height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+}
+
+.week {
+	width: 100%;
+	margin-bottom: 200px;
+	box-shadow: 1px 1px 5px #cecece;
+	border-radius: 5px;
+	border-collapse: collapse;
+}
+
+.week td,
+.week th {
+	text-align: center;
+	border-right: 1px solid #cecece;
+	width: 12.5%;
+	height: 25px;
+}
+
+.week td:last-child,
+.week th:last-child {
+	border-right: none;
+}
+
+.week tr {
+	border-bottom: 1px solid #cecece;
+}
+
+.week tbody tr:last-child {
+	border-bottom: none;
+}
+
+.hour {
+	font-weight: 500;
+}
+
+.task-timelog-title {
+	display: none;
+	height: 100%;
+	width: 100%;
+	text-align: left;
+	padding: 5px;
+}
+
+.task-time-block:hover .task-timelog-title {
+	display: block;
+}
+
+.task-time-block:hover {
+	width: 130%;
+	height: 50px;
+	background-color: #19334d;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.edit-task-btn {
+	background: none;
+	color: #fff;
+	border: none;
+	float: right;
+}

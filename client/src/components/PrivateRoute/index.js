@@ -8,19 +8,15 @@ class PrivateRoute extends Component {
 			path: PropTypes.string.isRequired,
 			component: PropTypes.func.isRequired
 		};
-	};
+	}
 	render() {
 		let isLoggedIn = localStorage.getItem('loggedIn') === 'true';
 		let { path, component } = this.props;
 
 		if (isLoggedIn) {
-			return (
-				<Route path={path} component={component} />
-			);
+			return <Route path={path} component={component} />;
 		} else {
-			return (
-				<Redirect to="/login" />
-			);
+			return <Redirect to="/login" />;
 		}
 	}
 }
