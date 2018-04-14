@@ -99,17 +99,18 @@ class Login extends Component {
 	};
 
 	login() {
-		if (this.state.email === '') {
+		let { email, password } = this.state.data;
+		if (email === '') {
 			this.setState({ invalidEmail: true });
 		}
 
-		if (this.state.password === '') {
+		if (password === '') {
 			this.setState({ invalidPassword: true });
 		}
 
 		if (!this.state.invalidEmail && !this.state.invalidPassword) {
 			this.loginService
-				.login(this.state.email, this.state.password)
+				.login(email, password)
 				.then(res => {
 					if (!('unauthenticated' in res.data)) {
 						localStorage.setItem('loggedIn', true);
