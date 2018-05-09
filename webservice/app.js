@@ -26,9 +26,9 @@ app.use(settings);
 app.use(employees);
 
 //attempt to allow dynamic choosing of port
-app.configure(function(){
-	app.set('port', process.env.PORT || 3001);
-})
+// app.configure(function(){
+// 	app.set('port', process.env.PORT || 3001);
+// })
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
