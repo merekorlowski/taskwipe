@@ -6,7 +6,7 @@
 		"excludePattern": "(^|\\/|\\\\)_",
 		"exclude": [
 			"node_modules",
-			"build"
+			"dist"
 		]
 	},
 	"sourceType": "module",
