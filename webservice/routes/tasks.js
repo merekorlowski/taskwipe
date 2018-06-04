@@ -32,12 +32,12 @@ router.put('/api/task/:taskId/push', (req, res) => pushTask(req, res));
 router.get('/api/task/timelogs', (req, res) => getTaskTimelogs(req, res));
 
 function getTasks(req, res) {
-	const { employeeId, date } = req.query;
+	const { userId, date } = req.query;
 
 	const tasks = [];
 
 	for (let i = 0; i < taskData.length; i++) {
-		if (date == taskData[i].date && employeeId == taskData[i].employeeId) {
+		if (date == taskData[i].date && userId == taskData[i].userId) {
 			tasks.push(taskData[i]);
 		}
 	}

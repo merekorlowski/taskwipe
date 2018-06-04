@@ -1,39 +1,55 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { object, func } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
-import LoginService from '../../services/login';
+import { connect } from 'react-redux';
+import { login } from '../../actions/session';
+import Credentials from '../../models/credentials';
 import './styles.scss';
 
-/** Login page component */
 class Login extends Component {
+	state = {
+		credentials: new Credentials()
+	};
+
+	static propTypes = {
+		history: object.isRequired,
+		login: func.isRequired
+	};
+
 	/**
-	 * A log in component
-	 * @constructor
+	 * Updates the state when a value is changed
+	 * @param {*} event
 	 */
-	constructor(props) {
-		super(props);
-		this.state = {
-			data: {
-				email: '',
-				password: ''
-			},
-			invalidEmail: false,
-			invalidPassword: false
-		};
+	onChange = event => {
+		let { credentials } = this.state;
+		credentials[event.target.name] = event.target.value;
+		this.setState({ credentials });
+	};
 
-		this.loginService = new LoginService();
-	}
+	/** Attempts to log in with the given credentials */
+	onSubmit = event => {
+		event.preventDefault();
 
-	/** Renders the login page */
+		let { credentials } = this.state;
+
+		if (credentials.isEmailValid && credentials.isPasswordValid) {
+			this.props.login(
+				credentials.email,
+				credentials.password
+			);
+		}
+	};
+
 	render() {
-		if (localStorage.getItem('loggedIn') === 'true') {
+		const { session } = this.props;
+		if (session.isActive) {
 			return <Redirect to="/tasks" />;
 		} else {
-			let { data } = this.state;
+			let { credentials } = this.state;
 			return (
-				<div className="container">
-					<h1 className="page-title">Login</h1>
+				<div>
+					<h1 className="tw-page-title">Login</h1>
 					<form onSubmit={this.onSubmit}>
 						<div>
 							<div className="login-form-row">
@@ -41,10 +57,10 @@ class Login extends Component {
 									id="email"
 									type="text"
 									autoFocus="on"
-									className="form-elem"
+									className="tw-form-elem boxed"
 									name="email"
 									placeholder="Email"
-									value={data.email}
+									value={credentials.email}
 									onChange={this.onChange}
 								/>
 							</div>
@@ -52,15 +68,15 @@ class Login extends Component {
 								<input
 									id="password"
 									type="password"
-									className="form-elem"
+									className="tw-form-elem boxed"
 									name="password"
 									placeholder="Password"
-									value={data.password}
+									value={credentials.password}
 									onChange={this.onChange}
 								/>
 							</div>
 							<div className="login-form-row">
-								<button type="submit" className="btn right">
+								<button type="submit" className="tw-btn right">
 									Sign in
 								</button>
 							</div>
@@ -70,60 +86,10 @@ class Login extends Component {
 			);
 		}
 	}
-
-	static get propTypes() {
-		return {
-			history: PropTypes.shape({
-				push: PropTypes.func.isRequired
-			})
-		};
-	}
-
-	/**
-	 * Updates the state when a value is changed
-	 * @param {*} event
-	 */
-	onChange = event => {
-		// The change is stored in the change data structure
-		let { data } = this.state;
-		data[event.target.name] = event.target.value;
-		this.setState({
-			data
-		});
-	};
-
-	/** Attempts to log in with the given credentials */
-	onSubmit = event => {
-		event.preventDefault();
-		this.login();
-	};
-
-	login() {
-		let { email, password } = this.state.data;
-		if (email === '') {
-			this.setState({ invalidEmail: true });
-		}
-
-		if (password === '') {
-			this.setState({ invalidPassword: true });
-		}
-
-		if (!this.state.invalidEmail && !this.state.invalidPassword) {
-			this.loginService
-				.login(email, password)
-				.then(res => {
-					if (!('unauthenticated' in res.data)) {
-						localStorage.setItem('loggedIn', true);
-						localStorage.setItem('employeeId', res.data.employeeId);
-						localStorage.setItem('employeeName', res.data.firstName);
-						window.location = '/tasks';
-					}
-				})
-				.catch(err => {
-					console.error(err.message);
-				});
-		}
-	}
 }
 
-export default Login;
+const mapStateToProps = state => ({
+	session: state.sessionReducer
+});
+
+export default connect(mapStateToProps, { login })(Login);

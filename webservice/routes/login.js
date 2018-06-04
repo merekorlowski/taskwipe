@@ -1,8 +1,10 @@
 const express = require('express');
+const jsonwebtoken = require('jsonwebtoken');
 
 const router = express.Router();
 
 const employeeData = require('../dummyData/employee.json');
+const config = require('../config');
 
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-plusplus */
@@ -22,17 +24,21 @@ function login(req, res) {
 			employeeData[i].email === email &&
 			employeeData[i].password === password
 		) {
-			employee = employeeData[i];
+			employee = {
+				firstName: employeeData[i].firstName,
+				lastName: employeeData[i].lastName
+			};
 			break;
 		}
 	}
 
 	if (employee) {
-		res.json(employee);
-	} else {
-		res.status(401).send({
-			error: 'Unauthorized'
+		res.status(200).json({
+			user: employee,
+			jwt: jsonwebtoken.sign(employee, config.secret)
 		});
+	} else {
+		res.status(401).send();
 	}
 }
 

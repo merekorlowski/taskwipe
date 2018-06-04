@@ -1,6 +1,6 @@
 // import React from 'react';
 // import createClass from 'create-react-class';
-// // import EmployeeService from '../../services/employees';
+// // import EmployeeService from '../../api/employees';
 // import { PropTypes } from 'prop-types';
 // import Select from 'react-select';
 // import 'react-select/dist/react-select.css';

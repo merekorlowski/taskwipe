@@ -23,11 +23,11 @@ router.delete('/api/project/:projectId', (req, res) => deleteProject(req, res));
  * Returns all of the projects for a given user
  */
 function getAllUserProjects(req, res) {
-	const { employeeId } = req.query;
+	const { userId } = req.query;
 	const projects = [];
 
 	for (let i = 0; i < employeeProjectData.length; i++) {
-		if (employeeProjectData[i].employeeId == employeeId) {
+		if (employeeProjectData[i].userId == userId) {
 			for (let j = 0; j < projectData.length; j++) {
 				if (projectData[j].projectId == employeeProjectData[i].projectId) {
 					projects.push(projectData[j]);
@@ -43,13 +43,13 @@ function getAllUserProjects(req, res) {
  * Adds a new project to the user's project list
  */
 function addProject(req, res) {
-	const { project, employeeId } = req.body;
+	const { project, userId } = req.body;
 	project.projectId = projectIdIncrement;
 	projectIdIncrement++;
 
 	projectData.push(project);
 	employeeProjectData.push({
-		employeeId,
+		userId,
 		projectId: project.projectId,
 		projectAdmin: true
 	});

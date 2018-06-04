@@ -1,80 +1,28 @@
 import React, { Component } from 'react';
 
-import SettingsService from '../../services/settings';
-import EmployeeService from '../../services/employees';
+import SettingsService from '../../api/settings';
+import UserService from '../../api/users';
 import './styles.scss';
 
 class Settings extends Component {
-	constructor(props) {
-		super(props);
+	team = {
+		color: '',
+		name: '',
+		members: []
+	};
 
-		this.team = {
-			color: '',
-			name: '',
-			members: []
-		};
-
-		this.state = {
-			employeeId: '',
-			numOfWeeksAhead: '',
-			displayDeadlines: false,
-			team: null,
-			newTeam: { ...this.team }
-		};
-
-		this.settingsService = new SettingsService();
-		this.employeeService = new EmployeeService();
-	}
+	state = {
+		userId: '',
+		numOfWeeksAhead: '',
+		displayDeadlines: false,
+		team: null,
+		newTeam: { ...this.team }
+	};
 
 	componentDidMount() {
+		this.settingsService = new SettingsService();
+		this.userService = new UserService();
 		this.getUserSettings();
-	}
-
-	render() {
-		return (
-			<div className="container">
-				<h1 className="page-title">Settings</h1>
-				<ul className="list">
-					<li>
-						<div>
-							<h3>Display Settings</h3>
-							<div className="settings-section">
-								<label htmlFor="numOfWeeksAhead">
-									Number of weeks to display in Tasks page:
-								</label>
-								<input
-									id="numOfWeeksAhead"
-									type="number"
-									className="form-elem"
-									name="numOfWeeksAhead"
-									value={this.state.numOfWeeksAhead}
-									onChange={this.onChange}
-								/>
-							</div>
-							<div className="settings-section">
-								<label htmlFor="displayDeadlines">
-									Display deadlines in Tasks page:
-								</label>
-								<span>
-									<input
-										id="displayDeadlines"
-										type="checkbox"
-										className="form-elem"
-										name="displayDeadlines"
-										checked={this.state.displayDeadlines}
-										onChange={this.onChange}
-									/>
-								</span>
-							</div>
-						</div>
-					</li>
-					<li>
-						<h3>Team Management</h3>
-						{this.state.team ? this.displayTeam() : this.displayCreateTeam()}
-					</li>
-				</ul>
-			</div>
-		);
 	}
 
 	displayTeam() {
@@ -181,8 +129,8 @@ class Settings extends Component {
 	};
 
 	getUserTeam() {
-		this.employeeService
-			.getUserTeam(localStorage.getItem('employeeId'))
+		this.userService
+			.getUserTeam(localStorage.getItem('userId'))
 			.then(res => {
 				this.setState({ team: res.data });
 			});
@@ -190,7 +138,7 @@ class Settings extends Component {
 
 	createTeam(event) {
 		event.preventDefault();
-		this.employeeService
+		this.userService
 			.createTeam(this.state.newTeam)
 			.then(res => {
 				this.setState({ team: res.data });
@@ -209,6 +157,53 @@ class Settings extends Component {
 			.catch(err => {
 				console.error(err.message);
 			});
+	}
+
+	render() {
+		return (
+			<div className="container">
+				<h1 className="page-title">Settings</h1>
+				<ul className="list">
+					<li>
+						<div>
+							<h3>Display Settings</h3>
+							<div className="settings-section">
+								<label htmlFor="numOfWeeksAhead">
+									Number of weeks to display in Tasks page:
+								</label>
+								<input
+									id="numOfWeeksAhead"
+									type="number"
+									className="form-elem"
+									name="numOfWeeksAhead"
+									value={this.state.numOfWeeksAhead}
+									onChange={this.onChange}
+								/>
+							</div>
+							<div className="settings-section">
+								<label htmlFor="displayDeadlines">
+									Display deadlines in Tasks page:
+								</label>
+								<span>
+									<input
+										id="displayDeadlines"
+										type="checkbox"
+										className="form-elem"
+										name="displayDeadlines"
+										checked={this.state.displayDeadlines}
+										onChange={this.onChange}
+									/>
+								</span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<h3>Team Management</h3>
+						{this.state.team ? this.displayTeam() : this.displayCreateTeam()}
+					</li>
+				</ul>
+			</div>
+		);
 	}
 }
 

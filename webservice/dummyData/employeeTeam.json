@@ -1,8 +1,8 @@
 [
-    { "teamId": "tm1", "employeeId": "002", "isAdmin": false },
-    { "teamId": "tm1", "employeeId": "003", "isAdmin": false },
-    { "teamId": "tm1", "employeeId": "004", "isAdmin": true },
-    { "teamId": "tm2", "employeeId": "006", "isAdmin": false },
-    { "teamId": "tm2", "employeeId": "007", "isAdmin": false },
-    { "teamId": "tm2", "employeeId": "008", "isAdmin": true }
+    { "teamId": "tm1", "userId": "002", "isAdmin": false },
+    { "teamId": "tm1", "userId": "003", "isAdmin": false },
+    { "teamId": "tm1", "userId": "004", "isAdmin": true },
+    { "teamId": "tm2", "userId": "006", "isAdmin": false },
+    { "teamId": "tm2", "userId": "007", "isAdmin": false },
+    { "teamId": "tm2", "userId": "008", "isAdmin": true }
 ]

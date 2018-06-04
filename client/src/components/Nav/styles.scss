@@ -1,23 +1,24 @@
 @import '../../styles.scss';
 
 $header-height: 60px;
-$header-shadow: 1px 1px 5px gray;
+$header-shadow: 1px 1px 5px $tw-shadow-color;
 
 header {
 	height: $header-height;
-	margin-bottom: 25px;
+	margin-bottom: 30px;
 }
 
 nav {
-	box-shadow: 1px 1px 5px #222;
+	box-shadow: 0px 1px 5px #222;
 	height: $header-height;
-	background-color: $primary;
+	background-color: $tw-primary-color;
 	z-index: 2;
 	width: 100%;
 	left: 0;
 	top: 0;
 	padding: 0;
 	position: fixed;
+	overflow: hidden;
 
 	ul {
 		display: inline-block;
@@ -34,17 +35,31 @@ nav {
 			text-align: center;
 			line-height: $header-height;
 			height: $header-height;
-			color: #ffffff;
-			background-color: $primary;
+			color: $tw-light-grey;
+			background-color: $tw-primary-color;
+			position: relative;
+
+			i {
+				color: $tw-light-grey;
+			}
 		}
 
 		a:hover {
-			filter: grayscale(50%);
+			color: $tw-white;
+
+			i {
+				color: $tw-white;
+			}
 		}
 
 		a:active,
 		a.active {
-			filter: grayscale(50%);
+			background-color: $tw-primary-dark-color;
+			color: $tw-white;
+
+			i {
+				color: $tw-white;
+			}
 		}
 	}
 }
@@ -54,21 +69,8 @@ nav {
 	height: 100%;
 	margin-right: 20px;
 	display: inline-block;
-
-	a {
-		line-height: 40px;
-	}
-
-	span {
-		line-height: 60px;
-	}
-
-	a,
-	span {
-		color: #ffffffd5;
-		text-decoration: none;
-		display: block;
-	}
+	color: $tw-light-text-color;
+	line-height: 60px;
 }
 
 .sign-out-btn {

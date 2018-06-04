@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { string, func, array } from 'prop-types';
 import moment from 'moment';
-
-import TaskService from '../../services/tasks';
-import './styles.scss';
+import { connect } from 'react-redux';
+import { getTaskTimelogs } from '../../actions/tasks';
 
 class Timeslot extends Component {
-	constructor(props) {
-		super(props);
-		this.taskService = new TaskService();
-		this.state = {
-			taskTimelogs: [],
-			day: this.props.day,
-			hour: this.props.hour
-		};
-	}
+	state = {
+		day: this.props.day,
+		hour: this.props.hour
+	};
+
+	static propTypes = {
+		day: string.isRequired,
+		hour: string.isRequired,
+		userId: string.isRequired,
+		timelogs: array.isRequired,
+		getTaskTimelogs: func.isRequired
+	};
 
 	render() {
-		let { taskTimelogs } = this.state;
+		let { timelogs } = this.props;
 		return (
 			<div className="timeslot">
 				<div className="timeslot-container">
@@ -43,28 +45,13 @@ class Timeslot extends Component {
 		);
 	}
 
-	componentWillReceiveProps(props) {
-		this.setState(
-			{
-				taskTimelogs: [],
-				day: props.day,
-				hour: props.hour
-			},
-			() => {
-				this.getTaskTimelogs();
-			}
-		);
-	}
+	componentWillMount() {
+		const { userId } = this.props;
+		this.props.getTaskTimelogs(userId);
 
-	componentDidMount() {
-		this.getTaskTimelogs();
-	}
-
-	static get propTypes() {
-		return {
-			day: PropTypes.string.isRequired,
-			hour: PropTypes.string.isRequired
-		};
+		for (let timelog of this.props.timelogs) {
+			this.setTimeBlock(timelog);
+		}
 	}
 
 	setTimeBlock(taskTimelog) {
@@ -114,21 +101,12 @@ class Timeslot extends Component {
 			this.setState({ taskTimelogs: taskTimelogs });
 		}
 	}
-
-	getTaskTimelogs() {
-		this.taskService
-			.getTaskTimelogs(this.state.day, this.state.hour)
-			.then(res => {
-				if (res.data.length > 0) {
-					for (let i = 0; i < res.data.length; i++) {
-						this.setTimeBlock(res.data[i]);
-					}
-				}
-			})
-			.catch(err => {
-				console.error(err.message);
-			});
-	}
 }
 
-export default Timeslot;
+const mapStateToProps = state => ({
+	userId: state.sessionReducer.user.userId
+});
+
+export default connect(mapStateToProps, {
+	getTaskTimelogs
+})(Timeslot);

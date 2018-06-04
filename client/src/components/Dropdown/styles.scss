@@ -1,0 +1,40 @@
+@import '../../styles.scss';
+
+.tw-dropdown {
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    border: 1px solid transparent;
+    box-shadow: 1px 1px 5px none;
+    margin-left: 5px;
+
+    &:hover {
+        border: 1px solid $tw-shadow-color;
+        box-shadow: 1px 1px 5px $tw-shadow-color;
+    }
+
+    ul {
+        position: absolute;
+        top: 100%;
+        z-index: 9999;
+        border: 1px solid $tw-shadow-color;
+        box-shadow: 2px 2px 5px $tw-shadow-color;
+        background-color: #ffffff;
+    }
+
+    .arrow-icon {
+        margin-left: 10px;
+    }
+
+    li {
+        border: none;
+        box-shadow: none;
+    }
+
+    button {
+        background: none;
+        border: none;
+        padding: 5px;
+    }
+}

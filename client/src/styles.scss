@@ -1,43 +1,36 @@
-/* HSL */
-// $primary: hsla(201%, 38%, 29%, 1);
-$background: hsla(0%, 8%, 97%, 1);
-$invalid: hsla(2%, 67%, 57%, 1);
-$informatio: hsla(48%, 96%, 45%, 1);
-$success: hsla(182%, 32%, 49%, 1);
 
-// /* RGB */
-// $primary: rgba(46, 82, 102, 1);
-$background: rgba(249, 248, 248, 1);
-$invalid: rgba(219, 80, 74, 1);
-$informatio: rgba(227, 181, 5, 1);
-$success: rgba(86, 163, 166, 1);
+$tw-background: #f2f2f2;
 
-/* HSL */
-$primary: hsla(203%, 63%, 20%, 1);
-$color2: hsla(209%, 49%, 43%, 1);
-$color3: hsla(204%, 62%, 60%, 1);
-$color4: hsla(199%, 86%, 74%, 1);
-$color5: hsla(190%, 85%, 77%, 1);
+$tw-light-grey: #dddddd;
+$tw-white: #ffffff;
 
-/* RGB */
-$primary: rgba(19, 60, 85, 1);
-$color2: rgba(56, 111, 164, 1);
-$color3: rgba(89, 165, 216, 1);
-$color4: rgba(132, 210, 246, 1);
-$color5: rgba(145, 229, 246, 1);
+$tw-light-blue: #0077b3;
+$tw-primary-color: #2D4B71;
+$tw-primary-dark-color: #132E51;
+$tw-primary-darker-color: #041730;
+$tw-green: #00b300;
+// $tw-red: ;
 
-$underline-color: rgba(19, 60, 85, 0.2);
-$shadow-color: #cecece;
-$font: 'Work Sans';
-$font-size: 14px;
-$primary-font-color: #ffffff;
-$color: #373d3f;
+$tw-highlight-color: #AC813B;
+
+$tw-shadow-color: #e6e6e6;
+$tw-font-family: 'Archivo Narrow';
+
+$tw-font-size-small: 12px;
+$tw-font-size-medium: 14px;
+$tw-font-size-normal: 16px;
+$tw-font-size-big: 18px;
+
+$tw-dark-text-color: #262626;
+$tw-grey-text-color: #4d4d4d;
+$tw-light-text-color: #ffffff;
 $item-background-color: #f1f1f1;
 
 body {
-	font-family: $font;
-	font-size: $font-size;
-	color: $color;
+	font-family: $tw-font-family;
+	font-size: $tw-font-size-normal;
+	color: $tw-dark-text-color;
+	// background-color: $tw-background;
 	padding: 0;
 	margin: 0;
 }
@@ -56,26 +49,29 @@ a {
 	text-decoration: none;
 }
 
-.btn {
-	background-color: $primary;
-	color: $primary-font-color;
+.tw-btn {
+	background-color: $tw-primary-color;
+	color: $tw-light-text-color;
 	border: none;
 	border-radius: 5px;
 	padding: 10px;
-	box-shadow: 1px 1px 5px $shadow-color;
-}
+	box-shadow: 1px 1px 5px $tw-shadow-color;
 
-.disabled-btn,
-.disabled-btn:hover {
-	opacity: 0.5;
-}
+	&:hover {
+		background-color: $tw-primary-dark-color;
+	}
 
-.btn:hover {
-	filter: grayscale(50%);
-}
+	&:active {
+		background-color: $tw-primary-darker-color;
+	}
 
-.btn:active {
-	filter: grayscale(75%);
+	&.disabled {
+		opacity: 0.5;
+	}
+
+	&.disabled:hover {
+		opacity: 0.5;
+	}
 }
 
 .centered {
@@ -83,111 +79,200 @@ a {
 	text-align: center;
 }
 
-.form-elem {
-	padding: 10px;
-	border-radius: 3px;
-	border: 1px solid #c2c2c2;
-	box-shadow: inset 0px 0px 5px $shadow-color;
-	background-color: #ffffff;
+.tw-form-elem {
+  padding: 5px;
+	border-radius: 5px;
 	margin: 5px;
+	font-size: $tw-font-size-normal;
+	background-color: transparent;
+	border: 1px solid $tw-shadow-color;
+	box-shadow: inset 0px 0px 5px $tw-shadow-color;
 }
 
-input[type='checkbox'].form-elem,
-input[type='color'].form-elem {
+input[type='checkbox'].tw-form-elem,
+input[type='color'].tw-form-elem {
 	padding: 0;
+}
+
+label {
+	color: $tw-highlight-color;
+	display: inline-block;
+	margin-bottom: 0;
+}
+
+.scrollable {
+	height: 100vw;
+	overflow-y: scroll;
+	overflow-x: auto;
 }
 
 .list {
 	transition: 1s height linear;
 	border-radius: 5px;
 
+	ul {
+		display: block;
+		margin: 10px;
+	}
+
 	li {
 		display: block;
-		padding: 10px;
 		transition: 0.2s box-shadow ease-in-out;
 		border-radius: 5px;
-		border-left: 5px solid $primary;
-		background-color: $item-background-color;
+		border-left: 5px solid $tw-primary-color;
+		border: 1px solid #d9d9d9;
+		box-shadow: 1px 1px 5px $tw-shadow-color;
 		margin: 5px;
+		padding: 10px;
 
-		.empty-list,
-		.empty-list:hover {
+		.empty,
+		.empty:hover {
 			background-color: transparent;
 			box-shadow: none;
 		}
 
-		.form-elem,
-		button {
+		label {
+			vertical-align: middle;
 			display: inline-block;
-			font-size: 12px;
+			input, select {
+				display: block;
+			}
+	
+			span {
+				margin-left: 12.5px;
+			}
+		}
+
+		.expand-icon-section {
+			display: inline-block;
+			width: 25px;
+			vertical-align: top;
+		}
+
+		.properties {
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		.details {
+			display: block;
+			width: 100%;
+
+			textarea {
+				width: 100%;
+				min-height: 100px;
+				min-width: 100%;
+				max-width: 100%;
+				max-height: 100px;
+			}
 		}
 	}
 }
 
-.list-elem-details {
-	display: block;
-	width: 100%;
+.boxed {
+	border: 1px solid $tw-light-grey;
+	box-shadow: 1px 1px 5px $tw-light-grey;
 }
 
-.list-elem-details textarea {
-	width: 100%;
-	max-width: 100%;
-	max-height: 100px;
-	border: 1px solid #c2c2c2;
-	background-color: #ffffff;
-	border-radius: 5px;
-	padding: 10px;
-	margin: 5px;
-	box-shadow: none;
-	font-size: 12px;
-}
-
-.right {
-	float: right;
-}
-
-.form-row {
+.tw-form-row {
 	margin-bottom: 5px;
+}
+
+.tw-font-size-small {
+	font-size: $tw-font-size-small;
+}
+
+.tw-font-size-medium {
+	font-size: $tw-font-size-medium;
+}
+
+.tw-font-size-normal {
+	font-size: $tw-font-size-normal;
+}
+
+.tw-font-size-big {
+	font-size: $tw-font-size-big;
 }
 
 input,
 select,
 button {
 	margin: 0;
-	font-size: 14px;
-	color: $color;
+	font-size: $tw-font-size-normal;
+	color: $tw-dark-text-color;
+}
+
+input, select {
+	min-width: 75px;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-	box-shadow: inset 0 0 5px $shadow-color;
-	border: 1px solid #c2c2c2;
+	box-shadow: inset 0 0 5px $tw-shadow-color;
 	outline: none;
 }
 
 .expand-icon {
-	margin-right: 10px;
+	height: 100%;
+	width: 30px;
 	display: inline-block;
 }
 
-.list-item-row {
-	display: block;
-	margin: 10px;
-}
-
 .left {
-	display: block;
 	float: left;
 }
 
 .right {
-	display: block;
 	float: right;
 }
 
-.page-title {
-	font-weight: normal;
-	border-bottom: 1px solid $underline-color;
+.tw-page-title {
 	padding-bottom: 15px;
+	font-weight: normal;
+}
+
+.inline-block {
+	display: inline-block;
+	height: 100%;
+}
+
+.fixed {
+	position: fixed;
+}
+
+.scrollable {
+	display: block;
+	overflow: auto;
+}
+
+.tw-message {
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid $tw-shadow-color;
+	background-color: $tw-shadow-color;
+}
+
+.tw-page-width {
+	margin: 0 auto;
+	position: relative;
+	display: block;
+	height: 100%;
+
+	@media only screen and (max-width: 600px) {
+		width: 100%;
+	}
+	@media only screen and (min-width: 601px) and (max-width: 750px) {
+		width: 600px;
+	}
+	@media only screen and (min-width: 751px) and (max-width: 1000px) {
+		width: 750px;
+	}
+	@media only screen and (min-width: 1001px) {
+		width: 900px;
+	}
+	@media only screen and (min-width: 1100px) {
+		width: 1000px;
+	}
 }

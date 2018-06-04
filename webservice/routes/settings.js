@@ -11,10 +11,10 @@ const settingsData = require('../dummyData/settings.json');
 /**
  * Settings routes
  */
-router.get('/api/settings/:employeeId', (req, res) =>
+router.get('/api/settings/:userId', (req, res) =>
 	getUserSettings(req, res)
 );
-router.put('/api/settings/:employeeId', (req, res) =>
+router.put('/api/settings/:userId', (req, res) =>
 	updateUserSettings(req, res)
 );
 
@@ -22,12 +22,12 @@ router.put('/api/settings/:employeeId', (req, res) =>
  * Returns the settings for a given user
  */
 function getUserSettings(req, res) {
-	const { employeeId } = req.params;
+	const { userId } = req.params;
 
 	let settings = {};
 
 	for (let i = 0; i < settingsData.length; i++) {
-		if (employeeId == settingsData[i].employeeId) {
+		if (userId == settingsData[i].userId) {
 			settings = settingsData[i];
 		}
 	}
@@ -42,7 +42,7 @@ function updateUserSettings(req, res) {
 	const settings = req.body;
 
 	for (let i = 0; i < settingsData.length; i++) {
-		if (settings.employeeId == settingsData[i].employeeId) {
+		if (settings.userId == settingsData[i].userId) {
 			settingsData[i] = { ...settings };
 			break;
 		}

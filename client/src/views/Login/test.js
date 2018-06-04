@@ -26,7 +26,7 @@ describe('Login Component Tests', () => {
 
 	it('Opens the tasks page when logged in.', done => {
 		localStorage.setItem('loggedIn', true);
-		localStorage.setItem('employeeId', '003');
+		localStorage.setItem('userId', '003');
 		const wrapper = mount(
 			<MemoryRouter initialEntries={['/Tasks']}>
 				<App />

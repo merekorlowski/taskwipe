@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import Calendar from '../../components/Calendar';
-import './styles.css';
+import { Calendar } from '../../components';
+import './styles.scss';
 
 class Time extends Component {
 	render() {
 		return (
-			<div className="container">
-				<h1 className="page-title">Time</h1>
+			<div>
+				<h1 className="tw-page-title">Time</h1>
 				<div>
 					<Calendar />
 				</div>
