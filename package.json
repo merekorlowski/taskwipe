@@ -2,7 +2,8 @@
   "name": "taskwipe",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+		"build": "webpack --mode production",
+		"postinstall": "npm run build",
     "test": "jest",
     "coverage": "jest --coverage"
   },
