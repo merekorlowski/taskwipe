@@ -12,7 +12,6 @@ const projects = require('./routes/projects');
 const settings = require('./routes/settings');
 const employees = require('./routes/employees');
 
-// uncomment after placing your favicon in /client
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,11 +23,6 @@ app.use(login);
 app.use(projects);
 app.use(settings);
 app.use(employees);
-
-//attempt to allow dynamic choosing of port
-// app.configure(function(){
-// 	app.set('port', process.env.PORT || 3001);
-// })
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

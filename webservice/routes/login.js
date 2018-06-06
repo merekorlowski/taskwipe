@@ -1,5 +1,5 @@
 const express = require('express');
-const jsonwebtoken = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
@@ -25,6 +25,7 @@ function login(req, res) {
 			employeeData[i].password === password
 		) {
 			employee = {
+				userId: employeeData[i].userId,
 				firstName: employeeData[i].firstName,
 				lastName: employeeData[i].lastName
 			};
@@ -33,10 +34,10 @@ function login(req, res) {
 	}
 
 	if (employee) {
-		res.status(200).json({
-			user: employee,
-			jwt: jsonwebtoken.sign(employee, config.secret)
+		const token = jwt.sign(employee, config.secret, {
+			// expiresIn: 86400 // expires in 24 hours
 		});
+		res.json({ user: employee, token: token });
 	} else {
 		res.status(401).send();
 	}

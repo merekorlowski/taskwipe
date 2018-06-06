@@ -1,10 +1,7 @@
 {
-  "name": "taskwipe",
+  "name": "tw-webservice",
   "scripts": {
-    "start": "node ./bin/www",
-    "jsdoc": "./node_modules/.bin/jsdoc -r -c .jsdocrc.json .",
-    "build:tw": "cd tw && npm run build &&",
-    "build": "npm run build:tw"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

@@ -1,0 +1,46 @@
+@import '../../styles';
+
+.tw-project {
+	width: 100%;
+
+	.status {
+		float: right;
+	}
+
+	.status select option:hover {
+		background-color: $tw-light-grey;
+	}
+
+	.completed {
+		color: $tw-white;
+		background-color: $tw-green;
+	}
+
+	.paused {
+		color: $tw-dark-text-color;
+		background-color: $tw-light-grey;
+	}
+
+	.in-progress {
+		color: $tw-white;
+		background-color: $tw-highlight-color;
+	}
+
+	.project-title {
+		margin-bottom: 10px;
+	}
+}
+
+.add-project-form {
+	label {
+		vertical-align: middle;
+		display: inline-block;
+		input, select {
+			display: block;
+		}
+
+		span {
+			margin-left: 12.5px;
+		}
+	}
+}
