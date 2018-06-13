@@ -7,7 +7,7 @@ import { PROJECT } from '../../constants';
 import './styles.scss';
 
 class AddProjectForm extends Component {
-	newProject = {
+	data = {
 		title: '',
 		url: '',
 		status: PROJECT.IN_PROGRESS,
@@ -15,7 +15,7 @@ class AddProjectForm extends Component {
 	};
 
 	state = {
-		newProject: {...this.newProject}
+		data: {...this.data}
 	};
 
 	static propTypes = {
@@ -26,61 +26,53 @@ class AddProjectForm extends Component {
 	onSubmit = event => {
 		event.preventDefault();
 
-		const { newProject } = this.state;
+		const { data } = this.state;
 		const { userId } = this.props;
-		this.props.addProject(userId, newProject);
-		this.setState({ newProject: {...this.newProject} });
+		this.props.addProject(userId, data);
+		this.setState({ data: {...this.data} });
 	}
 
 	onChange = event => {
-		let { newProject } = this.state;
-		newProject[event.target.name] = event.target.value;
-		this.setState({ newProject });
+		let { data } = this.state;
+		data[event.target.name] = event.target.value;
+		this.setState({ data });
 	}
 
 	render() {
-		let { newProject } = this.state;
+		let { data } = this.state;
 		return (
-			<div className="add-project-form">
+			<div className="border rounded padding--full shadow">
 				<form onSubmit={this.onSubmit}>
-					<div>
+					<div className="space-evenly">
 						<input
 							name="title"
 							type="text"
 							autoComplete="off"
-							className="tw-form-elem tw-font-size-medium"
+							className="tw-form-elem col-8"
 							autoFocus="on"
-							placeholder="New Project"
+							placeholder="Add a project..."
 							required="true"
-							value={newProject.title}
+							value={data.title}
 							onChange={this.onChange}
 						/>
-						<span className="right">
-							<button className="tw-btn tw-font-size-normal">Create</button>
-						</span>
+						<button className="tw-btn col-2 right">Create</button>
 					</div>
-					<div>
-						<label className="tw-highlight-color">
-							<span className="tw-font-size-medium">Project URL (Optional)</span>
-							<input
-								name="url"
-								className="tw-form-elem tw-font-size-medium"
-								placeholder="http://example.com"
-								value={newProject.url}
-								onChange={this.onChange}
-							/>
-						</label>
-						<label className="tw-highlight-color">
-							<span className="tw-font-size-medium">Team Members</span>
-							<select
-								name="teammembers"
-								className="tw-form-elem tw-font-size-medium"
-								value={newProject.teamMembers}
-								onChange={this.onChange}
-							>
-								<option value="morlo">Merek Orlowski</option>
-							</select>
-						</label>
+					<div className="col-8">
+						<input
+							name="url"
+							className="tw-form-elem col-6"
+							placeholder="http://url-to-project.com"
+							value={data.url}
+							onChange={this.onChange}
+						/>
+						<select
+							name="teammembers"
+							className="tw-form-elem col-5 right"
+							value={data.teamMembers}
+							onChange={this.onChange}
+						>
+							<option value="morlo">Merek Orlowski</option>
+						</select>
 					</div>
 				</form>	
 			</div>

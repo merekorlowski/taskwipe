@@ -1,40 +1,43 @@
-@import '../../styles.scss';
+@import '../../styles/globals.scss';
 
 .tw-dropdown {
-    position: relative;
-    padding: 10px;
-    border-radius: 5px;
-    display: inline-block;
-    border: 1px solid transparent;
-    box-shadow: 1px 1px 5px none;
-    margin-left: 5px;
+	position: relative;
+	user-select: none;
 
-    &:hover {
-        border: 1px solid $tw-shadow-color;
-        box-shadow: 1px 1px 5px $tw-shadow-color;
-    }
+	ul {
+		position: absolute;
+		top: 100%;
+		z-index: 9999;
+		border: 1.5px solid $grey;
+		box-shadow: 1px 1px 5px $grey;
+		background-color: $white;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		left: 0;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+	}
 
-    ul {
-        position: absolute;
-        top: 100%;
-        z-index: 9999;
-        border: 1px solid $tw-shadow-color;
-        box-shadow: 2px 2px 5px $tw-shadow-color;
-        background-color: #ffffff;
-    }
+	.arrow-icon {
+		margin-left: 10px;
+	}
 
-    .arrow-icon {
-        margin-left: 10px;
-    }
+	li {
+		margin: 0;
+		border: none;
+		box-shadow: none;
+		padding: 5px;
+		background-color: $white;
+		
+		&:hover {
+			background-color: darken($white, 10%);
+		}
+	}
 
-    li {
-        border: none;
-        box-shadow: none;
-    }
-
-    button {
-        background: none;
-        border: none;
-        padding: 5px;
-    }
+	button {
+		background: none;
+		border: none;
+		padding: 5px;
+	}
 }

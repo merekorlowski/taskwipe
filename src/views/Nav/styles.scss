@@ -1,7 +1,7 @@
-@import '../../styles.scss';
+@import '../../styles/globals.scss';
 
 $header-height: 60px;
-$header-shadow: 1px 1px 5px $tw-shadow-color;
+$header-shadow: 1px 1px 5px $grey;
 
 header {
 	height: $header-height;
@@ -11,7 +11,7 @@ header {
 nav {
 	box-shadow: 0px 1px 5px #222;
 	height: $header-height;
-	background-color: $tw-primary-color;
+	background-color: $color--primary;
 	z-index: 2;
 	width: 100%;
 	left: 0;
@@ -35,29 +35,29 @@ nav {
 			text-align: center;
 			line-height: $header-height;
 			height: $header-height;
-			color: $tw-light-grey;
-			background-color: $tw-primary-color;
+			color: $grey;
+			background-color: $color--primary;
 			position: relative;
 
 			i {
-				color: $tw-light-grey;
+				color: $grey;
 			}
 		}
 
 		a:hover {
-			color: $tw-white;
+			color: $white;
 
 			i {
-				color: $tw-white;
+				color: $white;
 			}
 		}
 
 		a.active {
-			background-color: $tw-primary-dark-color;
-			color: $tw-white;
+			background-color: darken($color--primary, 10%);
+			color: $white;
 
 			i {
-				color: $tw-white;
+				color: $white;
 			}
 		}
 	}
@@ -68,7 +68,7 @@ nav {
 	height: 100%;
 	margin-right: 20px;
 	display: inline-block;
-	color: $tw-light-text-color;
+	color: $white;
 	line-height: 60px;
 }
 

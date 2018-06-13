@@ -161,8 +161,8 @@ class Settings extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				<h1 className="page-title">Settings</h1>
+			<div className="tw-page-width">
+				{/* <h1 className="page-title">Settings</h1>
 				<ul className="list">
 					<li>
 						<div>
@@ -201,7 +201,7 @@ class Settings extends Component {
 						<h3>Team Management</h3>
 						{this.state.team ? this.displayTeam() : this.displayCreateTeam()}
 					</li>
-				</ul>
+				</ul> */}
 			</div>
 		);
 	}

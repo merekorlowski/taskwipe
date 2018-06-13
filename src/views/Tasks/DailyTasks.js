@@ -52,17 +52,15 @@ class DailyTasks extends Component {
 		let dailyTasks = tasks[date];
 		return (
 			<div>
-				<span className="display-date">{displayDate}</span>
+				<span className="display-date font--large">{displayDate}</span>
+				<AddTaskForm
+					date={date}
+					projects={projects}
+				/>
 				<ul className="list">
-					<li>
-						<AddTaskForm
-							date={date}
-							projects={projects}
-						/>
-					</li>
 					{this.noTasksForTheDay &&
 						dailyTasks.map((task, index) => (
-							<li id={task.taskId} key={task.taskId}>
+							<li id={task.taskId} key={task.taskId} className="list-elem">
 								<TaskListItem
 									data={task}
 									date={date}

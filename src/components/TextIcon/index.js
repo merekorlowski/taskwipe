@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 
 import './styles.scss';
 

@@ -59,7 +59,7 @@ export const deleteTask = (userId, taskId) => dispatch => {
 		});
 };
 
-export const archiveTask = (userId, taskId) =>  {
+export const archiveTask = (userId, taskId) => dispatch => {
 	TaskApi
 		.archiveTask(userId, taskId)
 		.then(res => {
@@ -115,9 +115,9 @@ export const getOnGoingTask = (userId) => dispatch => {
 		});
 };
 
-export const getTimelogs = (userId) => dispatch => {
+export const getTimelogs = (userId, week) => dispatch => {
 	TaskApi
-		.getTimelogs(userId)
+		.getTimelogs(userId, week)
 		.then(res => {
 			dispatch({
 				type: types.GET_TASK_TIMELOGS,

@@ -57,13 +57,13 @@ const taskReducer = (state = initialState, action) => {
 			return {
 				...state,
 				onGoingTask: action.payload
-			}
+			};
 
 		case types.GET_TASK_TIMELOGS:
 			return {
 				...state,
 				timelogs: action.payload
-			}
+			};
 			
 		default:
 			return state;

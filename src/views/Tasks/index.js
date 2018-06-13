@@ -20,7 +20,7 @@ class Tasks extends Component {
 	 */
 	getWeeks() {
 		// temporary while waiting for settings implementation
-		let numOfWeeks = 4;
+		let numOfWeeks = 2;
 		let day = moment();
 
 		const weeks = [];
@@ -48,30 +48,39 @@ class Tasks extends Component {
 		this.setState({ weeks });
 	}
 
+	getWeekDisplay = (weekNumber) => {
+		const { weeks } = this.state;
+		const week = weeks[weekNumber];
+		
+		return `${week[0]} \u2014 ${week[week.length - 1]}`;
+	}
+
 	render() {
 		let { weeks } = this.state;
 		return (
-			<div>
+			<div className="tw-page-width">
 				<h1 className="tw-page-title">Tasks</h1>
 				{/* <div className="tw-message">
 					<TextIcon text="
 						Welcome to the tasks page! To create a new task, simply enter in the fields and assign it to a project.
 					" icon="fa fa-info-circle" iconArrangement="left"/>
 				</div> */}
-				<ul>
-					{weeks.map((week, index) => (
-						<li key={`week-${index}`} className="task-week">
-							<h3 className="week-number">Week {index + 1}</h3>
-							<ul>
-								{week.map((date) => (
-									<li key={date}>
-										<DailyTasks date={date} />
-									</li>
-								))}
-							</ul>
-						</li>
-					))}
-				</ul>
+				<div>
+					<ul>
+						{weeks.map((week, index) => (
+							<li key={`week-${index}`} className="task-week">
+								{/* <h3 className="week-number">{this.getWeekDisplay(index)}</h3> */}
+								<ul>
+									{week.map((date) => (
+										<li key={date}>
+											<DailyTasks date={date} />
+										</li>
+									))}
+								</ul>
+							</li>
+						))}
+					</ul>
+				</div>
 			</div>
 		);
 	}

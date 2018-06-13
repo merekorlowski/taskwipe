@@ -49,34 +49,39 @@ class Login extends Component {
 			let { credentials } = this.state;
 			return (
 				<div>
-					<h1 className="tw-page-title">Login</h1>
-					<form onSubmit={this.onSubmit}>
+					<div className="login-background"></div>
+					<form 
+						className="login-form"
+						onSubmit={this.onSubmit}
+					>
+						<h1 className="text-color--primary tw-title">taskwipe</h1>
 						<div>
-							<div className="login-form-row">
+							<div>
 								<input
 									id="email"
 									type="text"
 									autoFocus="on"
-									className="tw-form-elem boxed"
+									className="tw-form-elem col-12"
 									name="email"
 									placeholder="Email"
+									autoFocus="on"
 									value={credentials.email}
 									onChange={this.onChange}
 								/>
 							</div>
-							<div className="login-form-row">
+							<div>
 								<input
 									id="password"
 									type="password"
-									className="tw-form-elem boxed"
+									className="tw-form-elem col-12"
 									name="password"
 									placeholder="Password"
 									value={credentials.password}
 									onChange={this.onChange}
 								/>
 							</div>
-							<div className="login-form-row">
-								<button type="submit" className="tw-btn right">
+							<div>
+								<button type="submit" className="tw-btn col-12">
 									Sign in
 								</button>
 							</div>

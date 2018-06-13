@@ -4,29 +4,34 @@ import { endPoint } from '../config';
 class ProjectApi {
 	static getProjects(userId) {
 		return axios
-			.get(`${endPoint}/projects?userId=${userId}`)
-			.catch(err => err);
+			.get(`${endPoint}/user/${userId}/projects`)
+			.catch(err => {
+				throw(err);
+			});
 	}
 	
 	static addProject(userId, data) {
 		return axios
-			.post(`${endPoint}/project`, {
-				userId: userId,
-				data: data
-			})
-			.catch(err => err);
+			.post(`${endPoint}/user/${userId}/project`, data)
+			.catch(err => {
+				throw(err);
+			});
 	}
 	
-	static updateProject(projectId, fieldsToUpdate) {
+	static updateProject(userId, projectId, data) {
 		return axios
-			.put(`${endPoint}/project/${projectId}`, fieldsToUpdate)
-			.catch(err => err);
-		}
+			.put(`${endPoint}/user/${userId}/project/${projectId}`, data)
+			.catch(err => {
+				throw(err);
+			});
+	}
 
-	static deleteProject(projectId) {
+	static deleteProject(userId, projectId) {
 		return axios
-			.delete(`${endPoint}/project/${projectId}`)
-			.catch(err => err);
+			.delete(`${endPoint}/user/${userId}/project/${projectId}`)
+			.catch(err => {
+				throw(err);
+			});
 	}
 }
 

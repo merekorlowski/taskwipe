@@ -1,0 +1,286 @@
+@import './base/globals.scss';
+@import './modules/globals.scss';
+
+body {
+	font-family: $font--family;
+	font-size: $font--medium;
+	color: $black;
+	padding: 0;
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+a, input, select, option, button {
+	font-family: $font--family;
+	font-size: $font--medium;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.center--horizontal {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.center--vertical {
+	vertical-align: middle;
+}
+
+.scrollable {
+	height: 100vw;
+	overflow-y: scroll;
+	overflow-x: auto;
+}
+
+.fill--x {
+	width: 100%;
+}
+
+.fill--y {
+	height: 100%;
+}
+
+.inline {
+	display: inline-block;
+}
+
+.font--xsmall {
+	font-size: $font--xsmall;
+}
+
+.font--small {
+	font-size: $font--small;
+}
+
+.font--medium {
+	font-size: $font--medium;
+}
+
+.font--large {
+	font-size: $font--large;
+}
+
+.space-evenly {
+	display: table;
+	width: 100%;
+
+	span, div, ul {
+		display: table-cell;
+	}
+}
+
+.allign--top {
+	vertical-align: top;
+}
+
+.allign--middle {
+	vertical-align: middle;
+}
+
+.block {
+	display: block;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.fixed {
+	position: fixed;
+}
+
+.scrollable {
+	display: block;
+	overflow: auto;
+}
+
+.border {
+	border: 1.5px solid $grey;
+}
+
+.shadow {
+	box-shadow: 1px 1px 5px $grey;
+}
+
+.rounded {
+	@include rounded-corners(5px);
+}
+
+.padding--half {
+	padding: 5px;
+}
+
+.padding--full {
+	padding: 10px;
+}
+
+.space--left--one {
+	margin-left: space(1);
+}
+.space--right--one {
+	margin-right: space(1);
+}
+.space--top--one {
+	margin-top: space(1);
+}
+.space--bottom--one {
+	margin-bottom: space(1);
+}
+
+.space--left--two {
+	margin-left: space(2);
+}
+.space--right--two {
+	margin-right: space(2);
+}
+.space--top--two {
+	margin-top: space(2);
+}
+.space--bottom--two {
+	margin-bottom: space(2);
+}
+
+.text-color--primary {
+	color: $color--primary; 
+}
+
+.text-color--secondary {
+	color: $color--secondary; 
+}
+
+.bg-color--primary {
+	background-color: $color--primary;
+	color: $white;
+}
+
+.bg-color--secondary {
+	background-color: $color--secondary;
+	color: $white;
+}
+
+.bold {
+	font-weight: 800;
+}
+
+.tw-message {
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid $grey;
+	background-color: $grey;
+}
+
+.col-1 {
+	width: col(1);
+}
+
+.col-2 {
+	width: col(2);
+}
+
+.col-3 {
+	width: col(3);
+}
+
+.col-4 {
+	width: col(4);
+}
+
+.col-5 {
+	width: col(5);
+}
+
+.col-6 {
+	width: col(6);
+}
+
+.col-7 {
+	width: col(7);
+}
+
+.col-8 {
+	width: col(8);
+}
+
+.col-9 {
+	width: col(9);
+}
+
+.col-10 {
+	width: col(10);
+}
+
+.col-11 {
+	width: col(11);
+}
+
+.col-12 {
+	width: col(12);
+}
+
+.padding--none {
+	padding: 0;
+}
+
+.margin--none {
+	margin: 0;
+}
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.floating {
+	position: absolute;
+	
+	.floating--left {
+		right: 100%;
+		z-index: 9999;
+		box-shadow: 1px 1px solid $grey;
+	}
+}
+
+.tw-page-title {
+	font-weight: normal;
+	padding-bottom: 25px;
+}
+
+.tw-page-width {
+	margin: 0 auto;
+	position: relative;
+	display: block;
+	height: 100%;
+	padding: 0 15px;
+
+	@media only screen and (max-width: 600px) {
+		width: 100%;
+	}
+	@media only screen and (min-width: 601px) and (max-width: 750px) {
+		width: 600px;
+	}
+	@media only screen and (min-width: 751px) and (max-width: 1000px) {
+		width: 750px;
+	}
+	@media only screen and (min-width: 1001px) {
+		width: 900px;
+	}
+	@media only screen and (min-width: 1100px) {
+		width: 1000px;
+	}
+}

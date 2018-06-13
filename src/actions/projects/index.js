@@ -35,9 +35,9 @@ export const addProject = (userId, data) => dispatch => {
 		});
 };
 	
-export const updateProject = (projectId, data) => dispatch => {
+export const updateProject = (userId, projectId, data) => dispatch => {
 	return ProjectApi
-		.updateProject(projectId, data)
+		.updateProject(userId, projectId, data)
 		.then(res => {
 			dispatch({
 				type: types.UPDATE_PROJECT,

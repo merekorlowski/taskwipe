@@ -23,14 +23,12 @@ class Projects extends Component {
 	render() {
 		let { projects } = this.props;
 		return (
-			<div>
+			<div className="tw-page-width">
 				<h1 className="tw-page-title">Projects</h1>
+				<AddProjectForm />
 				<ul className="list">
-					<li>
-						<AddProjectForm />
-					</li>
 					{projects.length > 0 && projects.map((project, index) => (
-						<li key={project.projectId}>
+						<li key={project.projectId} className="list-elem">
 							<ProjectListItem
 								data={project}
 							/>

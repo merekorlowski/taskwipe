@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { object, array, func, string } from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { getProjects } from '../../actions/projects';
 import {
-	addTask,
 	getDailyTasks,
 	updateTask,
 	deleteTask,
@@ -15,7 +13,7 @@ import {
 } from '../../actions/tasks';
 import { TASK, DATE_FORMAT } from '../../constants';
 
-import { Dropdown, TextIcon } from '../../components';
+import { Dropdown } from '../../components';
 import './styles.scss';
 
 class TaskListItem extends Component {
@@ -27,6 +25,8 @@ class TaskListItem extends Component {
 		projectId: '',
 		comments: ''
 	};
+
+	onGoingInterval = null;
 
 	state = {
 		data: this.props.data || {...this.newTask},
@@ -52,9 +52,7 @@ class TaskListItem extends Component {
 
 	componentWillMount() {
 		let { userId } = this.props;
-		this.props.getOnGoingTask(userId).then(() => {
-			this.startInterval();
-		});
+		this.props.getOnGoingTask(userId);
 	}
 
 	componentWillUnmount() {
@@ -65,13 +63,26 @@ class TaskListItem extends Component {
 			this.props.updateTask(userId, data.taskId, data);
 		}
 
-		clearInterval(this.onGoingInterval);
+		if (this.onGoingInterval) {
+			clearInterval(this.onGoingInterval);
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.onGoingTask && (nextProps.onGoingTask !== this.props.onGoingTask)) {
+			this.startInterval(nextProps.onGoingTask);
+		} else {
+			this.setState({ onGoingTime: null });
+		}
 	}
 
 	onChange = event => {
-		let { data } = this.state;
-		let { userId } = this.props;
-		data[event.target.name] = event.target.value;
+		const { data } = this.state;
+		const { userId } = this.props;
+		const { target } = event;
+		
+		data[target.name] = target.value;
+
 		this.setState({ data });
 
 		if (data.taskId) {
@@ -79,11 +90,6 @@ class TaskListItem extends Component {
 				this.props.updateTask(userId, data.taskId, data);
 				this.props.getDailyTasks(userId, event.target.date);
 				this.props.getDailyTasks(userId, data.date);
-			}
-		} else {
-			if (event.target.name === 'projectId') {
-				this.props.addTask(userId, data);
-				this.setState({ data: {...this.newTask} });
 			}
 		}
 	};
@@ -94,17 +100,15 @@ class TaskListItem extends Component {
 	onStartTimer = () => {
 		const { taskId } = this.state.data;
 		const { userId } = this.props;
-		this.props.startTask(userId, taskId).then(() => {
-			this.startInterval();	
-		});
+
+		this.props.startTask(userId, taskId);
 	};
 
 	onStopTimer = () => {
 		const { taskId } = this.state.data;
 		const { userId } = this.props;
-		this.props.stopTask(userId, taskId).then(() => {
-			clearInterval(this.onGoingInterval);
-		});
+		this.props.stopTask(userId, taskId);
+		clearInterval(this.onGoingInterval);
 	};
 
 	onDelete = () => {
@@ -125,20 +129,15 @@ class TaskListItem extends Component {
 		this.setState({ isExpanded: !isExpanded });
 	}
 
-	startInterval() {
-		let { taskId } = this.state.data;
-		let { onGoingTask } = this.props;
-
+	startInterval(onGoingTask) {
 		this.setDuration(onGoingTask.start);
-		this.onGoingInterval = setInterval(() => {
-			this.setDuration(onGoingTask.start);
-		}, 1000);
+		if (this.onGoingInterval === null) {
+			this.onGoingInterval = setInterval(() => {
+				this.setDuration(onGoingTask.start);
+			}, 1000);
+		}
 	}
 
-	/**
-	 * Helper method for setting the duration of the current time since the given start time
-	 * @param {string} startTime
-	 */
 	setDuration(startTime) {
 		let ms = moment()
 			.utc()
@@ -168,7 +167,7 @@ class TaskListItem extends Component {
 
 	get isToday() {
 		let { date } = this.props;
-		return moment(date, DATE_FORMAT).isSame(moment())
+		return date === moment().format(DATE_FORMAT);
 	}
 
 	get iconAngle() {
@@ -180,97 +179,66 @@ class TaskListItem extends Component {
 		let { projects } = this.props;
 		return (
 			<div className="tw-task">
-				<span
-					className="expand-icon-section"
-					onClick={this.toggleExpand}
-				>
-					{isExpanded ? (
-						<i
-							className={`fa fa-angle-up`}
-						/>
-					) : (
-						<i
-							className={`fa fa-angle-down`}
-						/>
-					)}
-				</span>
-				{data.taskId && (
-					<span className="right">
-						{!this.isOnGoing ? (
-							<button
-								className={`tw-btn ${!this.canStart ? 'disabled' : ''}`}
-								onClick={this.onStartTimer}
-								disabled={!this.canStart}
-							>
-								<TextIcon
-									text="Start"
-									icon="fa fa-stopwatch"
-									iconArrangement="left"
-								/>
-							</button>
-						) : (
-							<button
-								className="tw-btn on-going-time tw-font-size-medium"
-								onClick={this.onStopTimer}
-								onMouseEnter={this.onMouseEnter}
-								onMouseLeave={this.onMouseLeave}
-							>
-								{mouseover ? 'Stop' : onGoingTime}
-							</button>
-						)}
+				<div>
+					<span className="inline allign--middle space--right--two"
+						onClick={this.toggleExpand}
+					>
+						{isExpanded
+							? <i className={`fa fa-angle-up`} />
+							: <i className={`fa fa-angle-down`}	/>
+						}
 					</span>
-				)}
-				<span className="properties">
-					<div>
+					<span className="col-11">
 						<input
 							name="title"
 							type="text"
-							className="tw-form-elem title tw-font-size-medium"
-							placeholder="Some sort of task"
+							className="tw-form-elem allign--middle col-7"
+							placeholder="Task"
 							value={data.title}
 							onChange={this.onChange}			
 						/>
-					</div>
-					{isExpanded && (
-						<div>
-							<label className="tw-highlight-color">
-								<span className="tw-font-size-medium">Created</span>
-								<input
-									type="date"
-									name="date"
-									className="tw-form-elem tw-font-size-medium"
-									value={data.date}
-									onChange={this.onChange}
-								/>
-							</label>
-							<label className="tw-highlight-color">
-								<span className="tw-font-size-medium">Due</span>
-								<input
-									type="date"
-									name="deadline"
-									className="tw-form-elem tw-font-size-medium"
-									value={data.deadline}
-									onChange={this.onChange}
-								/>
-							</label>
-							<label className="tw-highlight-color">
-								<span className="tw-font-size-medium">Type</span>
-								<select
-									name="type"
-									className="tw-form-elem tw-font-size-medium"
-									value={data.type}
-									onChange={this.onChange}
-								>
-									<option value="Normal">Normal</option>
-									<option value="Priority">Priority</option>
-									<option value="Optional">Optional</option>
-								</select>
-							</label>
-							<label className="tw-highlight-color">
-								<span className="tw-font-size-medium">Project</span>
+						{/* <Dropdown
+							title="Actions"
+							className="inline col-2"
+							items={[
+								{
+									title: "Delete",
+									action: this.onDelete
+								},
+								{
+									title: "Archive",
+									action: this.onArchive
+								}
+							]}	
+						/> */}
+						{data.taskId && (
+							<span className="allign--middle">
+								{!this.isOnGoing ? (
+									<button
+										className={`tw-btn col-2 right ${!this.canStart ? 'disabled' : ''}`}
+										onClick={this.onStartTimer}
+										disabled={!this.canStart}
+									>
+										{/* <i className="fa fa-stopwatch space--right--one"></i> */}
+										Start
+									</button>
+								) : (
+									<button
+										className="tw-btn col-2 right on-going-time"
+										onClick={this.onStopTimer}
+										onMouseEnter={this.onMouseEnter}
+										onMouseLeave={this.onMouseLeave}
+									>
+										{mouseover ? 'Stop' : onGoingTime}
+									</button>
+								)}
+							</span>
+						)}
+						{isExpanded && (
+							<div className="space--top--one space--left--two">
 								<select
 									name="projectId"
-									className="tw-form-elem tw-font-size-medium"
+									className="tw-form-elem col-3"
 									value={data.projectId}
 									onChange={this.onChange}
 								>
@@ -283,33 +251,45 @@ class TaskListItem extends Component {
 										</option>
 									))}
 								</select>
-							</label>
-							{/* <Dropdown
-								title="Actions"
-								items={[
-									{
-										title: "Delete",
-										action: this.onDelete
-									},
-									{
-										title: "Archive",
-										action: this.onArchive
-									}
-								]}	
-							/> */}
-							<div className="details">
-								<textarea
-									name="comments"
-									autoFocus="on"
-									placeholder="Enter notes for this task here."
-									className="tw-form-elem tw-font-size-medium"
-									value={data.comments}
+								<input
+									type="date"
+									name="date"
+									className="tw-form-elem col-2"
+									value={data.date}
 									onChange={this.onChange}
 								/>
+								to
+								<input
+									type="date"
+									name="deadline"
+									className="tw-form-elem col-2"
+									value={data.deadline}
+									onChange={this.onChange}
+								/>
+								<select
+									name="type"
+									className="tw-form-elem"
+									value={data.type}
+									onChange={this.onChange}
+								>
+									<option value="Normal">Normal</option>
+									<option value="Priority">Priority</option>
+									<option value="Optional">Optional</option>
+								</select>
+								<div>
+									<textarea
+										name="comments"
+										autoFocus="on"
+										placeholder="Enter notes for this task here."
+										className="tw-form-elem col-9 font--xsmall"
+										value={data.comments}
+										onChange={this.onChange}
+									/>
+								</div>
 							</div>
-						</div>
-					)}
-				</span>
+						)}
+					</span>
+				</div>
 			</div>
 		);
 	}
@@ -322,7 +302,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-	addTask,
 	getDailyTasks,
 	updateTask,
 	deleteTask,

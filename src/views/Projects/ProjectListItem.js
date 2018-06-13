@@ -51,18 +51,24 @@ class ProjectListItem extends Component {
 	render() {
 		let { data, isExpanded } = this.state;
 		return (
-			<div className="tw-project">
-				<span onClick={this.toggleExpand} className="expand-icon">
-					<i
-						className={`fa ${
-							isExpanded ? 'fa-angle-up' : 'fa-angle-down'
-						}`}
-					/>
-				</span>
-				<div className="status">
+			<div>
+				<div className="space-evenly">
+					<span onClick={this.toggleExpand} className="expand-icon allign--middle">
+						<i
+							className={`fa ${
+								isExpanded ? 'fa-angle-up' : 'fa-angle-down'
+							}`}
+						/>
+					</span>
+					<span className="allign--middle col-8">
+						{data.url
+							? <a href={data.url}>{data.title}</a>
+							: <span>{data.title}</span>
+						}
+					</span>
 					<select
 						name="status"
-						className={`tw-form-elem tw-font-size-normal ${this.statusClass}`}
+						className={`tw-form-elem right col-3 ${this.statusClass}`}
 						value={data.status}
 						onChange={this.onChange}
 					>
@@ -71,37 +77,28 @@ class ProjectListItem extends Component {
 						<option value="Completed" className="completed">Completed</option>
 					</select>
 				</div>
-				<div className="properties">
-					<div className="project-title tw-font-size-normal">
-						{data.url
-							? <a href={data.url}>{data.title}</a>
-							: <span>{data.title}</span>
-						}
-					</div>
-					{isExpanded && (
-						<div className="details">
-							<label className="tw-highlight-color tw-font-size-medium">
-								<span className="tw-font-size-medium">Team Members</span>
-								<select
-									name="teammembers"
-									className="tw-form-elem tw-font-size-medium"
-									value={data.teamMembers}
-									onChange={this.onChange}
-								>
-									<option value="morlo">Merek Orlowski</option>
-								</select>
-							</label>
+				{isExpanded && (
+					<div className="space--top--two">
+						<select
+							name="teammembers"
+							className="tw-form-elem col-6"
+							value={data.teamMembers}
+							onChange={this.onChange}
+						>
+							<option value="morlo">Merek Orlowski</option>
+						</select>
+						<div>
 							<textarea
 								name="comments"
 								autoFocus="on"
 								placeholder="Enter notes for this project here."
-								className="tw-form-elem tw-font-size-small"
+								className="tw-form-elem font--xsmall col-9"
 								value={data.comments}
 								onChange={this.onChange}
 							/>
 						</div>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		);
 	}

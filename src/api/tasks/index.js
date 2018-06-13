@@ -56,9 +56,9 @@ class TaskApi {
 			.catch(err => err);
 	}
 
-	static getTimelogs(day, hour) {
+	static getTimelogs(userId, week) {
 		return axios
-			.get(`${endPoint}/task/timelogs?day=${day}&hour=${hour}`)
+			.get(`${endPoint}/user/${userId}/timelogs?week=${week}`)
 			.catch(err => err);
 	}
 }

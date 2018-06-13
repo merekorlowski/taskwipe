@@ -1,11 +1,12 @@
 {
   "name": "taskwipe",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
-		"build": "webpack --mode production",
-		"postinstall": "npm run build",
+    "start": "webpack-dev-server --mode development --hot",
+    "build": "webpack --mode production",
+    "postinstall": "npm run build",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "lint": "eslint src/**/*.js"
   },
   "jest": {
     "setupFiles": [
@@ -21,13 +22,19 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-class-property": "^1.1.0",
+    "eslint-plugin-react": "^7.9.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.0.0",
     "jest-localstorage-mock": "^2.2.0",
     "node-sass": "^4.9.0",
+    "prettier": "^1.13.4",
     "react-test-renderer": "^16.4.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.5.1",
+    "sass-lint": "^1.12.1",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.9.1",
@@ -36,9 +43,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap-grid": "^3.0.1",
     "moment": "^2.22.1",
-    "objectmodel": "^3.4.6",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",

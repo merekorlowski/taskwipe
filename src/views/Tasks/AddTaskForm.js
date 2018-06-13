@@ -7,7 +7,7 @@ import {
 	addTask,
 	archiveTask
 } from '../../actions/tasks';
-import { TASK } from '../../constants';
+import { TASK, DATE_FORMAT } from '../../constants';
 
 import { Dropdown, TextIcon } from '../../components';
 import './styles.scss';
@@ -51,87 +51,69 @@ class AddTaskForm extends Component {
 		this.props.getDailyTasks(date);
 	}
 
+	get isToday() {
+		const { date } = this.props;
+		return date === moment().format(DATE_FORMAT);
+	}
+
 	render() {
 		let { data } = this.state;
 		let { projects } = this.props;
 		return (
-			<div>
-				<span className="properties">
-					<div>
+			<div className="border rounded padding--full shadow">
+				<span>
+					<div className="space-evenly">
 						<input
 							name="title"
 							type="text"
-							className="tw-form-elem title tw-font-size-medium"
-							placeholder="New Task"
+							className="tw-form-elem col-8"
+							placeholder="Add a task..."
+							autoFocus={this.isToday}
 							value={data.title}
-							onChange={this.onChange}			
+							onChange={this.onChange}
 						/>
-					</div>
-					<div>
-						<label className="tw-highlight-color">
-							<span className="tw-font-size-medium">Created</span>
-							<input
-								type="date"
-								name="date"
-								className="tw-form-elem tw-font-size-medium"
-								value={data.date}
-								onChange={this.onChange}
-							/>
-						</label>
-						<label className="tw-highlight-color">
-							<span className="tw-font-size-medium">Due</span>
-							<input
-								type="date"
-								name="deadline"
-								className="tw-form-elem tw-font-size-medium"
-								value={data.deadline}
-								onChange={this.onChange}
-							/>
-						</label>
-						<label className="tw-highlight-color">
-							<span className="tw-font-size-medium">Type</span>
-							<select
-								name="type"
-								className="tw-form-elem tw-font-size-medium"
-								value={data.type}
-								onChange={this.onChange}
-							>
-								<option value="Normal">Normal</option>
-								<option value="Priority">Priority</option>
-								<option value="Optional">Optional</option>
-							</select>
-						</label>
-						<label className="tw-highlight-color">
-							<span className="tw-font-size-medium">Project</span>
-							<select
-								name="projectId"
-								className="tw-form-elem tw-font-size-medium"
-								value={data.projectId}
-								onChange={this.onChange}
-							>
-								<option value="" disabled="true">
-									Select
+						<select
+							name="projectId"
+							className="tw-form-elem right bg-color--secondary padding--full bold col-3"
+							value={data.projectId}
+							onChange={this.onChange}
+						>
+							<option value="" disabled="true">
+								Assign to project
+							</option>
+							{projects.map((project, index) => (
+								<option key={index} value={project.projectId}>
+									{project.title}
 								</option>
-								{projects.map((project, index) => (
-									<option key={index} value={project.projectId}>
-										{project.title}
-									</option>
-								))}
-							</select>
-						</label>
-						{/* <Dropdown
-							title="Actions"
-							items={[
-								{
-									title: "Delete",
-									action: this.onDelete
-								},
-								{
-									title: "Archive",
-									action: this.onArchive
-								}
-							]}	
-						/> */}
+							))}
+						</select>
+					</div>
+					<div className="col-8">
+						<select
+							name="type"
+							className="tw-form-elem col-3"
+							value={data.type}
+							onChange={this.onChange}
+						>
+							<option value="Normal">Normal</option>
+							<option value="Priority">Priority</option>
+							<option value="Optional">Optional</option>
+						</select>
+						<input
+							type="date"
+							name="date"
+							className="tw-form-elem col-4"
+							value={data.date}
+							onChange={this.onChange}
+						/>
+						to
+						<input
+							type="date"
+							name="deadline"
+							className="tw-form-elem col-4"
+							value={data.deadline}
+							onChange={this.onChange}
+						/>
 					</div>
 				</span>
 			</div>

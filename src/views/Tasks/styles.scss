@@ -1,21 +1,22 @@
-@import '../../styles';
+@import '../../styles/globals.scss';
 
 .display-date {
 	font-style: italic;
 	position: relative;
 	margin: 20px 0;
 	display: block;
-	color: $tw-grey-text-color;
+	color: lighten($black, 20%);
+	padding-left: 5px;
 }
 
 .display-date::before {
 	content: '';
-	background-color: $tw-primary-dark-color;
+	background-color: darken($color--primary, 10%);
 	position: absolute;
 	left: -20px;
 	top: 1px;
 	border-radius: 100%;
-	box-shadow: 1px 1px 5px $tw-shadow-color;
+	box-shadow: 1px 1px 5px $grey;
 	height: 15px;
 	width: 15px;
 }
@@ -24,7 +25,7 @@
 	margin: 0;
 	padding: 12px;
 	padding-top: 0;
-	border-left: 1px solid $tw-primary-darker-color;
+	border-left: 1px solid darken($color--primary, 10%);
 }
 
 .task-week:last-child {
@@ -42,36 +43,13 @@
 
 .week-number {
 	font-weight: 500;
-	margin-bottom: 0;
+	margin: 0 auto;
 }
 
 .tw-btn.on-going-time {
-	background-color: $tw-green;
+	background-color: $green;
 
 	&:hover {
-		background-color: $tw-green;
+		background-color: $green;
 	}
-}
-
-.tw-task {
-	width: 100%;
-
-	button {
-		width: 85px;
-		vertical-align: middle;
-
-		.icon {
-			display: inline-block;
-			margin-right: 5px;
-		}
-	}
-}
-
-.task-title {
-	margin-bottom: 5px;
-}
-
-.action-row {
-	margin-top: 10px;
-	margin-left: 15px;
 }
