@@ -7,7 +7,6 @@ import { getTimelogs } from '../../actions/tasks';
 // import Timeslot from './Timeslot';
 import { WEEK_FORMAT } from '../../constants';
 import './styles.scss';
-import AddTaskForm from '../Tasks/AddTaskForm';
 import AddTimelogForm from './AddTimelogForm';
 
 class Time extends Component {
@@ -39,7 +38,6 @@ class Time extends Component {
 	onChange = event => {
 		const { target } = event;
 		this.setState({ [target.name]: target.value }, () => {
-			debugger;
 			getTimelogs(this.props.userId, target.value);
 		});
 	};
@@ -67,7 +65,7 @@ class Time extends Component {
 		return startOfWeek.day(index).format('ddd, DD');
 	}
 
- 	render() {
+	render() {
 		const { week } = this.state;
 		return (
 			<div className="tw-page-width">

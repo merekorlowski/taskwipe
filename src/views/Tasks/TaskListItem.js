@@ -13,7 +13,6 @@ import {
 } from '../../actions/tasks';
 import { TASK, DATE_FORMAT } from '../../constants';
 
-import { Dropdown } from '../../components';
 import './styles.scss';
 
 class TaskListItem extends Component {
@@ -50,7 +49,7 @@ class TaskListItem extends Component {
 		getOnGoingTask: func.isRequired
 	};
 
-	componentWillMount() {
+	componentDidMount() {
 		let { userId } = this.props;
 		this.props.getOnGoingTask(userId);
 	}
@@ -68,7 +67,7 @@ class TaskListItem extends Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		if(nextProps.onGoingTask && (nextProps.onGoingTask !== this.props.onGoingTask)) {
 			this.startInterval(nextProps.onGoingTask);
 		} else {
@@ -178,9 +177,9 @@ class TaskListItem extends Component {
 		let { data, isExpanded, onGoingTime, mouseover } = this.state;
 		let { projects } = this.props;
 		return (
-			<div className="tw-task">
-				<div>
-					<span className="inline allign--middle space--right--two"
+			<div className={`task-item ${isExpanded ? 'expanded' : ''}`}>
+				<div className="space-evenly">
+					<span className="inline allign--middle icon"
 						onClick={this.toggleExpand}
 					>
 						{isExpanded
@@ -188,108 +187,106 @@ class TaskListItem extends Component {
 							: <i className={`fa fa-angle-down`}	/>
 						}
 					</span>
-					<span className="col-11">
-						<input
-							name="title"
-							type="text"
-							className="tw-form-elem allign--middle col-7"
-							placeholder="Task"
-							value={data.title}
-							onChange={this.onChange}			
-						/>
-						{/* <Dropdown
-							title="Actions"
-							className="inline col-2"
-							items={[
-								{
-									title: "Delete",
-									action: this.onDelete
-								},
-								{
-									title: "Archive",
-									action: this.onArchive
-								}
-							]}	
-						/> */}
-						{data.taskId && (
-							<span className="allign--middle">
-								{!this.isOnGoing ? (
-									<button
-										className={`tw-btn col-2 right ${!this.canStart ? 'disabled' : ''}`}
-										onClick={this.onStartTimer}
-										disabled={!this.canStart}
-									>
-										{/* <i className="fa fa-stopwatch space--right--one"></i> */}
-										Start
-									</button>
-								) : (
-									<button
-										className="tw-btn col-2 right on-going-time"
-										onClick={this.onStopTimer}
-										onMouseEnter={this.onMouseEnter}
-										onMouseLeave={this.onMouseLeave}
-									>
-										{mouseover ? 'Stop' : onGoingTime}
-									</button>
-								)}
-							</span>
-						)}
-						{isExpanded && (
-							<div className="space--top--one space--left--two">
-								<select
-									name="projectId"
-									className="tw-form-elem col-3"
-									value={data.projectId}
-									onChange={this.onChange}
+					<input
+						name="title"
+						type="text"
+						className="tw-form-elem allign--middle inline col-7"
+						placeholder="Task"
+						value={data.title}
+						onChange={this.onChange}			
+					/>
+					{/* <Dropdown
+						title="Actions"
+						className="inline col-2"
+						items={[
+							{
+								title: "Delete",
+								action: this.onDelete
+							},
+							{
+								title: "Archive",
+								action: this.onArchive
+							}
+						]}	
+					/> */}
+					{data.taskId && (
+						<span className="allign--middle inline col-2">
+							{!this.isOnGoing ? (
+								<button
+									className={`tw-btn right ${!this.canStart ? 'disabled' : ''}`}
+									onClick={this.onStartTimer}
+									disabled={!this.canStart}
 								>
-									<option value="" disabled="true">
-										Select
-									</option>
-									{projects.map((project, index) => (
-										<option key={index} value={project.projectId}>
-											{project.title}
-										</option>
-									))}
-								</select>
-								<input
-									type="date"
-									name="date"
-									className="tw-form-elem col-2"
-									value={data.date}
-									onChange={this.onChange}
-								/>
-								to
-								<input
-									type="date"
-									name="deadline"
-									className="tw-form-elem col-2"
-									value={data.deadline}
-									onChange={this.onChange}
-								/>
-								<select
-									name="type"
-									className="tw-form-elem"
-									value={data.type}
-									onChange={this.onChange}
+									{/* <i className="fa fa-stopwatch space--right--one"></i> */}
+									Start
+								</button>
+							) : (
+								<button
+									className="tw-btn right on-going-time"
+									onClick={this.onStopTimer}
+									onMouseEnter={this.onMouseEnter}
+									onMouseLeave={this.onMouseLeave}
 								>
-									<option value="Normal">Normal</option>
-									<option value="Priority">Priority</option>
-									<option value="Optional">Optional</option>
-								</select>
-								<div>
-									<textarea
-										name="comments"
-										autoFocus="on"
-										placeholder="Enter notes for this task here."
-										className="tw-form-elem col-9 font--xsmall"
-										value={data.comments}
-										onChange={this.onChange}
-									/>
-								</div>
-							</div>
-						)}
-					</span>
+									{mouseover ? 'Stop' : onGoingTime}
+								</button>
+							)}
+						</span>
+					)}
 				</div>
+				{isExpanded && (
+					<div className="task-details">
+						<select
+							name="projectId"
+							className="tw-form-elem col-3"
+							value={data.projectId}
+							onChange={this.onChange}
+						>
+							<option value="" disabled="true">
+								Select
+							</option>
+							{projects.map((project, index) => (
+								<option key={index} value={project.projectId}>
+									{project.title}
+								</option>
+							))}
+						</select>
+						<select
+							name="type"
+							className="tw-form-elem"
+							value={data.type}
+							onChange={this.onChange}
+						>
+							<option value="Normal">Normal</option>
+							<option value="Priority">Priority</option>
+							<option value="Optional">Optional</option>
+						</select>
+						<input
+							type="date"
+							name="date"
+							className="tw-form-elem col-2"
+							value={data.date}
+							onChange={this.onChange}
+						/>
+						to
+						<input
+							type="date"
+							name="deadline"
+							className="tw-form-elem col-2"
+							value={data.deadline}
+							onChange={this.onChange}
+						/>
+						<div>
+							<textarea
+								name="comments"
+								autoFocus="on"
+								placeholder="Enter notes for this task here."
+								className="tw-form-elem col-9 font--xsmall"
+								value={data.comments}
+								onChange={this.onChange}
+							/>
+						</div>
+					</div>
+				)}
 			</div>
 		);
 	}

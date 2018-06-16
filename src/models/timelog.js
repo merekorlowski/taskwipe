@@ -6,9 +6,9 @@ class Timelog {
 		this.end = end;
 	}
 
-    get isOnGoing() {			
-			return this.start && !this.end;
-    }
+	get isOnGoing() {			
+		return this.start && !this.end;
+	}
 }
 
 export default Timelog;

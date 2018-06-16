@@ -7,11 +7,9 @@ import { connect } from 'react-redux';
 import { getProjects } from '../../actions/projects';
 import { getDailyTasks } from '../../actions/tasks';
 
-import Task from '../../models/task';
 import TaskListItem from './TaskListItem';
 import AddTaskForm from './AddTaskForm';
-import { 
-	TASK,
+import {
 	DATE_FORMAT,
 	DAY_OF_MONTH_FORMAT
 } from '../../constants';
@@ -35,13 +33,19 @@ class DailyTasks extends Component {
 		getDailyTasks: func.isRequired
 	};
 
-	componentWillMount() {
+	typeOrder = {
+		optional: 1,
+		normal: 2,
+		priority: 3
+	};
+
+	componentDidMount() {
 		let { date, userId } = this.props;
 		this.props.getDailyTasks(userId, date);
 		this.props.getProjects(userId);
 	}
 
-	get noTasksForTheDay() {
+	get hasTasksForTheDay() {
 		const { tasks, date } = this.props;
 		return tasks[date] ? tasks[date].length > 0 : false; 
 	}
@@ -52,14 +56,16 @@ class DailyTasks extends Component {
 		let dailyTasks = tasks[date];
 		return (
 			<div>
-				<span className="display-date font--large">{displayDate}</span>
+				<span className="display-date">{displayDate}</span>
 				<AddTaskForm
 					date={date}
 					projects={projects}
 				/>
 				<ul className="list">
-					{this.noTasksForTheDay &&
-						dailyTasks.map((task, index) => (
+					{this.hasTasksForTheDay &&
+						[...dailyTasks]
+						.sort((a, b) => (this.typeOrder[a.type] > this.typeOrder[b.type]))
+						.map((task) => (
 							<li id={task.taskId} key={task.taskId} className="list-elem">
 								<TaskListItem
 									data={task}

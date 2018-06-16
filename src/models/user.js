@@ -1,11 +1,5 @@
-import { Model } from 'objectmodel';
 
-class User extends Model({
-    userId: String,
-    firstName: String,
-    lastName: String,
-    email: String
-}) {
+class User {
 
 }
 

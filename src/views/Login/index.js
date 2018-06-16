@@ -14,7 +14,8 @@ class Login extends Component {
 
 	static propTypes = {
 		history: object.isRequired,
-		login: func.isRequired
+		login: func.isRequired,
+		session: object.isRequired
 	};
 
 	/**
@@ -54,7 +55,8 @@ class Login extends Component {
 						className="login-form"
 						onSubmit={this.onSubmit}
 					>
-						<h1 className="text-color--primary tw-title">taskwipe</h1>
+						<h2 className="text-color--primary tw-title">Welcome to taskwipe!</h2>
+						<h3 className="centered">Log in to your account.</h3>
 						<div>
 							<div>
 								<input
@@ -64,7 +66,6 @@ class Login extends Component {
 									className="tw-form-elem col-12"
 									name="email"
 									placeholder="Email"
-									autoFocus="on"
 									value={credentials.email}
 									onChange={this.onChange}
 								/>

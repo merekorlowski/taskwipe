@@ -1,10 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
-
-const htmlPlugin = new HtmlWebPackPlugin({
-	template: 'src/index.html',
-	filename: 'index.html'
-});
 
 module.exports = {
 	entry: {
@@ -12,7 +8,7 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'bundle.js'
+		filename: '[name].bundle.js'
 	},
 	module: {
 		rules: [
@@ -33,10 +29,11 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [htmlPlugin],
-	devServer: {
-		contentBase: path.resolve(__dirname, 'dist'),
-		historyApiFallback: true,
-		inline: true
-	}
+	plugins: [
+		new CleanWebpackPlugin(['dist']),
+		new HtmlWebPackPlugin({
+			template: 'src/index.html',
+			filename: 'index.html'
+		})
+	]
 };

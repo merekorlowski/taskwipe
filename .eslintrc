@@ -15,8 +15,8 @@
 		},
 		"sourceType": "module"
 	},
+	"parser": "babel-eslint",
 	"plugins": [
-		"react",
-		"class-property"
+		"react"
 	]
 }

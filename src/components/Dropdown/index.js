@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { string, array } from 'prop-types';
+
 import './styles.scss';
 
 class Dropdown extends Component {
 	state = {
 		isExpanded: false
+	};
+
+	static propTypes = {
+		title: string.isRequired,
+		items: array.isRequired
 	};
 
 	onItemClick = (item) => {

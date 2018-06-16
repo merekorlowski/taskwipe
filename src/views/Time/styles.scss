@@ -1,5 +1,14 @@
 @import '../../styles/globals.scss';
 
+.add-time-form {
+	border: 1.5px solid $grey;
+	box-shadow: 1px 1px 5px $grey;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: $white;
+	margin-bottom: 5px;
+}
+
 .week {
 	width: 100%;
 
@@ -16,6 +25,7 @@
 		border: 1.5px solid $grey;
 		border-radius: 15px;
 		border-collapse: collapse;
+		background-color: $white;
 
 		thead, tbody {
 			border: 1.5px solid $grey;

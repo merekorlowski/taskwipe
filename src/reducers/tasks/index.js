@@ -16,7 +16,7 @@ const taskReducer = (state = initialState, action) => {
 				tasks
 			};
 
-		case types.ADD_TASK:
+		case types.ADD_TASK: {
 			const newTask = action.payload;
 			if (tasks[newTask.date]) {
 				tasks[newTask.date].push(newTask);
@@ -28,9 +28,8 @@ const taskReducer = (state = initialState, action) => {
 			return {
 				...state,
 				tasks
-			}
-
-			return result;
+			};
+		}
 
 		case types.UPDATE_TASK:
 			return state;

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { object, array, func, string } from 'prop-types';
+import { array, func, string } from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { getProjects } from '../../actions/projects';
 import {
 	addTask,
 	archiveTask
 } from '../../actions/tasks';
 import { TASK, DATE_FORMAT } from '../../constants';
 
-import { Dropdown, TextIcon } from '../../components';
 import './styles.scss';
 
 class AddTaskForm extends Component {
@@ -30,7 +28,8 @@ class AddTaskForm extends Component {
 		userId: string.isRequired,
 		date: string.isRequired,
 		projects: array.isRequired,
-		archiveTask: func.isRequired
+		archiveTask: func.isRequired,
+		addTask: func.isRequired
 	};
 
 	onChange = event => {
@@ -46,9 +45,8 @@ class AddTaskForm extends Component {
 	};
 
 	onArchive = () => {
-		const { taskId, date } = this.state.data;
+		const { taskId } = this.state.data;
 		this.props.archiveTask(taskId);
-		this.props.getDailyTasks(date);
 	}
 
 	get isToday() {
@@ -60,7 +58,7 @@ class AddTaskForm extends Component {
 		let { data } = this.state;
 		let { projects } = this.props;
 		return (
-			<div className="border rounded padding--full shadow">
+			<div className="add-task-form">
 				<span>
 					<div className="space-evenly">
 						<input
@@ -128,5 +126,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
 	addTask,
-	archiveTask
+	archiveTask,
+
 })(AddTaskForm);

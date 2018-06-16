@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, func, object } from 'prop-types';
+import { string, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { addProject } from '../../actions/projects';
 
@@ -41,7 +41,7 @@ class AddProjectForm extends Component {
 	render() {
 		let { data } = this.state;
 		return (
-			<div className="border rounded padding--full shadow">
+			<div className="add-project-form">
 				<form onSubmit={this.onSubmit}>
 					<div className="space-evenly">
 						<input

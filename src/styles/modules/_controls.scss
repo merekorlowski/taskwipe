@@ -9,13 +9,15 @@
 	margin: 5px;
 	border: none;
 	font-weight: bold;
+	opacity: 1;
 
 	&:hover {
 		background-color: lighten($color--secondary, 10%);
 	}
 
 	&:disabled {
-		filter: grayscale(70%);
+		background-color: $color--secondary;
+		opacity: 0.5;
 
 		&:hover {
 			background-color: $color--secondary;

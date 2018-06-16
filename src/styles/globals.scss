@@ -4,6 +4,7 @@
 body {
 	font-family: $font--family;
 	font-size: $font--medium;
+	background-color: darken($white, 2.5%);
 	color: $black;
 	padding: 0;
 	margin: 0;
@@ -244,6 +245,7 @@ ul {
 .centered {
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
 }
 
 .floating {
@@ -283,4 +285,9 @@ ul {
 	@media only screen and (min-width: 1100px) {
 		width: 1000px;
 	}
+}
+
+.icon {
+	margin: 0 10px;
+	text-align: center;
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { object, func } from 'prop-types';
+import { object } from 'prop-types';
 
-import ProjectService from '../../api/projects';
 import './styles.scss';
 
 class ProjectListItem extends Component {
@@ -51,34 +50,37 @@ class ProjectListItem extends Component {
 	render() {
 		let { data, isExpanded } = this.state;
 		return (
-			<div>
+			<div className="project-item">
 				<div className="space-evenly">
-					<span onClick={this.toggleExpand} className="expand-icon allign--middle">
-						<i
-							className={`fa ${
-								isExpanded ? 'fa-angle-up' : 'fa-angle-down'
-							}`}
-						/>
+					<span className="inline allign--middle icon"
+						onClick={this.toggleExpand}
+					>
+						{isExpanded
+							? <i className="fa fa-angle-up" />
+							: <i className="fa fa-angle-down"	/>
+						}
 					</span>
-					<span className="allign--middle col-8">
+					<span className="allign--middle col-8 padding--full">
 						{data.url
 							? <a href={data.url}>{data.title}</a>
 							: <span>{data.title}</span>
 						}
 					</span>
-					<select
-						name="status"
-						className={`tw-form-elem right col-3 ${this.statusClass}`}
-						value={data.status}
-						onChange={this.onChange}
-					>
-						<option value="In Progress" className="in-progress">In Progress</option>
-						<option value="Paused" className="paused">Paused</option>
-						<option value="Completed" className="completed">Completed</option>
-					</select>
+					<span className="col-3">
+						<select
+							name="status"
+							className={`tw-form-elem right ${this.statusClass}`}
+							value={data.status}
+							onChange={this.onChange}
+						>
+							<option value="In Progress" className="in-progress">In Progress</option>
+							<option value="Paused" className="paused">Paused</option>
+							<option value="Completed" className="completed">Completed</option>
+						</select>
+					</span>
 				</div>
 				{isExpanded && (
-					<div className="space--top--two">
+					<div className="project-details">
 						<select
 							name="teammembers"
 							className="tw-form-elem col-6"

@@ -5,7 +5,6 @@ import { getProjects } from '../../actions/projects';
 
 import ProjectListItem from './ProjectListItem';
 import AddProjectForm from './AddProjectForm';
-import { PROJECT } from '../../constants';
 import './styles.scss';
 
 class Projects extends Component {
@@ -15,7 +14,7 @@ class Projects extends Component {
 		getProjects: func.isRequired
 	};
 
-	componentWillMount() {
+	componentDidMount() {
 		const { userId } = this.props;
 		this.props.getProjects(userId);
 	}
@@ -27,7 +26,7 @@ class Projects extends Component {
 				<h1 className="tw-page-title">Projects</h1>
 				<AddProjectForm />
 				<ul className="list">
-					{projects.length > 0 && projects.map((project, index) => (
+					{projects.length > 0 && projects.map((project) => (
 						<li key={project.projectId} className="list-elem">
 							<ProjectListItem
 								data={project}

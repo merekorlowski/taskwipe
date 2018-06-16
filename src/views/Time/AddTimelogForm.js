@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { object, array, func, string } from 'prop-types';
-import moment from 'moment';
+import { string } from 'prop-types';
 import { connect } from 'react-redux';
-import {
-	addTask,
-	archiveTask
-} from '../../actions/tasks';
+
 import './styles.scss';
 
 class AddTimelogForm extends Component {
@@ -34,7 +30,7 @@ class AddTimelogForm extends Component {
 	render() {
 		let { data } = this.state;
 		return (
-			<div className="border rounded padding--full space--bottom--two">
+			<div className="add-time-form">
 				<div className="space-evenly">
 					<select
 						name="taskId"

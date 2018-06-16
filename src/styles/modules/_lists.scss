@@ -5,11 +5,11 @@
 	padding: 5px 10px;
 	list-style-type: none;
 
-	.list-elem {
-		@include rounded-corners(5px);
-		display: block;
-		border: 1.5px solid $grey;
-		margin: 2px 5px;
-		padding: 10px;
-	}
+	// .list-elem {
+	// 	@include rounded-corners(5px);
+	// 	display: block;
+	// 	border: 1.5px solid $grey;
+	// 	margin: 2px 5px;
+	// 	padding: 10px;
+	// }
 }
