@@ -21,4 +21,10 @@ const TextIcon = ({text, icon, iconArrangement}) => {
 	);
 }
 
+TextIcon.propTypes = {
+	text: string.isRequired,
+	icon: string.isRequired,
+	iconArrangement: string.isRequired
+}
+
 export default TextIcon;

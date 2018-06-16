@@ -221,12 +221,7 @@ describe('Project Actions', () => {
 	it('DELETE_PROJECT_ERROR: error occurs while deleting a project', (done) => {
 		const store = mockStore([]);
 		const projectId = '001';
-
-		const response = {
-			data:	{
-				projectId: '001'
-			}
-		};
+		
 		const expectedActions = [
 			{
 				type: types.DELETE_PROJECT_ERROR

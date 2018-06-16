@@ -93,12 +93,6 @@ describe('Session Actions', () => {
 
 		const store = mockStore([]);
 
-		const expectedActions = [
-			{
-				type: types.LOG_OUT_SUCCESS,
-			}
-		];
-
 		store
 			.dispatch(actionCreators.logout());
 		
