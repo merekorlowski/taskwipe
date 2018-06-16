@@ -1,4 +1,1 @@
 component_depth: 2
-exclude:
- - /client/config/.*
- - /client/scripts/.*

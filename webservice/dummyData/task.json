@@ -2,7 +2,7 @@
 	{
 		"taskId": "t001",
 		"projectId": "p001",
-		"employeeId": "000",
+		"userId": "000",
 		"title": "Task A",
 		"date": "2018-04-01",
 		"deadline": "",
@@ -12,7 +12,7 @@
 	{
 		"taskId": "t002",
 		"projectId": "p001",
-		"employeeId": "000",
+		"userId": "000",
 		"title": "Task B",
 		"date": "2018-04-01",
 		"deadline": "",
@@ -22,7 +22,7 @@
 	{
 		"taskId": "t003",
 		"projectId": "p002",
-		"employeeId": "001",
+		"userId": "001",
 		"title": "Task C",
 		"date": "2018-04-05",
 		"deadline": "",

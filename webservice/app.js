@@ -12,7 +12,6 @@ const projects = require('./routes/projects');
 const settings = require('./routes/settings');
 const employees = require('./routes/employees');
 
-// uncomment after placing your favicon in /client
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

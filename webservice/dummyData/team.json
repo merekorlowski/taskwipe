@@ -1,13 +1,13 @@
 [
     {
         "teamId": "tm1",
-        "employeeId": "001",
+        "userId": "001",
         "name": "Team A",
         "color": "#0000ff"
     },
     {
         "teamId": "tm2",
-        "employeeId": "005",
+        "userId": "005",
         "name": "Team B",
         "color": "#00ff00"
     }

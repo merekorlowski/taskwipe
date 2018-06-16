@@ -9,35 +9,31 @@ const router = express.Router();
 
 let taskIdIncrement = 1;
 let onGoingTaskId = null;
-let startTime = null;
+let start = null;
 
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-plusplus */
 /* eslint-disable eqeqeq */
 
-/**
- * Task routes
- */
-router.get('/api/tasks', (req, res) => getTasks(req, res));
-router.post('/api/task', (req, res) => addTask(req, res));
-router.put('/api/task/:taskId', (req, res) => updateTask(req, res));
-router.delete('/api/task/:taskId', (req, res) => deleteTask(req, res));
-router.get('/api/task/:taskId/ongoing-timelog', (req, res) =>
-	getOnGoingTimeLog(req, res)
-);
-router.post('/api/task/:taskId/start', (req, res) => startTimer(req, res));
-router.post('/api/task/:taskId/stop', (req, res) => stopTimer(req, res));
-router.put('/api/task/:taskId/archive', (req, res) => archiveTask(req, res));
-router.put('/api/task/:taskId/push', (req, res) => pushTask(req, res));
-router.get('/api/task/timelogs', (req, res) => getTaskTimelogs(req, res));
+router.get('/api/user/:userId/tasks', (req, res) => getDailyTasks(req, res));
+router.get('/api/user/:userId/task/ongoing', (req, res) => getOnGoingTimeLog(req, res));
+router.post('/api/user/:userId/task', (req, res) => addTask(req, res));
+router.put('/api/user/:userId/task/:taskId', (req, res) => updateTask(req, res));
+router.delete('/api/user/:userId/task/:taskId', (req, res) => deleteTask(req, res));
+router.post('/api/user/:userId/task/:taskId/start', (req, res) => startTask(req, res));
+router.post('/api/user/:userId/task/:taskId/stop', (req, res) => stopTask(req, res));
+router.put('/api/user/:userId/task/:taskId/archive', (req, res) => archiveTask(req, res));
+router.put('/api/user/:userId/task/:taskId/push', (req, res) => pushTask(req, res));
+router.get('/api/user/:userId/task/timelogs', (req, res) => getTimelogs(req, res));
 
-function getTasks(req, res) {
-	const { employeeId, date } = req.query;
+function getDailyTasks(req, res) {
+	const { date } = req.query;
+	const { userId } = req.params;
 
 	const tasks = [];
 
 	for (let i = 0; i < taskData.length; i++) {
-		if (date == taskData[i].date && employeeId == taskData[i].employeeId) {
+		if (date == taskData[i].date && userId == taskData[i].userId) {
 			tasks.push(taskData[i]);
 		}
 	}
@@ -46,30 +42,33 @@ function getTasks(req, res) {
 }
 
 function addTask(req, res) {
-	const task = req.body;
-	task.taskId = taskIdIncrement;
+	const { userId } = req.params;
+	const data = req.body;
+	data.taskId = taskIdIncrement;
+	data.userId = userId;
 	taskIdIncrement++;
 
-	taskData.push(task);
+	taskData.push(data);
 
-	res.json(task);
+	res.json(data);
 }
 
 function updateTask(req, res) {
-	const { taskId } = req.params;
-	const { attribute, value } = req.body;
+	const { userId, taskId } = req.params;
+	const data = req.body;
 
 	for (let i = 0; i < taskData.length; i++) {
 		if (taskData[i].taskId == taskId) {
-			taskData[i][attribute] = value;
+			prevTaskData = taskData[i];
+			taskData[i] = {
+				...prevTaskData,
+				...data
+			};
 			break;
 		}
 	}
 
-	res.json({
-		attribute,
-		value
-	});
+	res.json({ taskId });
 }
 
 function deleteTask(req, res) {
@@ -86,41 +85,42 @@ function deleteTask(req, res) {
 }
 
 function getOnGoingTimeLog(req, res) {
-	if (req.params.taskId == onGoingTaskId) {
-		res.json({
-			taskId: onGoingTaskId,
-			startTime: startTime.format('YYYY-MM-DD HH:mm:ss')
-		});
-	} else {
-		res.json({});
+	const { userId } = req.params;
+	let onGoingTimelog = null;
+	for (let i = 0; i < timelogData.length; i++) {
+		if (timelogData[i].userId == userId && !timelogData[i].end) {
+			onGoingTimelog = timelogData[i];
+			break;
+		}
 	}
+	res.json(onGoingTimelog);
 }
 
-function startTimer(req, res) {
-	const { taskId } = req.params;
-	startTime = moment();
+function startTask(req, res) {
+	const { userId, taskId } = req.params;
+	let start = moment();
 
 	onGoingTaskId = taskId;
 
-	timelogData.push({
+	let newTimelog = {
+		userId,
 		taskId,
-		start: startTime.format('YYYY-MM-DD HH:mm:ss'),
+		start: start.format('YYYY-MM-DD HH:mm:ss'),
 		end: ''
-	});
+	};
 
-	res.json({
-		taskId,
-		startTime: startTime.format('YYYY-MM-DD HH:mm:ss')
-	});
+	timelogData.push(newTimelog);
+
+	res.json(newTimelog);
 }
 
-function stopTimer(req, res) {
+function stopTask(req, res) {
 	const { taskId } = req.params;
 
 	onGoingTaskId = null;
 
 	for (let i = 0; i < timelogData.length; i++) {
-		if (timelogData[i].end === '') {
+		if (timelogData[i].taskId == taskId) {
 			timelogData[i].end = moment().format('YYYY-MM-DD HH:mm:ss');
 			break;
 		}
@@ -150,49 +150,23 @@ function archiveTask(req, res) {
 	res.json(taskId);
 }
 
-function pushTask(req, res) {
-	const { taskId } = req.params;
-
-	for (let i = 0; i < taskData.length; i++) {
-		if (taskData[i].taskId == taskId) {
-			taskData[i].date = moment(taskData[i].date, 'YYYY-MM-DD')
-				.add(1, 'd')
-				.format('YYYY-MM-DD');
-		}
-	}
-
-	res.json(taskId);
-}
-
-function getTaskTimelogs(req, res) {
-	const { day, hour } = req.query;
-	const timeslot = {
-		start: moment(`${day} ${hour}`, 'YYYY-MM-DD HH:mm').format(
-			'YYYY-MM-DD HH:mm:ss'
-		),
-		end: moment(`${day} ${hour}`, 'YYYY-MM-DD HH:mm')
-			.add(1, 'h')
-			.format('YYYY-MM-DD HH:mm:ss')
-	};
-
-	const taskTimelogs = [];
+function getTimelogs(req, res) {
+	const { date } = req.query;
+	const { userId } = req.params;
+	const timelogs = [];
 
 	for (let i = 0; i < timelogData.length; i++) {
-		if (areOverlaping(timeslot, timelogData[i])) {
-			for (let j = 0; j < taskData.length; j++) {
-				if (taskData[j].taskId == timelogData[i].taskId) {
-					taskTimelogs.push({
-						taskId: taskData[j].taskId,
-						title: taskData[j].title,
-						start: timelogData[i].start,
-						end: timelogData[i].end
-					});
-				}
+		if (timelogData[i].end) {
+			let timelogStart = moment(timelogData[i].start, 'YYYY-MM-DD HH:mm:ss');
+			let timelogEnd = moment(timelogData[i].end, 'YYYY-MM-DD HH:mm:ss');
+
+			if (timelogStart.format('YYYY-MM-DD') == date || timelogEnd.format('YYYY-MM-DD') == date) {
+				timelogs.push(timelogData[i]);
 			}
 		}
 	}
 
-	res.json(taskTimelogs);
+	res.json(timelogs);
 }
 
 function areOverlaping(timeslot, timelog) {

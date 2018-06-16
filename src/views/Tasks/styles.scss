@@ -1,0 +1,77 @@
+@import '../../styles';
+
+.display-date {
+	font-style: italic;
+	position: relative;
+	margin: 20px 0;
+	display: block;
+	color: $tw-grey-text-color;
+}
+
+.display-date::before {
+	content: '';
+	background-color: $tw-primary-dark-color;
+	position: absolute;
+	left: -20px;
+	top: 1px;
+	border-radius: 100%;
+	box-shadow: 1px 1px 5px $tw-shadow-color;
+	height: 15px;
+	width: 15px;
+}
+
+.task-week {
+	margin: 0;
+	padding: 12px;
+	padding-top: 0;
+	border-left: 1px solid $tw-primary-darker-color;
+}
+
+.task-week:last-child {
+	margin-bottom: 400px;
+}
+
+.tasks-section {
+	height: 500px;
+	overflow-y: auto;
+}
+
+.tasks-in-week {
+	height: 100px;
+}
+
+.week-number {
+	font-weight: 500;
+	margin-bottom: 0;
+}
+
+.tw-btn.on-going-time {
+	background-color: $tw-green;
+
+	&:hover {
+		background-color: $tw-green;
+	}
+}
+
+.tw-task {
+	width: 100%;
+
+	button {
+		width: 85px;
+		vertical-align: middle;
+
+		.icon {
+			display: inline-block;
+			margin-right: 5px;
+		}
+	}
+}
+
+.task-title {
+	margin-bottom: 5px;
+}
+
+.action-row {
+	margin-top: 10px;
+	margin-left: 15px;
+}

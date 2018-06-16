@@ -20,7 +20,7 @@ router.get('/api/employees/project/:projectId', (req, res) =>
 router.get('/api/employees/team/:teamId', (req, res) =>
 	getEmployeesByTeamId(req, res)
 );
-router.post('/api/employees/:employeeId/team', (req, res) =>
+router.post('/api/employees/:userId/team', (req, res) =>
 	createTeam(req, res)
 );
 
@@ -60,9 +60,9 @@ function getEmployeesByTeamId(req, res) {
 }
 
 function addEmployeeToList(empTeam, employees) {
-	const { employeeId } = empTeam;
+	const { userId } = empTeam;
 	for (let i = 0; i < employeeData.length; i++) {
-		if (employeeId == employeeData[i].employeeId) {
+		if (userId == employeeData[i].userId) {
 			employees.push(employeeData[i]);
 		}
 	}
@@ -88,14 +88,14 @@ function createTeam(req, res) {
 			teamId,
 			name: team.name,
 			color: team.color,
-			employeeId: team.employeeId
+			userId: team.userId
 		});
 
 		const { members } = team;
 		for (let i = 0; i < members.length; i++) {
 			empTeamData.push({
 				teamId,
-				employeeId: members[i].employeeId,
+				userId: members[i].userId,
 				isAdmin: members[i].isAdmin
 			});
 		}

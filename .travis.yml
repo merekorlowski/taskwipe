@@ -1,22 +1,21 @@
 language: node_js
 branches:
   only:
-   - master
-   - dev
+  - master
 cache:
   directories:
-   - "client/node_modules"
-   - "webservice/node_modules"
+  - node_modules
 node_js:
- - "8"
+- '8'
+deploy:
+  provider: heroku
+  api_key:
+    secure: Df3zzBMSQ7TswDjxUe8jHFxaO+sKgfNj85BJ2lPuuVFHymAUFjlQFBOQHIbNNmizU9I0KXFPwJ03+u3K8AakMXWxDWboodT46sm7pBHX+0SJbvvcpNrt+8hdt6XcYCVrkLRKb3iz1Tx9cIr+Jy2qHkzLvDZ1r6pc2x6k4ZxRR7R7ovsMNkY1qJen/VErW/M67eURE7hr4obv+T9QgF/ngQO1kVVoBCeJY5OvwEnUwLpmnPzAX2ciqUJLxeZX8S19GsoTkI+/JXX7KzNBgmNJkOxIDwZ597SKxWdCIiVRhP5XK/kD8QurLmX7Z2Qjszm9fBvZ+6GLQ3gVBvEGQiEZW45ZJeR6Sj63v37d1fAaaLdbNGZTJ9nnsut/uN4so1/0jYesY4/snavm6ntj6ffkZfzlK6bZ2t5vqUBziGtpe1zwn9KjXTwhP4D8zMaoPH+zPIOgE1Vk1DoWJZVyV6+W4SGazIUUrAMD1ZmHGUqIHxOs7E7dD/LmYEp9bS93BSGURYeyB13iZ5D+WXiOgbyZoJkE06mFAGzTrZFCplM1ZmII6ydRPsMcxbHM/Fx3q+xg76GaFG8j8jR/Pc+lc6YwUV3V+8Ape2um7YAKSHw40pGYHl8H405IanGLF5VtshCnH5tc6dy+ics0SJnyEhaPXodfCoOj/QK75BUpiWZilmQ=
+  app:
+    master: taskwipe.staging
+    production: taskwipe
 install:
- - cd client && npm install && cd ..
- - cd webservice && npm install && cd ..
+- npm install
 script:
- - cd webservice
- - npm start &
- - cd ../client
- - npm run eslint
- - npm run jsdoc
- - npm test
- - npm run build
+- npm run build
+- npm run test
