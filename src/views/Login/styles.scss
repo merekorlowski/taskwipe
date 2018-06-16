@@ -1,0 +1,39 @@
+@import '../../styles/globals.scss';
+
+.login-background {
+	background-color: $color--primary;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
+}
+
+.login-form {
+	position: relative;
+	padding: 40px;
+	width: 400px;
+	margin: 100px auto;
+	background-color: $white;
+	border-radius: 10px;
+	border: 1.5px solid $grey;
+	z-index: 999;
+
+	.tw-title {
+		margin-bottom: 75px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+
+	.tw-form-elem {
+		margin: 5px auto;
+	}
+
+	.tw-btn {
+		margin: 10px auto;
+	}
+}

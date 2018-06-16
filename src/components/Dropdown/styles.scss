@@ -1,0 +1,43 @@
+@import '../../styles/globals.scss';
+
+.tw-dropdown {
+	position: relative;
+	user-select: none;
+
+	ul {
+		position: absolute;
+		top: 100%;
+		z-index: 9999;
+		border: 1.5px solid $grey;
+		box-shadow: 1px 1px 5px $grey;
+		background-color: $white;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		left: 0;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+	}
+
+	.arrow-icon {
+		margin-left: 10px;
+	}
+
+	li {
+		margin: 0;
+		border: none;
+		box-shadow: none;
+		padding: 5px;
+		background-color: $white;
+		
+		&:hover {
+			background-color: darken($white, 10%);
+		}
+	}
+
+	button {
+		background: none;
+		border: none;
+		padding: 5px;
+	}
+}

@@ -1,0 +1,54 @@
+@import '../../styles/globals.scss';
+
+.add-time-form {
+	border: 1.5px solid $grey;
+	box-shadow: 1px 1px 5px $grey;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: $white;
+	margin-bottom: 5px;
+}
+
+.week {
+	width: 100%;
+
+	.tw-form-elem {
+		margin: 0;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		border-bottom: none;
+	}
+
+	table {
+		width: 100%;
+		margin-bottom: 200px;
+		border: 1.5px solid $grey;
+		border-radius: 15px;
+		border-collapse: collapse;
+		background-color: $white;
+
+		thead, tbody {
+			border: 1.5px solid $grey;
+		}
+
+		thead {
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+		}
+
+		tbody {
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+		}
+
+		th {
+			padding: 10px;
+		}
+	
+		td {
+			padding: 5px;
+			text-align: center;
+			border-bottom: 1px solid $grey;
+		}
+	}
+}

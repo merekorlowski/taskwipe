@@ -1,0 +1,91 @@
+@import '../../styles/globals.scss';
+
+.task-item {
+	border: 1.5px solid $grey;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: $white;
+	margin: 2.5px;
+}
+
+.add-task-form {
+	border: 1.5px solid $grey;
+	box-shadow: 1px 1px 5px $grey;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: $white;
+}
+
+.display-date {
+	position: relative;
+	margin: 20px 0;
+	display: block;
+	font-size: 22px;
+	font-weight: bold;
+	color: $color--primary;
+}
+
+.display-date::before {
+	content: '';
+	background-color: $color--primary;
+	position: absolute;
+	left: -20px;
+	top: 5px;
+	border-radius: 100%;
+	height: 15px;
+	width: 15px;
+}
+
+.task-week {
+	margin: 0;
+	padding: 12px;
+	padding-top: 0;
+	border-left: 1.5px dashed $grey;
+}
+
+.task-week:last-child {
+	margin-bottom: 400px;
+}
+
+.tasks-section {
+	height: 500px;
+	overflow-y: auto;
+}
+
+.tasks-in-week {
+	height: 100px;
+}
+
+.week-number {
+	font-weight: 500;
+	margin: 0 auto;
+}
+
+.tw-btn.on-going-time {
+	background-color: $green;
+
+	&:hover {
+		background-color: $green;
+	}
+}
+
+.week-number {
+	font-weight: 500;
+	margin: 0 auto;
+}
+
+.tw-btn.on-going-time {
+	background-color: $green;
+
+	&:hover {
+		background-color: $green;
+	}
+}
+
+.expanded {
+	box-shadow: 1px 1px 10px darken($grey, 30%);
+}
+
+.task-details {
+	margin-left: 30px;
+}

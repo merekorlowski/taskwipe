@@ -1,31 +1,57 @@
 {
-	"name": "taskwipe",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"start:dev": "npm run start:webservice:dev && npm run start:client:dev",
-		"start:webservice:dev": "cd webservice && nodemon bin/www & cd ..",
-		"start:client:dev": "cd client && npm start & cd ..",
-		"start": "npm run build && npm run start:webservice && npm start:client",
-		"start:webservice": "cd webservice && npm start & cd ..",
-		"start:client": "cd client && serve build & cd ..",
-		"build": "cd client && npm run build && cd ..",
-		"test": "cd client && npm run test && cd ..",
-		"eslint": "cd client && npm run eslint && cd ..",
-		"jsdoc": "cd client && npm run jsdoc && cd .."
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:merekorlowski/taskwipe.git"
-	},
-	"devDependencies": {
-		"eslint": "^4.19.1",
-		"eslint-config-airbnb": "^16.1.0",
-		"eslint-config-prettier": "^2.9.0",
-		"eslint-plugin-import": "^2.11.0",
-		"eslint-plugin-jsx-a11y": "^6.0.3",
-		"eslint-plugin-prettier": "^2.6.0",
-		"eslint-plugin-react": "^7.7.0"
-	},
-	"dependencies": {}
+  "name": "taskwipe",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.dev.js --hot --inline --open",
+    "build": "webpack --config webpack.prod.js",
+    "postinstall": "npm run build",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "lint": "eslint src/**/*.js"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "^23.0.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-react": "^7.9.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.0.0",
+    "jest-localstorage-mock": "^2.2.0",
+    "node-sass": "^4.9.0",
+    "prettier": "^1.13.4",
+    "react-test-renderer": "^16.4.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-mock-store": "^1.5.1",
+    "sass-lint": "^1.12.1",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.9.1",
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "moment": "^2.22.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "serve": "^6.5.8"
+  }
 }

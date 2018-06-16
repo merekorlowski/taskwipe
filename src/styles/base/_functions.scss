@@ -1,0 +1,8 @@
+
+@function space($amount) {
+	@return $amount * 5px;
+}
+
+@function col($amount) {
+	@return ($amount / 12) * 100%;
+}

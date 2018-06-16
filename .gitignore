@@ -1,6 +1,16 @@
+# dependencies
 node_modules
-.vscode
-.DS_Store
-.idea
+
+# test
+coverage
+
+# production
+dist
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 out
-npm-debug.log*
+*.log
