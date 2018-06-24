@@ -1,5 +1,6 @@
 {
   "name": "taskwipe",
+	"version": 1.0.0",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js --hot --inline --open",
     "build": "webpack --config webpack.prod.js",
